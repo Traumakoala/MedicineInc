@@ -11,6 +11,7 @@
     <nav class="flex-column">
         <AuthorizeView>
             <Authorized>
+                <LoginDisplay />
                 <div class="nav-item px-3">
                     <NavLink class="nav-link" href="authentication/profile" Match="NavLinkMatch.All">
                         <span class="oi oi-person" aria-hidden="true"></span> Hello, @context.User.Identity?.Name!
@@ -30,7 +31,7 @@
                 </div>
                 <div class="nav-item px-3">
                     <NavLink class="nav-link" href="authentication/login" Match="NavLinkMatch.All">
-                        <span class="oi oi-account-logout" aria-hidden="true"></span> Log in
+                        <span class="oi oi-account-login" aria-hidden="true"></span> Log in
                     </NavLink>
                 </div>
             </NotAuthorized>
@@ -40,7 +41,7 @@
                 <span class="oi oi-dollar" aria-hidden="true"></span> Featured Items
             </NavLink>
         </div>
-        
+
         <div class="nav-item px-3">
             <NavLink class="nav-link" href="cartpage">
                 <span class="oi oi-cart" aria-hidden="true"></span> Cart
@@ -52,7 +53,6 @@
                 <span class="oi oi-home" aria-hidden="true"></span> Store
             </NavLink>
         </div>
-        
     </nav>
 </div>
 @code {
@@ -64,6 +64,6 @@
     }
     private void BeginLogOut(MouseEventArgs args)
     {
-        Navigation.NavigateToLogout("authentication/logout", "/");
+        Navigation.NavigateTo("authentication/logout");
     }
 }
