@@ -1,9 +1,37 @@
-﻿@page "/cartpage"
+﻿@page "/cart"
+@inject MedicineInc.Client.Class.CartService CartService
 
-<h3>Order</h3>
+<h1>Your Shopping Cart</h1>
+<link rel="stylesheet" href="css/cart.css">
 
-<h5>Order Page WIP</h5>
+@if (cartService.CartItems.Any())
+{
+    <div class="cart-container">
+        <ul class="cart-items">
+            @foreach (var item in cartService.CartItems)
+            {
+                <li class="cart-item">
+                    <img src="@item.ImageUrl" alt="@item.Name" class="product-image">
+                    <div class="product-details">
+                        <h2>@item.Name</h2>
+                        <p>@item.Description</p>
+                        <p>Price: $@item.Price</p>
+                    </div>
+                </li>
+            }
+        </ul>
+    </div>
+}
+else
+{
+    <p>Your cart is empty.</p>
+}
+
+<footer>
+    <p>&copy; 2024 Online Pharmacy</p>
+</footer>
 
 @code {
-
+    [Inject]
+    MedicineInc.Client.Class.CartService cartService { get; set; }
 }

@@ -1,9 +1,83 @@
 ﻿@page "/storepage"
+@inject MedicineInc.Client.Class.CartService CartService
 
-<h3>Store</h3>
+<h1>Main store!</h1>
+<link rel="stylesheet" href="css/styles.css">
 
-<h5>store page WIP</h5>
+<main>
+    <section class="products">
+        <div class="product">
+            <img src="images/Glucosamine.jpg" alt="Glucosamine">
+            <h2>Best Vitamins to stay healthy</h2>
+            <p>Price: $10.99</p>
+            <button @onclick='() => AddToCart(new MedicineInc.Client.Class.Product {
+                Id = 1,
+                Name = "Glucosamine",
+                Description = "Best Vitamins to stay healthy",
+                Price = 10.99m,
+                ImageUrl = "images/Glucosamine.jpg"
+            })'>
+                Add to Cart
+            </button>
+        </div>
+
+        <div class="product">
+            <img src="images/panadol.jpg" alt="Panadol">
+            <h2>Most Popular Item for Cold and Fever</h2>
+            <p>Price: $5.99</p>
+            <button @onclick='() => AddToCart(new MedicineInc.Client.Class.Product {
+                Id = 2,
+                Name = "Panadol",
+                Description = "Most Popular Item for Cold and Fever",
+                Price = 5.99m,
+                ImageUrl = "images/panadol.jpg"
+            })'>
+                Add to Cart
+            </button>
+        </div>
+
+        <div class="product">
+            <img src="images/bandaids.jpg" alt="Bandaids">
+            <h2>For your child's injuries</h2>
+            <p>Price: $7.50</p>
+            <button @onclick='() => AddToCart(new MedicineInc.Client.Class.Product {
+                Id = 3,
+                Name = "Bandaids",
+                Description = "For any injuries",
+                    Price=7.50m,
+                    ImageUrl="images/bandaids.jpg"
+                    })'>
+                Add to Cart
+            </button>
+        </div>
+
+        <div class="product">
+            <img src="images/strepsils.jpg" alt="Strepsils">
+            <h2>To soothe your sore throat</h2>
+            <p>Price: $4.25</p>
+            <button @onclick='() => AddToCart(new MedicineInc.Client.Class.Product {
+                Id = 4,
+                Name = "Strepsils",
+                Description = "To soothe your sore throat",
+                Price = 4.25m,
+                ImageUrl = "images/strepsils.jpg"
+            })'>
+                Add to Cart
+            </button>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <p>&copy; 2024 Online Pharmacy</p>
+</footer>
 
 @code {
+    [Inject]
+    MedicineInc.Client.Class.CartService cartService { get; set; }
 
+    void AddToCart(MedicineInc.Client.Class.Product product)
+    {
+        cartService.AddToCart(product);
+    }
 }

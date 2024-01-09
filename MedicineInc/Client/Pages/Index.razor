@@ -1,7 +1,7 @@
 ﻿@page "/"
 
 <PageTitle>Index</PageTitle>
-<h1 >Welcome to our store!</h1>
+<h1 >Featured Items!</h1>
 <link href = "css/index.css" rel ="stylesheet"/>
 <div class="products-container">
     <div class="product">
@@ -24,3 +24,16 @@
         <ul><li>To soothe your sore throat</li></ul>
     </div>
 </div>
+<footer>
+    <p>&copy; 2024 Online Pharmacy</p>
+</footer>
+
+@code {
+    [Inject]
+    private MedicineInc.Client.Class.CartService cartService { get; set; }
+
+    private void AddToCart(MedicineInc.Client.Class.Product product)
+    {
+        cartService.AddToCart(product);
+    }
+}
