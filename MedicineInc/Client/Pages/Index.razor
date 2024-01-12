@@ -1,27 +1,39 @@
 ﻿@page "/"
 
 <PageTitle>Index</PageTitle>
-<h1 >Featured Items!</h1>
-<link href = "css/index.css" rel ="stylesheet"/>
+<h1>Featured Items!</h1>
+<link href="css/index.css" rel="stylesheet" />
 <div class="products-container">
     <div class="product">
-        <img src="images/Glucosamine.jpg"/>
-        <ul><li>Best Vitamins to stay healthy</li></ul>
+        <img src="images/Glucosamine.jpg" />
+        <ul>
+            <li>Best Vitamins to stay healthy</li>
+            <li><button @onclick='() => AddToCart(new Medicine { MediName = " Vitamins" })'>Add to Cart</button></li>
+        </ul>
     </div>
 
     <div class="product">
-        <img src="images/panadol.jpg"/>
-        <ul><li>Most Popular Item for Cold and Fever</li></ul>
+        <img src="images/panadol.jpg" />
+        <ul>
+            <li>Most Popular Item for Cold and Fever</li>
+            <li><button @onclick='() => AddToCart(new Medicine { MediName = " Panadol" })'>Add to Cart</button></li>
+        </ul>
     </div>
 
     <div class="product">
-        <img src="images/bandaids.jpg"/>
-        <ul><li>For your child's injuries</li></ul>
+        <img src="images/bandaids.jpg" />
+        <ul>
+            <li>For any and all injuries</li>
+            <li><button @onclick='() => AddToCart(new Medicine { MediName = " Bandaids" })'>Add to Cart</button></li>
+        </ul>
     </div>
 
     <div class="product">
-        <img src="images/strepsils.jpg"/>
-        <ul><li>To soothe your sore throat</li></ul>
+        <img src="images/strepsils.jpg" />
+        <ul>
+            <li>To soothe your sore throat</li>
+            <li><button @onclick='() => AddToCart(new Medicine { MediName = " Strepsils" })'>Add to Cart</button></li>
+        </ul>
     </div>
 </div>
 <footer>
@@ -29,11 +41,10 @@
 </footer>
 
 @code {
-    [Inject]
-    private MedicineInc.Client.Class.CartService cartService { get; set; }
+    private List<Medicine> cartItems = new List<Medicine>();
 
-    private void AddToCart(MedicineInc.Client.Class.Product product)
+    private void AddToCart(Medicine product)
     {
-        cartService.AddToCart(product);
+        cartItems.Add(product);
     }
 }
