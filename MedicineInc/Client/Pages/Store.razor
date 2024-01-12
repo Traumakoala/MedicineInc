@@ -78,6 +78,17 @@
 
     void AddToCart(MedicineInc.Client.Class.Product product)
     {
-        cartService.AddToCart(product);
+        var existingProduct = cartService.CartItems.FirstOrDefault(item => item.Id == product.Id);
+
+        if (existingProduct != null)
+        {
+            // If the product is already in the cart, increment the quantity
+            existingProduct.Quantity++;
+        }
+        else
+        {
+            // If the product is not in the cart, add a new entry
+            cartService.AddToCart(product);
+        }
     }
 }

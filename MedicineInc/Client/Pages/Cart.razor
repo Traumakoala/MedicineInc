@@ -1,5 +1,5 @@
 ﻿@page "/cart"
-@inject MedicineInc.Client.Class.CartService CartService
+@inject MedicineInc.Shared.Domain.CartService cartservice
 
 <h1>Your Shopping Cart</h1>
 <link rel="stylesheet" href="css/cart.css">
@@ -11,11 +11,11 @@
             @foreach (var item in cartService.CartItems)
             {
                 <li class="cart-item">
-                    <img src="@item.ImageUrl" alt="@item.Name" class="product-image">
-                    <div class="product-details">
-                        <h2>@item.Name</h2>
-                        <p>@item.Description</p>
+                    <img src="@item.ImageUrl" alt="@item.MediName" class="medicine-image">
+                    <div class="medicine-details">
+                        <h2>@item.MediName</h2>
                         <p>Price: $@item.Price</p>
+                        <p>Quantity: @item.Count</p>
                     </div>
                 </li>
             }
@@ -33,5 +33,5 @@ else
 
 @code {
     [Inject]
-    MedicineInc.Client.Class.CartService cartService { get; set; }
+    MedicineInc.Shared.Domain.CartService cartService { get; set; }
 }
