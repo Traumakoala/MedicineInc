@@ -1,39 +1,60 @@
-﻿@page "/"
+﻿@page "/cart"
 
-<PageTitle>Index</PageTitle>
-<h1 >Featured Items!</h1>
-<link href = "css/index.css" rel ="stylesheet"/>
-<div class="products-container">
-    <div class="product">
-        <img src="images/Glucosamine.jpg"/>
-        <ul><li>Best Vitamins to stay healthy</li></ul>
-    </div>
+<h1>Your Shopping Cart</h1>
+<link rel="stylesheet" href="css/cart.css">
 
-    <div class="product">
-        <img src="images/panadol.jpg"/>
-        <ul><li>Most Popular Item for Cold and Fever</li></ul>
+@if (cartItems.Any())
+{
+    <div class="cart-container">
+        <ul class="cart-items">
+            @foreach (var item in cartItems)
+            {
+                <li class="cart-item">
+                    <img src="@item.ImageRef" alt="@item.MediName" class="medicine-image">
+                    <div class="medicine-details">
+                        <h2>@item.MediName</h2>
+                        <p>Price: $@item.Price</p>
+                        <p>Quantity: @item.Count</p>
+                    </div>
+                </li>
+            }
+        </ul>
     </div>
+}
+else
+{
+    <p>Your cart is empty.</p>
+}
 
-    <div class="product">
-        <img src="images/bandaids.jpg"/>
-        <ul><li>For your child's injuries</li></ul>
-    </div>
-
-    <div class="product">
-        <img src="images/strepsils.jpg"/>
-        <ul><li>To soothe your sore throat</li></ul>
-    </div>
-</div>
 <footer>
     <p>&copy; 2024 Online Pharmacy</p>
 </footer>
 
 @code {
-    [Inject]
-    private MedicineInc.Client.Class.CartService cartService { get; set; }
+    private List<Medicine> cartItems;
 
-    private void AddToCart(MedicineInc.Client.Class.Product product)
+    protected override void OnInitialized()
     {
-        cartService.AddToCart(product);
+        cartItems = new List<Medicine>
+        {
+            new Medicine
+            {
+                Id = 1,
+                MediName = "Example Medicine 1",
+                Price = 9.99,
+                Count = 2,
+                Usage = "Example usage",
+                ImageRef = "images/example1.jpg"
+            },
+            new Medicine
+            {
+                Id = 2,
+                MediName = "Example Medicine 2",
+                Price = 14.50,
+                Count = 1,
+                Usage = "Another example usage",
+                ImageRef = "images/example2.jpg"
+            }
+        };
     }
 }

@@ -1,66 +1,61 @@
 ﻿@page "/storepage"
-@inject MedicineInc.Client.Class.CartService CartService
 
 <h1>Main store!</h1>
 <link rel="stylesheet" href="css/styles.css">
 
 <main>
-    <section class="products">
-        <div class="product">
+    <section class="medicines">
+        <div class="medicine">
             <img src="images/Glucosamine.jpg" alt="Glucosamine">
             <h2>Best Vitamins to stay healthy</h2>
             <p>Price: $10.99</p>
-            <button @onclick='() => AddToCart(new MedicineInc.Client.Class.Product {
+            <button @onclick='() => AddToCart(new Medicine {
                 Id = 1,
-                Name = "Glucosamine",
-                Description = "Best Vitamins to stay healthy",
-                Price = 10.99m,
-                ImageUrl = "images/Glucosamine.jpg"
+                MediName = "Glucosamine",
+                Price = 10.99,
+                ImageRef = "images/Glucosamine.jpg"
             })'>
                 Add to Cart
             </button>
         </div>
 
-        <div class="product">
+        <div class="medicine">
             <img src="images/panadol.jpg" alt="Panadol">
             <h2>Most Popular Item for Cold and Fever</h2>
             <p>Price: $5.99</p>
-            <button @onclick='() => AddToCart(new MedicineInc.Client.Class.Product {
+            <button @onclick='() => AddToCart(new Medicine {
                 Id = 2,
-                Name = "Panadol",
-                Description = "Most Popular Item for Cold and Fever",
-                Price = 5.99m,
-                ImageUrl = "images/panadol.jpg"
+                MediName = "Panadol",
+                Price = 5.99,
+                ImageRef = "images/panadol.jpg"
             })'>
                 Add to Cart
             </button>
         </div>
 
-        <div class="product">
+        <div class="medicine">
             <img src="images/bandaids.jpg" alt="Bandaids">
             <h2>For your child's injuries</h2>
             <p>Price: $7.50</p>
-            <button @onclick='() => AddToCart(new MedicineInc.Client.Class.Product {
+            <button @onclick='() => AddToCart(new Medicine {
                 Id = 3,
-                Name = "Bandaids",
-                Description = "For any injuries",
-                    Price=7.50m,
-                    ImageUrl="images/bandaids.jpg"
-                    })'>
+                MediName = "Bandaids",
+                Price = 7.50,
+                ImageRef = "images/bandaids.jpg"
+            })'>
                 Add to Cart
             </button>
         </div>
 
-        <div class="product">
+        <div class="medicine">
             <img src="images/strepsils.jpg" alt="Strepsils">
             <h2>To soothe your sore throat</h2>
             <p>Price: $4.25</p>
-            <button @onclick='() => AddToCart(new MedicineInc.Client.Class.Product {
+            <button @onclick='() => AddToCart(new Medicine {
                 Id = 4,
-                Name = "Strepsils",
-                Description = "To soothe your sore throat",
-                Price = 4.25m,
-                ImageUrl = "images/strepsils.jpg"
+                MediName = "Strepsils",
+                Price = 4.25,
+                ImageRef = "images/strepsils.jpg"
             })'>
                 Add to Cart
             </button>
@@ -73,22 +68,32 @@
 </footer>
 
 @code {
-    [Inject]
-    MedicineInc.Client.Class.CartService cartService { get; set; }
+    private List<Medicine> cartItems = new List<Medicine>();
 
-    void AddToCart(MedicineInc.Client.Class.Product product)
+    void AddToCart(Medicine medicine)
     {
-        var existingProduct = cartService.CartItems.FirstOrDefault(item => item.Id == product.Id);
+        var existingMedicine = cartItems.FirstOrDefault(item => item.Id == medicine.Id);
 
-        if (existingProduct != null)
+        if (existingMedicine != null)
         {
-            // If the product is already in the cart, increment the quantity
-            existingProduct.Quantity++;
+            // If the medicine is already in the cart, increment the quantity
+            existingMedicine.Count++;
+            Console.WriteLine($"Quantity of {existingMedicine.MediName} increased to {existingMedicine.Count} in cart!");
         }
         else
         {
-            // If the product is not in the cart, add a new entry
-            cartService.AddToCart(product);
+            // If the medicine is not in the cart, add a new entry
+            cartItems.Add(new Medicine
+                {
+                    Id = medicine.Id,
+                    MediName = medicine.MediName,
+                    Price = medicine.Price,
+                    Count = 1,
+                    Usage = medicine.Usage,
+                    ImageRef = medicine.ImageRef
+                });
+
+            Console.WriteLine($"{medicine.MediName} added to cart!");
         }
     }
 }

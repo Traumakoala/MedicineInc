@@ -1,17 +1,16 @@
 ﻿@page "/cart"
-@inject MedicineInc.Shared.Domain.CartService cartservice
 
 <h1>Your Shopping Cart</h1>
 <link rel="stylesheet" href="css/cart.css">
 
-@if (cartService.CartItems.Any())
+@if (cartItems.Any())
 {
     <div class="cart-container">
         <ul class="cart-items">
-            @foreach (var item in cartService.CartItems)
+            @foreach (var item in cartItems)
             {
                 <li class="cart-item">
-                    <img src="@item.ImageUrl" alt="@item.MediName" class="medicine-image">
+                    <img src="@item.ImageRef" alt="@item.MediName" class="medicine-image">
                     <div class="medicine-details">
                         <h2>@item.MediName</h2>
                         <p>Price: $@item.Price</p>
@@ -32,6 +31,10 @@ else
 </footer>
 
 @code {
-    [Inject]
-    MedicineInc.Shared.Domain.CartService cartService { get; set; }
+    private List<Medicine> cartItems;
+
+    protected override void OnInitialized()
+    {
+        cartItems = new List<Medicine>();
+    }
 }

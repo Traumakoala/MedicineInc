@@ -24,7 +24,6 @@ builder.Services.AddAuthentication()
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
-builder.Services.AddScoped<CartService>();
 
 var app = builder.Build();
 
