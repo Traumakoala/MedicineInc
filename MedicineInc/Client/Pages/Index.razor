@@ -8,17 +8,15 @@
         <img src="images/Glucosamine.jpg" />
         <ul>
             <li>Best Vitamins to stay healthy</li>
-            <li><button @onclick='() => AddToCart(new Medicine { MediName = " Vitamins" })'>Add to Cart</button></li>
+            <li><button @onclick='() => AddToCart(new Medicine { MediName = "Vitamins" })'>Add to Cart</button></li>
         </ul>
     </div>
-<h1>Your Shopping Cart</h1>
-<link rel="stylesheet" href="css/cart.css">
 
     <div class="product">
         <img src="images/panadol.jpg" />
         <ul>
             <li>Most Popular Item for Cold and Fever</li>
-            <li><button @onclick='() => AddToCart(new Medicine { MediName = " Panadol" })'>Add to Cart</button></li>
+            <li><button @onclick='() => AddToCart(new Medicine { MediName = "Panadol" })'>Add to Cart</button></li>
         </ul>
     </div>
 
@@ -26,8 +24,14 @@
         <img src="images/bandaids.jpg" />
         <ul>
             <li>For any and all injuries</li>
-            <li><button @onclick='() => AddToCart(new Medicine { MediName = " Bandaids" })'>Add to Cart</button></li>
+            <li><button @onclick='() => AddToCart(new Medicine { MediName = "Bandaids" })'>Add to Cart</button></li>
         </ul>
+    </div>
+</div>
+
+<h1>Your Shopping Cart</h1>
+<link rel="stylesheet" href="css/cart.css">
+
 @if (cartItems.Any())
 {
     <div class="cart-container">
@@ -57,11 +61,12 @@ else
 
 @code {
     private List<Medicine> cartItems = new List<Medicine>();
-    private List<Medicine> cartItems;
 
     private void AddToCart(Medicine product)
     {
         cartItems.Add(product);
+    }
+
     protected override void OnInitialized()
     {
         cartItems = new List<Medicine>
