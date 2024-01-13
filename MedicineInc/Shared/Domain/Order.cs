@@ -2,7 +2,7 @@
 {
     public class Order : BaseDomainModel
     {
-        public string? OrderDetails { get; set; }
+        public List<Medicine>? OrderDetails { get; set; }
         public Boolean OrderDone { get; set; }
         public Boolean OrderFinal { get; set; }
         public int BranchID { get; set; }

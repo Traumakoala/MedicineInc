@@ -1,51 +1,24 @@
-﻿body, h1, h2, p, button {
-    margin: 0;
-    padding: 0;
-}
-
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    color: #333;
-    line-height: 1.6;
-}
-
-header {
-    background-color: #3f51b5;
-    color: #fff;
-    text-align: center;
-    padding: 1rem 0;
-}
-
-header h1 {
-    font-size: 2rem;
-}
-
-main {
-    padding: 20px;
-}
-
-.products {
+﻿.medicines {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     grid-gap: 20px;
 }
 
-.product {
+.medicine {
     border: 1px solid #ccc;
     padding: 20px;
     background-color: #fff;
     text-align: center;
 }
 
-.product img {
+.medicine img {
     width: 100%;
     max-width: 200px;
     height: auto;
     margin-bottom: 10px;
-}
+ }
 
-button {
+.medicine button {
     background-color: #4caf50;
     color: #fff;
     border: none;
@@ -59,6 +32,6 @@ button {
     border-radius: 4px;
 }
 
-button:hover {
+.medicine button:hover {
     background-color: #45a049;
 }

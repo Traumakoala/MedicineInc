@@ -1,4 +1,4 @@
-﻿@page "/cart"
+﻿@page "/"
 
 <PageTitle>Index</PageTitle>
 <h1>Featured Items!</h1>
@@ -8,87 +8,82 @@
         <img src="images/Glucosamine.jpg" />
         <ul>
             <li>Best Vitamins to stay healthy</li>
-            <li><button @onclick='() => AddToCart(new Medicine { MediName = "Vitamins" })'>Add to Cart</button></li>
+            <li>Price: $10.99</li>
+            <button @onclick='() => AddToCart(new Medicine {
+                Id = 1,
+                MediName = "Glucosamine",
+                Usage = "Best Vitamins to stay healthy",
+                Price = 10.99,
+                ImageRef = "images/Glucosamine.jpg"
+            })'>
+                Add to Cart
+            </button>
         </ul>
     </div>
-
     <div class="product">
         <img src="images/panadol.jpg" />
         <ul>
             <li>Most Popular Item for Cold and Fever</li>
-            <li><button @onclick='() => AddToCart(new Medicine { MediName = "Panadol" })'>Add to Cart</button></li>
+            <li>Price: $5.99</li>
+            <button @onclick='() => AddToCart(new Medicine {
+                Id = 2,
+                MediName = "Panadol",
+                Usage = "Most Popular Item for Cold and Fever",
+                Price = 5.99,
+                ImageRef = "images/panadol.jpg"
+            })'>
+                Add to Cart
+            </button>
         </ul>
     </div>
-
     <div class="product">
         <img src="images/bandaids.jpg" />
         <ul>
             <li>For any and all injuries</li>
-            <li><button @onclick='() => AddToCart(new Medicine { MediName = "Bandaids" })'>Add to Cart</button></li>
+            <li>Price: $7.50</li>
+            <button @onclick='() => AddToCart(new Medicine {
+                Id = 3,
+                MediName = "Bandaids",
+                Usage = "For any and all injuries",
+                Price = 7.50,
+                ImageRef = "images/bandaids.jpg"
+            })'>
+                Add to Cart
+            </button>
         </ul>
     </div>
 </div>
-
-<h1>Your Shopping Cart</h1>
-<link rel="stylesheet" href="css/cart.css">
-
-@if (cartItems.Any())
-{
-    <div class="cart-container">
-        <ul class="cart-items">
-            @foreach (var item in cartItems)
-            {
-                <li class="cart-item">
-                    <img src="@item.ImageRef" alt="@item.MediName" class="medicine-image">
-                    <div class="medicine-details">
-                        <h2>@item.MediName</h2>
-                        <p>Price: $@item.Price</p>
-                        <p>Quantity: @item.Count</p>
-                    </div>
-                </li>
-            }
-        </ul>
-    </div>
-}
-else
-{
-    <p>Your cart is empty.</p>
-}
 
 <footer>
     <p>&copy; 2024 Online Pharmacy</p>
 </footer>
 
 @code {
-    private List<Medicine> cartItems = new List<Medicine>();
+    [Inject]
+    private CartService CartService { get; set; }
 
-    private void AddToCart(Medicine product)
+    void AddToCart(Medicine medicine)
     {
-        cartItems.Add(product);
-    }
+        var existingMedicine = CartService.CartItems.FirstOrDefault(item => item.Id == medicine.Id);
 
-    protected override void OnInitialized()
-    {
-        cartItems = new List<Medicine>
+        if (existingMedicine != null)
         {
-            new Medicine
-            {
-                Id = 1,
-                MediName = "Example Medicine 1",
-                Price = 9.99,
-                Count = 2,
-                Usage = "Example usage",
-                ImageRef = "images/example1.jpg"
-            },
-            new Medicine
-            {
-                Id = 2,
-                MediName = "Example Medicine 2",
-                Price = 14.50,
-                Count = 1,
-                Usage = "Another example usage",
-                ImageRef = "images/example2.jpg"
-            }
-        };
+            existingMedicine.Count++;
+            Console.WriteLine($"Quantity of {existingMedicine.MediName} increased to {existingMedicine.Count} in cart!");
+        }
+        else
+        {
+            CartService.AddToCart(new Medicine
+                {
+                    Id = medicine.Id,
+                    MediName = medicine.MediName,
+                    Price = medicine.Price,
+                    Count = 1,
+                    Usage = medicine.Usage,
+                    ImageRef = medicine.ImageRef
+                });
+
+            Console.WriteLine($"{medicine.MediName} added to cart!");
+        }
     }
 }

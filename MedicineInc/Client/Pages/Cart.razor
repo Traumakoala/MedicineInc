@@ -3,21 +3,24 @@
 <h1>Your Shopping Cart</h1>
 <link rel="stylesheet" href="css/cart.css">
 
-@if (cartItems.Any())
+@if (CartService.CartItems.Any())
 {
     <div class="cart-container">
         <ul class="cart-items">
-            @foreach (var item in cartItems)
+            @foreach (var item in CartService.CartItems)
             {
                 <li class="cart-item">
-                    <img src="@item.ImageRef" alt="@item.MediName" class="medicine-image">
+                    <img src="@item.ImageRef" alt="@item.MediName" class="product-image">
                     <div class="medicine-details">
                         <h2>@item.MediName</h2>
                         <p>Price: $@item.Price</p>
                         <p>Quantity: @item.Count</p>
+                        <button @onclick='() => RemoveFromCart(item)'>Remove from Cart</button>
                     </div>
                 </li>
             }
+
+            <button @onclick='() => ClearCart()'>Clear Cart</button>
         </ul>
     </div>
 }
@@ -31,10 +34,15 @@ else
 </footer>
 
 @code {
-    private List<Medicine>? cartItems;
+    [Inject]
+    private CartService CartService { get; set; }
 
-    protected override void OnInitialized()
+    private void ClearCart()
     {
-        cartItems = new List<Medicine>();
+        CartService.ClearCart();
+    }
+    private void RemoveFromCart(Medicine product)
+    {
+        CartService.RemoveFromCart(product);
     }
 }

@@ -1,7 +1,8 @@
 ﻿@page "/storepage"
+@inherits ComponentBase
 
 <h1>Main store!</h1>
-<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/store.css">
 
 <main>
     <section class="medicines">
@@ -72,22 +73,21 @@
 </footer>
 
 @code {
-    private List<Medicine> cartItems = new List<Medicine>();
+    [Inject]
+    private CartService CartService { get; set; }
 
     void AddToCart(Medicine medicine)
     {
-        var existingMedicine = cartItems.FirstOrDefault(item => item.Id == medicine.Id);
+        var existingMedicine = CartService.CartItems.FirstOrDefault(item => item.Id == medicine.Id);
 
         if (existingMedicine != null)
         {
-            
             existingMedicine.Count++;
             Console.WriteLine($"Quantity of {existingMedicine.MediName} increased to {existingMedicine.Count} in cart!");
         }
         else
         {
-            
-            cartItems.Add(new Medicine
+            CartService.AddToCart(new Medicine
                 {
                     Id = medicine.Id,
                     MediName = medicine.MediName,

@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34221.43
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedicineInc.Server", "MedicineInc\Server\MedicineInc.Server.csproj", "{B6E84529-2882-4F39-B688-8EE9E2CA9EDF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicineInc.Server", "MedicineInc\Server\MedicineInc.Server.csproj", "{B6E84529-2882-4F39-B688-8EE9E2CA9EDF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedicineInc.Client", "MedicineInc\Client\MedicineInc.Client.csproj", "{EB3C4A36-05F0-4889-93D7-B83A0411D20C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicineInc.Client", "MedicineInc\Client\MedicineInc.Client.csproj", "{EB3C4A36-05F0-4889-93D7-B83A0411D20C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedicineInc.Shared", "MedicineInc\Shared\MedicineInc.Shared.csproj", "{FC7E5C10-4505-4C03-AECB-669B4643F970}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicineInc.Shared", "MedicineInc\Shared\MedicineInc.Shared.csproj", "{FC7E5C10-4505-4C03-AECB-669B4643F970}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
