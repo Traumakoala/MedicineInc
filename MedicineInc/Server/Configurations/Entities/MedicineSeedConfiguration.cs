@@ -39,7 +39,7 @@ namespace MedicineInc.Server.Configurations.Entities
                     Id = 3,
                     MediName = "Bandaids",
                     Usage = "For any and all injuries",
-                    Price = 7.50,
+                    Price = 7.49,
                     ImageRef = "images/bandaids.jpg",
                     DateCreated = DateTime.Now,
                     DateUpdated = DateTime.Now,
@@ -51,8 +51,44 @@ namespace MedicineInc.Server.Configurations.Entities
                     Id = 4,
                     MediName = "Strepsils",
                     Usage = "To soothe your sore throat",
-                    Price = 4.25,
+                    Price = 4.29,
                     ImageRef = "images/strepsils.jpg",
+                    DateCreated = DateTime.Now,
+                    DateUpdated = DateTime.Now,
+                    CreatedBy = "System",
+                    UpdatedBy = "System"
+                },
+                new Medicine
+                {
+                    Id = 5,
+                    MediName = "Tylenol",
+                    Usage = "Pain reliever and fever reducer",
+                    Price = 9.99,
+                    ImageRef = "images/tylenol.jpg",
+                    DateCreated = DateTime.Now,
+                    DateUpdated = DateTime.Now,
+                    CreatedBy = "System",
+                    UpdatedBy = "System"
+                },
+                new Medicine
+                {
+                    Id = 6,
+                    MediName = "Ibuprofen",
+                    Usage = "Nonsteroidal anti-inflammatory drug (NSAID)",
+                    Price = 7.49,
+                    ImageRef = "images/ibuprofen.jpg",
+                    DateCreated = DateTime.Now,
+                    DateUpdated = DateTime.Now,
+                    CreatedBy = "System",
+                    UpdatedBy = "System"
+                },
+                new Medicine
+                {
+                    Id = 7,
+                    MediName = "Claritin",
+                    Usage = "Antihistamine for allergy relief",
+                    Price = 5.99,
+                    ImageRef = "images/claritin.jpg",
                     DateCreated = DateTime.Now,
                     DateUpdated = DateTime.Now,
                     CreatedBy = "System",

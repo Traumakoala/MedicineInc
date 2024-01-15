@@ -11,7 +11,7 @@
 <div class="products-container">
     @if (Medicines != null)
     {
-        @foreach (var item in Medicines)
+        @foreach (var item in Medicines.Where(q => q.Id % 2 == 1).Take(4))
         {
             <div class="product">
                 <img src="@item.ImageRef" alt="@item.MediName" class="product-image">
@@ -25,11 +25,10 @@
     }
     else
     {
-        <div class= "product">
+        <div class="product">
             <h2>There are no featured items today!</h2>
         </div>
     }
-
 </div>
 
 <footer>
@@ -48,20 +47,6 @@
     {
         Medicines = await _client.GetFromJsonAsync<List<Medicine>>($"{Endpoints.MedicinesEndPoint}");
     }
-
-    // async Task Delete(int medicineId)
-    // {
-    //     if (Medicines != null)
-    //     {
-    //         var medicine = Medicines.First(q => q.Id == medicineId);
-    //         var confirm = await js.InvokeAsync<bool>("confirm", $"Do you want to delete {medicine.MediName}?");
-    //         if (confirm)
-    //         {
-    //             await _client.DeleteAsync($"{Endpoints.MedicinesEndPoint}/{medicineId}");
-    //             await LoadMedicines(); // Refresh the medicine list
-    //         }
-    //     }
-    // }
 
     [Inject]
     private CartService CartService { get; set; }
