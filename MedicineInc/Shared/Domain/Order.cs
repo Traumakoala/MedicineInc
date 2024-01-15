@@ -2,9 +2,8 @@
 {
     public class Order : BaseDomainModel
     {
-        public List<Medicine>? OrderDetails { get; set; }
+        public virtual List<Medicine>? OrderDetails { get; set; }
         public Boolean OrderDone { get; set; }
-        public Boolean OrderFinal { get; set; }
         public int BranchID { get; set; }
         public virtual Branch? Branch { get; set; }
         public int CustomerID { get; set; }

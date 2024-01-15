@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using MedicineInc.Shared.Domain;
+using MedicineInc.Server.Configurations.Entities;
 
 namespace MedicineInc.Server.Data
 {
@@ -20,6 +21,11 @@ namespace MedicineInc.Server.Data
         public DbSet<Medicine> Medicines { get; set;}
         public DbSet<Customer> Customers { get; set;}
         public DbSet<Branch> Branches { get; set;}
-        
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.ApplyConfiguration(new MedicineSeedConfiguration());
+        }
+
     }
 }

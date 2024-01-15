@@ -1,28 +1,28 @@
 ﻿using MedicineInc.Shared.Domain;
 using System.Collections.Generic;
-
+namespace MedicineInc.Client.Services;
 public class CartService
 {
     public List<Medicine> CartItems { get; set; } = new List<Medicine>();
 
-    public void AddToCart(Medicine product)
+    public void AddToCart(Medicine medicine)
     {
-        CartItems.Add(product);
+        CartItems.Add(medicine);
     }
 
-    public void RemoveFromCart(Medicine product)
+    public void RemoveFromCart(Medicine medicine)
     {
-        var existingProduct = CartItems.FirstOrDefault(item => item.Id == product.Id);
+        var existingmedicine = CartItems.FirstOrDefault(item => item.Id == medicine.Id);
 
-        if (existingProduct != null)
+        if (existingmedicine != null)
         {
-            if (existingProduct.Count > 1)
+            if (existingmedicine.Count > 1)
             {
-                existingProduct.Count--;
+                existingmedicine.Count--;
             }
             else
             {
-                CartItems.Remove(existingProduct);
+                CartItems.Remove(existingmedicine);
             }
         }
     }

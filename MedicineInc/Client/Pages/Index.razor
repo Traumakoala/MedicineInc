@@ -1,57 +1,35 @@
 ﻿@page "/"
+@using MedicineInc.Client.Services
+@inject HttpClient _client
+@inject IJSRuntime js
+@attribute [Authorize]
 
 <PageTitle>Index</PageTitle>
 <h1>Featured Items!</h1>
 <link href="css/index.css" rel="stylesheet" />
+
 <div class="products-container">
-    <div class="product">
-        <img src="images/Glucosamine.jpg" />
-        <ul>
-            <li>Best Vitamins to stay healthy</li>
-            <li>Price: $10.99</li>
-            <button @onclick='() => AddToCart(new Medicine {
-                Id = 1,
-                MediName = "Glucosamine",
-                Usage = "Best Vitamins to stay healthy",
-                Price = 10.99,
-                ImageRef = "images/Glucosamine.jpg"
-            })'>
-                Add to Cart
-            </button>
-        </ul>
-    </div>
-    <div class="product">
-        <img src="images/panadol.jpg" />
-        <ul>
-            <li>Most Popular Item for Cold and Fever</li>
-            <li>Price: $5.99</li>
-            <button @onclick='() => AddToCart(new Medicine {
-                Id = 2,
-                MediName = "Panadol",
-                Usage = "Most Popular Item for Cold and Fever",
-                Price = 5.99,
-                ImageRef = "images/panadol.jpg"
-            })'>
-                Add to Cart
-            </button>
-        </ul>
-    </div>
-    <div class="product">
-        <img src="images/bandaids.jpg" />
-        <ul>
-            <li>For any and all injuries</li>
-            <li>Price: $7.50</li>
-            <button @onclick='() => AddToCart(new Medicine {
-                Id = 3,
-                MediName = "Bandaids",
-                Usage = "For any and all injuries",
-                Price = 7.50,
-                ImageRef = "images/bandaids.jpg"
-            })'>
-                Add to Cart
-            </button>
-        </ul>
-    </div>
+    @if (Medicines != null)
+    {
+        @foreach (var item in Medicines)
+        {
+            <div class="product">
+                <img src="@item.ImageRef" alt="@item.MediName" class="product-image">
+                <div class="medicine-details">
+                    <h2>@item.MediName</h2>
+                    <p>Price: $@item.Price</p>
+                    <button @onclick='() => AddToCart(item)'>Add to Cart</button>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <div class= "product">
+            <h2>There are no featured items today!</h2>
+        </div>
+    }
+
 </div>
 
 <footer>
@@ -59,6 +37,32 @@
 </footer>
 
 @code {
+    private List<Medicine>? Medicines;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadMedicines();
+    }
+
+    private async Task LoadMedicines()
+    {
+        Medicines = await _client.GetFromJsonAsync<List<Medicine>>($"{Endpoints.MedicinesEndPoint}");
+    }
+
+    // async Task Delete(int medicineId)
+    // {
+    //     if (Medicines != null)
+    //     {
+    //         var medicine = Medicines.First(q => q.Id == medicineId);
+    //         var confirm = await js.InvokeAsync<bool>("confirm", $"Do you want to delete {medicine.MediName}?");
+    //         if (confirm)
+    //         {
+    //             await _client.DeleteAsync($"{Endpoints.MedicinesEndPoint}/{medicineId}");
+    //             await LoadMedicines(); // Refresh the medicine list
+    //         }
+    //     }
+    // }
+
     [Inject]
     private CartService CartService { get; set; }
 
