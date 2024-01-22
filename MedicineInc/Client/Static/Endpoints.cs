@@ -9,6 +9,7 @@ namespace MedicineInc.Client.Static
     {
         private static readonly string Prefix = "api";
 
+        public static readonly string CartsEndPoint = $"{Prefix}/carts";
         public static readonly string MedicinesEndPoint = $"{Prefix}/medicines";
         public static readonly string StaffsEndPoint = $"{Prefix}/staffs";
         public static readonly string BranchesEndPoint = $"{Prefix}/branches";

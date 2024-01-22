@@ -9,48 +9,48 @@ using MedicineInc.Server.Data;
 using MedicineInc.Shared.Domain;
 using MedicineInc.Server.IRepository;
 
-namespace MedicineInc.Server.Controllers
+namespace CartInc.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class MedicinesController : ControllerBase
+    public class CartsController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public MedicinesController(IUnitOfWork unitOfWork)
+        public CartsController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
 
-        // GET: api/Medicines
+        // GET: api/carts
         [HttpGet]
-        public async Task<IActionResult> GetMedicines()
+        public async Task<IActionResult> GetCarts()
         {
-            var medicines = await _unitOfWork.Medicines.GetAll();
-            return Ok(medicines);
+            var carts = await _unitOfWork.Carts.GetAll(includes: q => q.Include(x => x.Customer));
+            return Ok(carts);
         }
 
-        // GET: api/Medicines/5
+        // GET: api/Carts/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetMedicine(int id)
+        public async Task<IActionResult> GetCart(int id)
         {
-            var medicine = await _unitOfWork.Medicines.Get(q=>q.Id == id);
-
-            if (medicine == null)
+            var cart = await _unitOfWork.Carts.Get(q => q.Id == id);
+            
+            if (cart == null)
             {
                 return NotFound();
             }
 
-            return Ok(medicine);
+            return Ok(cart);
         }
 
-        // PUT: api/Medicines/5
+        // PUT: api/Carts/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutMedicine(int id, Medicine medicine)
+        public async Task<IActionResult> PutCart(int id, Cart cart)
         {
 
-            _unitOfWork.Medicines.Update(medicine);
+            _unitOfWork.Carts.Update(cart);
 
             try
             {
@@ -58,7 +58,7 @@ namespace MedicineInc.Server.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!await MedicineExists(id))
+                if (!await CartExists(id))
                 {
                     return NotFound();
                 }
@@ -71,38 +71,38 @@ namespace MedicineInc.Server.Controllers
             return NoContent();
         }
 
-        // POST: api/Medicines
+        // POST: api/Carts
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Medicine>> PostMedicine(Medicine medicine)
+        public async Task<ActionResult<Cart>> PostCart(Cart cart)
         {
-             
-            await  _unitOfWork.Medicines.Insert(medicine);
+
+            await _unitOfWork.Carts.Insert(cart);
             await _unitOfWork.Save(HttpContext);
 
-            return CreatedAtAction("GetMedicine", new { id = medicine.Id }, medicine);
+            return CreatedAtAction("GetCart", new { id = cart.Id }, cart);
         }
 
-        // DELETE: api/Medicines/5
+        // DELETE: api/Carts/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteMedicine(int id)
+        public async Task<IActionResult> DeleteCart(int id)
         {
-            var medicine = await _unitOfWork.Medicines.Get(q=>q.Id == id);
-            if (medicine == null)
+            var Cart = await _unitOfWork.Carts.Get(q => q.Id == id);
+            if (Cart == null)
             {
                 return NotFound();
             }
 
-            await _unitOfWork.Medicines.Delete(id);
+            await _unitOfWork.Carts.Delete(id);
             await _unitOfWork.Save(HttpContext);
 
             return NoContent();
         }
 
-        private async Task<bool> MedicineExists(int id)
+        private async Task<bool> CartExists(int id)
         {
-            var medicine = await _unitOfWork.Medicines.Get(q => q.Id == id);
-            return medicine != null;
+            var Cart = await _unitOfWork.Carts.Get(q => q.Id == id);
+            return Cart != null;
 
         }
     }

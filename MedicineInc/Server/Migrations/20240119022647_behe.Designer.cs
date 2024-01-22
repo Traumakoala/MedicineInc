@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace MedicineInc.Server.Data.Migrations
+namespace MedicineInc.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240115145502_ajhalfh")]
-    partial class ajhalfh
+    [Migration("20240119022647_behe")]
+    partial class behe
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -271,6 +271,41 @@ namespace MedicineInc.Server.Data.Migrations
                     b.ToTable("Branches");
                 });
 
+            modelBuilder.Entity("MedicineInc.Shared.Domain.Cart", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateUpdated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("MedicineId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CustomerId");
+
+                    b.HasIndex("MedicineId");
+
+                    b.ToTable("Carts");
+                });
+
             modelBuilder.Entity("MedicineInc.Shared.Domain.Customer", b =>
                 {
                     b.Property<int>("Id")
@@ -328,6 +363,9 @@ namespace MedicineInc.Server.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int?>("CartId")
+                        .HasColumnType("int");
+
                     b.Property<int>("Count")
                         .HasColumnType("int");
 
@@ -346,9 +384,6 @@ namespace MedicineInc.Server.Data.Migrations
                     b.Property<string>("MediName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("OrderId")
-                        .HasColumnType("int");
-
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
@@ -358,9 +393,12 @@ namespace MedicineInc.Server.Data.Migrations
                     b.Property<string>("Usage")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool?>("feat")
+                        .HasColumnType("bit");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("OrderId");
+                    b.HasIndex("CartId");
 
                     b.ToTable("Medicines");
 
@@ -370,37 +408,39 @@ namespace MedicineInc.Server.Data.Migrations
                             Id = 1,
                             Count = 0,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 1, 15, 22, 55, 2, 705, DateTimeKind.Local).AddTicks(6516),
-                            DateUpdated = new DateTime(2024, 1, 15, 22, 55, 2, 705, DateTimeKind.Local).AddTicks(6531),
+                            DateCreated = new DateTime(2024, 1, 19, 10, 26, 47, 164, DateTimeKind.Local).AddTicks(5258),
+                            DateUpdated = new DateTime(2024, 1, 19, 10, 26, 47, 164, DateTimeKind.Local).AddTicks(5279),
                             ImageRef = "images/Glucosamine.jpg",
                             MediName = "Glucosamine",
                             Price = 10.99,
                             UpdatedBy = "System",
-                            Usage = "Best Vitamins to stay healthy"
+                            Usage = "Best Vitamins to stay healthy",
+                            feat = true
                         },
                         new
                         {
                             Id = 2,
                             Count = 0,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 1, 15, 22, 55, 2, 705, DateTimeKind.Local).AddTicks(6539),
-                            DateUpdated = new DateTime(2024, 1, 15, 22, 55, 2, 705, DateTimeKind.Local).AddTicks(6540),
+                            DateCreated = new DateTime(2024, 1, 19, 10, 26, 47, 164, DateTimeKind.Local).AddTicks(5285),
+                            DateUpdated = new DateTime(2024, 1, 19, 10, 26, 47, 164, DateTimeKind.Local).AddTicks(5286),
                             ImageRef = "images/panadol.jpg",
                             MediName = "Panadol",
                             Price = 5.9900000000000002,
                             UpdatedBy = "System",
-                            Usage = "Most Popular Item for Cold and Fever"
+                            Usage = "Most Popular Item for Cold and Fever",
+                            feat = true
                         },
                         new
                         {
                             Id = 3,
                             Count = 0,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 1, 15, 22, 55, 2, 705, DateTimeKind.Local).AddTicks(6543),
-                            DateUpdated = new DateTime(2024, 1, 15, 22, 55, 2, 705, DateTimeKind.Local).AddTicks(6543),
+                            DateCreated = new DateTime(2024, 1, 19, 10, 26, 47, 164, DateTimeKind.Local).AddTicks(5289),
+                            DateUpdated = new DateTime(2024, 1, 19, 10, 26, 47, 164, DateTimeKind.Local).AddTicks(5290),
                             ImageRef = "images/bandaids.jpg",
                             MediName = "Bandaids",
-                            Price = 7.5,
+                            Price = 7.4900000000000002,
                             UpdatedBy = "System",
                             Usage = "For any and all injuries"
                         },
@@ -409,11 +449,11 @@ namespace MedicineInc.Server.Data.Migrations
                             Id = 4,
                             Count = 0,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 1, 15, 22, 55, 2, 705, DateTimeKind.Local).AddTicks(6546),
-                            DateUpdated = new DateTime(2024, 1, 15, 22, 55, 2, 705, DateTimeKind.Local).AddTicks(6547),
+                            DateCreated = new DateTime(2024, 1, 19, 10, 26, 47, 164, DateTimeKind.Local).AddTicks(5293),
+                            DateUpdated = new DateTime(2024, 1, 19, 10, 26, 47, 164, DateTimeKind.Local).AddTicks(5294),
                             ImageRef = "images/strepsils.jpg",
                             MediName = "Strepsils",
-                            Price = 4.25,
+                            Price = 4.29,
                             UpdatedBy = "System",
                             Usage = "To soothe your sore throat"
                         },
@@ -422,36 +462,38 @@ namespace MedicineInc.Server.Data.Migrations
                             Id = 5,
                             Count = 0,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 1, 15, 22, 55, 2, 705, DateTimeKind.Local).AddTicks(6550),
-                            DateUpdated = new DateTime(2024, 1, 15, 22, 55, 2, 705, DateTimeKind.Local).AddTicks(6551),
-                            ImageRef = "images/acetaminophen.jpg",
-                            MediName = "Acetaminophen",
+                            DateCreated = new DateTime(2024, 1, 19, 10, 26, 47, 164, DateTimeKind.Local).AddTicks(5298),
+                            DateUpdated = new DateTime(2024, 1, 19, 10, 26, 47, 164, DateTimeKind.Local).AddTicks(5298),
+                            ImageRef = "images/tylenol.jpg",
+                            MediName = "Tylenol",
                             Price = 9.9900000000000002,
                             UpdatedBy = "System",
-                            Usage = "Pain reliever and fever reducer"
+                            Usage = "Pain reliever and fever reducer",
+                            feat = true
                         },
                         new
                         {
                             Id = 6,
                             Count = 0,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 1, 15, 22, 55, 2, 705, DateTimeKind.Local).AddTicks(6553),
-                            DateUpdated = new DateTime(2024, 1, 15, 22, 55, 2, 705, DateTimeKind.Local).AddTicks(6554),
+                            DateCreated = new DateTime(2024, 1, 19, 10, 26, 47, 164, DateTimeKind.Local).AddTicks(5302),
+                            DateUpdated = new DateTime(2024, 1, 19, 10, 26, 47, 164, DateTimeKind.Local).AddTicks(5303),
                             ImageRef = "images/ibuprofen.jpg",
                             MediName = "Ibuprofen",
                             Price = 7.4900000000000002,
                             UpdatedBy = "System",
-                            Usage = "Nonsteroidal anti-inflammatory drug (NSAID)"
+                            Usage = "Nonsteroidal anti-inflammatory drug (NSAID)",
+                            feat = true
                         },
                         new
                         {
                             Id = 7,
                             Count = 0,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 1, 15, 22, 55, 2, 705, DateTimeKind.Local).AddTicks(6557),
-                            DateUpdated = new DateTime(2024, 1, 15, 22, 55, 2, 705, DateTimeKind.Local).AddTicks(6558),
-                            ImageRef = "images/loratadine.jpg",
-                            MediName = "Loratadine",
+                            DateCreated = new DateTime(2024, 1, 19, 10, 26, 47, 164, DateTimeKind.Local).AddTicks(5305),
+                            DateUpdated = new DateTime(2024, 1, 19, 10, 26, 47, 164, DateTimeKind.Local).AddTicks(5306),
+                            ImageRef = "images/claritin.jpg",
+                            MediName = "Claritin",
                             Price = 5.9900000000000002,
                             UpdatedBy = "System",
                             Usage = "Antihistamine for allergy relief"
@@ -469,6 +511,9 @@ namespace MedicineInc.Server.Data.Migrations
                     b.Property<int>("BranchID")
                         .HasColumnType("int");
 
+                    b.Property<int>("Count")
+                        .HasColumnType("int");
+
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
 
@@ -481,11 +526,26 @@ namespace MedicineInc.Server.Data.Migrations
                     b.Property<DateTime>("DateUpdated")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("ImageRef")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MediName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("OrderDone")
                         .HasColumnType("bit");
 
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
+
                     b.Property<string>("UpdatedBy")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Usage")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool?>("feat")
+                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
@@ -691,11 +751,28 @@ namespace MedicineInc.Server.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("MedicineInc.Shared.Domain.Cart", b =>
+                {
+                    b.HasOne("MedicineInc.Shared.Domain.Customer", "Customer")
+                        .WithMany()
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MedicineInc.Shared.Domain.Medicine", "Medicine")
+                        .WithMany()
+                        .HasForeignKey("MedicineId");
+
+                    b.Navigation("Customer");
+
+                    b.Navigation("Medicine");
+                });
+
             modelBuilder.Entity("MedicineInc.Shared.Domain.Medicine", b =>
                 {
-                    b.HasOne("MedicineInc.Shared.Domain.Order", null)
-                        .WithMany("OrderDetails")
-                        .HasForeignKey("OrderId");
+                    b.HasOne("MedicineInc.Shared.Domain.Cart", null)
+                        .WithMany("CartItems")
+                        .HasForeignKey("CartId");
                 });
 
             modelBuilder.Entity("MedicineInc.Shared.Domain.Order", b =>
@@ -784,9 +861,9 @@ namespace MedicineInc.Server.Data.Migrations
                     b.Navigation("Staff");
                 });
 
-            modelBuilder.Entity("MedicineInc.Shared.Domain.Order", b =>
+            modelBuilder.Entity("MedicineInc.Shared.Domain.Cart", b =>
                 {
-                    b.Navigation("OrderDetails");
+                    b.Navigation("CartItems");
                 });
 #pragma warning restore 612, 618
         }

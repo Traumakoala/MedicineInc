@@ -21,6 +21,7 @@ namespace MedicineInc.Server.Data
         public DbSet<Medicine> Medicines { get; set;}
         public DbSet<Customer> Customers { get; set;}
         public DbSet<Branch> Branches { get; set;}
+        public DbSet<Cart> Carts { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

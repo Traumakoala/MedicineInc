@@ -4,16 +4,19 @@ using MedicineInc.Server.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace MedicineInc.Server.Data.Migrations
+namespace MedicineInc.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240119024917_burd")]
+    partial class burd
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -268,6 +271,41 @@ namespace MedicineInc.Server.Data.Migrations
                     b.ToTable("Branches");
                 });
 
+            modelBuilder.Entity("MedicineInc.Shared.Domain.Cart", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateUpdated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("MedicineId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CustomerId");
+
+                    b.HasIndex("MedicineId");
+
+                    b.ToTable("Carts");
+                });
+
             modelBuilder.Entity("MedicineInc.Shared.Domain.Customer", b =>
                 {
                     b.Property<int>("Id")
@@ -325,6 +363,9 @@ namespace MedicineInc.Server.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int?>("CartId")
+                        .HasColumnType("int");
+
                     b.Property<int>("Count")
                         .HasColumnType("int");
 
@@ -343,9 +384,6 @@ namespace MedicineInc.Server.Data.Migrations
                     b.Property<string>("MediName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("OrderId")
-                        .HasColumnType("int");
-
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
@@ -355,9 +393,12 @@ namespace MedicineInc.Server.Data.Migrations
                     b.Property<string>("Usage")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool?>("feat")
+                        .HasColumnType("bit");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("OrderId");
+                    b.HasIndex("CartId");
 
                     b.ToTable("Medicines");
 
@@ -367,34 +408,36 @@ namespace MedicineInc.Server.Data.Migrations
                             Id = 1,
                             Count = 0,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 1, 15, 23, 3, 14, 675, DateTimeKind.Local).AddTicks(5538),
-                            DateUpdated = new DateTime(2024, 1, 15, 23, 3, 14, 675, DateTimeKind.Local).AddTicks(5556),
+                            DateCreated = new DateTime(2024, 1, 19, 10, 49, 17, 299, DateTimeKind.Local).AddTicks(7086),
+                            DateUpdated = new DateTime(2024, 1, 19, 10, 49, 17, 299, DateTimeKind.Local).AddTicks(7107),
                             ImageRef = "images/Glucosamine.jpg",
                             MediName = "Glucosamine",
                             Price = 10.99,
                             UpdatedBy = "System",
-                            Usage = "Best Vitamins to stay healthy"
+                            Usage = "Best Vitamins to stay healthy",
+                            feat = true
                         },
                         new
                         {
                             Id = 2,
                             Count = 0,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 1, 15, 23, 3, 14, 675, DateTimeKind.Local).AddTicks(5560),
-                            DateUpdated = new DateTime(2024, 1, 15, 23, 3, 14, 675, DateTimeKind.Local).AddTicks(5561),
+                            DateCreated = new DateTime(2024, 1, 19, 10, 49, 17, 299, DateTimeKind.Local).AddTicks(7117),
+                            DateUpdated = new DateTime(2024, 1, 19, 10, 49, 17, 299, DateTimeKind.Local).AddTicks(7118),
                             ImageRef = "images/panadol.jpg",
                             MediName = "Panadol",
                             Price = 5.9900000000000002,
                             UpdatedBy = "System",
-                            Usage = "Most Popular Item for Cold and Fever"
+                            Usage = "Most Popular Item for Cold and Fever",
+                            feat = true
                         },
                         new
                         {
                             Id = 3,
                             Count = 0,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 1, 15, 23, 3, 14, 675, DateTimeKind.Local).AddTicks(5564),
-                            DateUpdated = new DateTime(2024, 1, 15, 23, 3, 14, 675, DateTimeKind.Local).AddTicks(5564),
+                            DateCreated = new DateTime(2024, 1, 19, 10, 49, 17, 299, DateTimeKind.Local).AddTicks(7121),
+                            DateUpdated = new DateTime(2024, 1, 19, 10, 49, 17, 299, DateTimeKind.Local).AddTicks(7121),
                             ImageRef = "images/bandaids.jpg",
                             MediName = "Bandaids",
                             Price = 7.4900000000000002,
@@ -406,8 +449,8 @@ namespace MedicineInc.Server.Data.Migrations
                             Id = 4,
                             Count = 0,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 1, 15, 23, 3, 14, 675, DateTimeKind.Local).AddTicks(5567),
-                            DateUpdated = new DateTime(2024, 1, 15, 23, 3, 14, 675, DateTimeKind.Local).AddTicks(5567),
+                            DateCreated = new DateTime(2024, 1, 19, 10, 49, 17, 299, DateTimeKind.Local).AddTicks(7124),
+                            DateUpdated = new DateTime(2024, 1, 19, 10, 49, 17, 299, DateTimeKind.Local).AddTicks(7125),
                             ImageRef = "images/strepsils.jpg",
                             MediName = "Strepsils",
                             Price = 4.29,
@@ -419,34 +462,36 @@ namespace MedicineInc.Server.Data.Migrations
                             Id = 5,
                             Count = 0,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 1, 15, 23, 3, 14, 675, DateTimeKind.Local).AddTicks(5570),
-                            DateUpdated = new DateTime(2024, 1, 15, 23, 3, 14, 675, DateTimeKind.Local).AddTicks(5570),
+                            DateCreated = new DateTime(2024, 1, 19, 10, 49, 17, 299, DateTimeKind.Local).AddTicks(7128),
+                            DateUpdated = new DateTime(2024, 1, 19, 10, 49, 17, 299, DateTimeKind.Local).AddTicks(7129),
                             ImageRef = "images/tylenol.jpg",
                             MediName = "Tylenol",
                             Price = 9.9900000000000002,
                             UpdatedBy = "System",
-                            Usage = "Pain reliever and fever reducer"
+                            Usage = "Pain reliever and fever reducer",
+                            feat = true
                         },
                         new
                         {
                             Id = 6,
                             Count = 0,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 1, 15, 23, 3, 14, 675, DateTimeKind.Local).AddTicks(5573),
-                            DateUpdated = new DateTime(2024, 1, 15, 23, 3, 14, 675, DateTimeKind.Local).AddTicks(5574),
+                            DateCreated = new DateTime(2024, 1, 19, 10, 49, 17, 299, DateTimeKind.Local).AddTicks(7132),
+                            DateUpdated = new DateTime(2024, 1, 19, 10, 49, 17, 299, DateTimeKind.Local).AddTicks(7133),
                             ImageRef = "images/ibuprofen.jpg",
                             MediName = "Ibuprofen",
                             Price = 7.4900000000000002,
                             UpdatedBy = "System",
-                            Usage = "Nonsteroidal anti-inflammatory drug (NSAID)"
+                            Usage = "Nonsteroidal anti-inflammatory drug (NSAID)",
+                            feat = true
                         },
                         new
                         {
                             Id = 7,
                             Count = 0,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 1, 15, 23, 3, 14, 675, DateTimeKind.Local).AddTicks(5577),
-                            DateUpdated = new DateTime(2024, 1, 15, 23, 3, 14, 675, DateTimeKind.Local).AddTicks(5578),
+                            DateCreated = new DateTime(2024, 1, 19, 10, 49, 17, 299, DateTimeKind.Local).AddTicks(7135),
+                            DateUpdated = new DateTime(2024, 1, 19, 10, 49, 17, 299, DateTimeKind.Local).AddTicks(7136),
                             ImageRef = "images/claritin.jpg",
                             MediName = "Claritin",
                             Price = 5.9900000000000002,
@@ -466,6 +511,9 @@ namespace MedicineInc.Server.Data.Migrations
                     b.Property<int>("BranchID")
                         .HasColumnType("int");
 
+                    b.Property<int>("Count")
+                        .HasColumnType("int");
+
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
 
@@ -478,11 +526,26 @@ namespace MedicineInc.Server.Data.Migrations
                     b.Property<DateTime>("DateUpdated")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("ImageRef")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MediName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("OrderDone")
                         .HasColumnType("bit");
 
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
+
                     b.Property<string>("UpdatedBy")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Usage")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool?>("feat")
+                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
@@ -688,11 +751,28 @@ namespace MedicineInc.Server.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("MedicineInc.Shared.Domain.Cart", b =>
+                {
+                    b.HasOne("MedicineInc.Shared.Domain.Customer", "Customer")
+                        .WithMany()
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MedicineInc.Shared.Domain.Medicine", "Medicine")
+                        .WithMany()
+                        .HasForeignKey("MedicineId");
+
+                    b.Navigation("Customer");
+
+                    b.Navigation("Medicine");
+                });
+
             modelBuilder.Entity("MedicineInc.Shared.Domain.Medicine", b =>
                 {
-                    b.HasOne("MedicineInc.Shared.Domain.Order", null)
-                        .WithMany("OrderDetails")
-                        .HasForeignKey("OrderId");
+                    b.HasOne("MedicineInc.Shared.Domain.Cart", null)
+                        .WithMany("CartItems")
+                        .HasForeignKey("CartId");
                 });
 
             modelBuilder.Entity("MedicineInc.Shared.Domain.Order", b =>
@@ -781,9 +861,9 @@ namespace MedicineInc.Server.Data.Migrations
                     b.Navigation("Staff");
                 });
 
-            modelBuilder.Entity("MedicineInc.Shared.Domain.Order", b =>
+            modelBuilder.Entity("MedicineInc.Shared.Domain.Cart", b =>
                 {
-                    b.Navigation("OrderDetails");
+                    b.Navigation("CartItems");
                 });
 #pragma warning restore 612, 618
         }

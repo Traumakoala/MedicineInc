@@ -22,7 +22,8 @@ namespace MedicineInc.Server.Repository
         private IGenericRepository<Order> _orders;
         private IGenericRepository<Branch> _branches;
         private IGenericRepository<Customer> _customers;
-
+        private IGenericRepository<Cart> _carts;
+ 
         private UserManager<ApplicationUser> _userManager;
 
         public UnitOfWork(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
@@ -46,6 +47,8 @@ namespace MedicineInc.Server.Repository
         public IGenericRepository<Customer> Customers
             => _customers ??= new GenericRepository<Customer>(_context);
 
+        public IGenericRepository<Cart> Carts
+            => _carts ??= new GenericRepository<Cart>(_context);
         public void Dispose()
         {
             _context.Dispose();
@@ -53,7 +56,6 @@ namespace MedicineInc.Server.Repository
         }
         public async Task Save(HttpContext httpContext)
         {
-            //To be implemented
             string user = "System";
 
             var entries = _context.ChangeTracker.Entries()

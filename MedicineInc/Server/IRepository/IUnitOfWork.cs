@@ -15,5 +15,6 @@ namespace MedicineInc.Server.IRepository
         IGenericRepository<Order> Orders { get; }
         IGenericRepository<Branch> Branches { get; }
         IGenericRepository<Customer> Customers { get; }
+        IGenericRepository<Cart> Carts { get; }
     }
 }
