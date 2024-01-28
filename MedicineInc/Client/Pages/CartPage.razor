@@ -1,0 +1,94 @@
+﻿@page "/cart"
+@inject HttpClient _client
+@inject IJSRuntime js
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@attribute [Authorize]
+
+<h1>Your Shopping Cart</h1>
+<link href="css/cart.css" rel="stylesheet">
+
+@if (Carts != null && Carts.Count > 0)
+{
+    <div class="cart-container">
+        <ul class="cart-items">
+            @foreach (var cart in Carts.Where(c => c.CustomerId == CurrentCustomerId))
+            {
+                foreach (var cartItem in cart.CartItems)
+                {
+                    <li class="cart-item">
+                        <img src="@cartItem.ImageRef" alt="@cartItem.MediName" class="product-image">
+                        <div class="medicine-details">
+                            <h2>@cartItem.MediName</h2>
+                            <p>Price: $@cartItem.Price</p>
+                            <p>Quantity: @cartItem.Count</p>
+                            <button @onclick='() => RemoveFromCart(cart.Id, cartItem.Id)'>Remove from Cart</button>
+                        </div>
+                    </li>
+                }
+            }
+        </ul>
+        <button @onclick='ClearCart'>Clear Cart</button>
+    </div>
+}
+else
+{
+    <p>Your cart is empty.</p>
+}
+
+<footer>
+    <p>&copy; 2024 Online Pharmacy</p>
+</footer>
+
+@code {
+    private IList<Cart>? Carts;
+    private IList<Customer>? Customers;
+    private int CurrentCustomerId;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadCarts();
+        await LoadCustomers();
+        CurrentCustomerId = await GetCurrentCustomerId();
+    }
+
+    private async Task LoadCustomers()
+    {
+        Customers = await _client.GetFromJsonAsync<List<Customer>>($"{Endpoints.CustomersEndPoint}");
+    }
+
+    private async Task LoadCarts()
+    {
+        if (CurrentCustomerId != 0)
+        {
+            Carts = await _client.GetFromJsonAsync<List<Cart>>($"{Endpoints.CartsEndPoint}");
+        }
+    }
+
+    private async Task<int> GetCurrentCustomerId()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+
+        var customerIdClaim = user.FindFirst("customerId");
+
+        if (customerIdClaim != null && int.TryParse(customerIdClaim.Value, out var customerId))
+        {
+            return customerId;
+        }
+
+        return 0;
+    }
+
+    private async Task RemoveFromCart(int customerId, int medicineId)
+    {
+        await _client.DeleteAsync($"{Endpoints.CartsEndPoint}/{customerId}/{medicineId}");
+        await LoadCarts();
+    }
+
+    private async Task ClearCart()
+    {
+        var customerId = GetCurrentCustomerId();
+        await _client.DeleteAsync($"{Endpoints.CartsEndPoint}/{customerId}/clear");
+        await LoadCarts();
+    }
+}

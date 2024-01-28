@@ -1,13 +1,13 @@
 ﻿.products-container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-around;
     gap: 20px;
     padding: 20px;
 }
 
 .product {
-    width: calc(48% - 10px); 
+    width: calc(22% - 20px);
     box-sizing: border-box;
     border: 1px solid #ddd;
     padding: 10px;
@@ -24,4 +24,16 @@
 .medicine-details {
     text-align: center;
     padding: 10px;
+}
+
+@media (max-width: 768px) {
+    .product {
+        width: calc(50% - 20px);
+    }
+}
+
+@media (max-width: 480px) {
+    .product {
+        width: 100%;
+    }
 }

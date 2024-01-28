@@ -1,6 +1,7 @@
-﻿@* @page "/"
+﻿@page "/"
 @inject HttpClient _client
 @inject IJSRuntime js
+@inject AuthenticationStateProvider AuthenticationStateProvider
 @attribute [Authorize]
 
 <PageTitle>Index</PageTitle>
@@ -8,7 +9,7 @@
 <link href="css/index.css" rel="stylesheet" />
 
 <div class="products-container">
-    @if (Medicines != null)
+    @if (Medicines != null && Medicines.Any())
     {
         @foreach (var item in Medicines.Where(q => q.feat == true).Take(4))
         {
@@ -17,7 +18,7 @@
                 <div class="medicine-details">
                     <h2>@item.MediName</h2>
                     <p>Price: $@item.Price</p>
-                    <button @onclick='() => AddToCart(1,item.Id)'>Add to Cart</button>
+                    <button @onclick='() => AddToCart(item.Id)'>Add to Cart</button>
                 </div>
             </div>
         }
@@ -37,17 +38,13 @@
 @code {
     private IList<Medicine>? Medicines;
     private IList<Cart>? Carts;
-    private IList<Customer>? Customers;
+    private int CurrentCustomerId;
 
     protected override async Task OnInitializedAsync()
     {
         await LoadMedicines();
         await LoadCarts();
-        await LoadCustomers();
-    }
-    private async Task LoadCustomers()
-    {
-        Customers = await _client.GetFromJsonAsync<List<Customer>>($"{Endpoints.CustomersEndPoint}");
+        CurrentCustomerId = await GetCurrentCustomerId();
     }
 
     private async Task LoadMedicines()
@@ -57,15 +54,56 @@
 
     private async Task LoadCarts()
     {
-        Carts = await _client.GetFromJsonAsync<List<Cart>>($"{Endpoints.CartsEndPoint}");
+        if (CurrentCustomerId != 0)
+        {
+            Carts = await _client.GetFromJsonAsync<List<Cart>>($"{Endpoints.CartsEndPoint}");
+        }
     }
 
-    private async Task AddToCart(int customerId, int medicineId)
+    private async Task AddToCart(int medicineId)
     {
-        
+        if (CurrentCustomerId != 0)
+        {
+            var currentCart = await _client.GetFromJsonAsync<Cart>($"{Endpoints.CartsEndPoint}/{CurrentCustomerId}");
 
-        await _client.PutAsJsonAsync($"{Endpoints.CartsEndPoint}", Carts);
+            if (currentCart == null)
+            {
+                currentCart = new Cart { CustomerId = CurrentCustomerId, CartItems = new List<Medicine>() };
+            }
 
-        await LoadCarts();
+            var existingCartItem = currentCart.CartItems?.FirstOrDefault(item => item.Id == medicineId);
+
+            if (existingCartItem != null)
+            {
+                existingCartItem.Count++;
+            }
+            else
+            {
+                currentCart.CartItems?.Add(new Medicine { Id = medicineId, Count = 1 });
+            }
+
+            Console.WriteLine($"Added medicine with ID {medicineId} to the cart for customer {CurrentCustomerId}.");
+            Console.WriteLine($"Current cart items count: {currentCart.CartItems?.Count}");
+
+            await _client.PutAsJsonAsync($"{Endpoints.CartsEndPoint}/{CurrentCustomerId}", currentCart);
+            await LoadCarts();
+        }
     }
-} *@
+
+
+
+    private async Task<int> GetCurrentCustomerId()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+
+        var customerIdClaim = user.FindFirst("customerId");
+
+        if (customerIdClaim != null && int.TryParse(customerIdClaim.Value, out var customerId))
+        {
+            return customerId;
+        }
+
+        return 0;
+    }
+}
