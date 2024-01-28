@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace MedicineInc.Server.Migrations
 {
     /// <inheritdoc />
-    public partial class behe : Migration
+    public partial class fhubsauihfgasdhfljkasdh : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -298,12 +298,6 @@ namespace MedicineInc.Server.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    MediName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Price = table.Column<double>(type: "float", nullable: false),
-                    feat = table.Column<bool>(type: "bit", nullable: true),
-                    Count = table.Column<int>(type: "int", nullable: false),
-                    Usage = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ImageRef = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     OrderDone = table.Column<bool>(type: "bit", nullable: false),
                     BranchID = table.Column<int>(type: "int", nullable: false),
                     CustomerID = table.Column<int>(type: "int", nullable: false),
@@ -366,6 +360,7 @@ namespace MedicineInc.Server.Migrations
                     Usage = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ImageRef = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CartId = table.Column<int>(type: "int", nullable: true),
+                    OrderId = table.Column<int>(type: "int", nullable: true),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DateUpdated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -379,20 +374,25 @@ namespace MedicineInc.Server.Migrations
                         column: x => x.CartId,
                         principalTable: "Carts",
                         principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Medicines_Orders_OrderId",
+                        column: x => x.OrderId,
+                        principalTable: "Orders",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.InsertData(
                 table: "Medicines",
-                columns: new[] { "Id", "CartId", "Count", "CreatedBy", "DateCreated", "DateUpdated", "ImageRef", "MediName", "Price", "UpdatedBy", "Usage", "feat" },
+                columns: new[] { "Id", "CartId", "Count", "CreatedBy", "DateCreated", "DateUpdated", "ImageRef", "MediName", "OrderId", "Price", "UpdatedBy", "Usage", "feat" },
                 values: new object[,]
                 {
-                    { 1, null, 0, "System", new DateTime(2024, 1, 19, 10, 26, 47, 164, DateTimeKind.Local).AddTicks(5258), new DateTime(2024, 1, 19, 10, 26, 47, 164, DateTimeKind.Local).AddTicks(5279), "images/Glucosamine.jpg", "Glucosamine", 10.99, "System", "Best Vitamins to stay healthy", true },
-                    { 2, null, 0, "System", new DateTime(2024, 1, 19, 10, 26, 47, 164, DateTimeKind.Local).AddTicks(5285), new DateTime(2024, 1, 19, 10, 26, 47, 164, DateTimeKind.Local).AddTicks(5286), "images/panadol.jpg", "Panadol", 5.9900000000000002, "System", "Most Popular Item for Cold and Fever", true },
-                    { 3, null, 0, "System", new DateTime(2024, 1, 19, 10, 26, 47, 164, DateTimeKind.Local).AddTicks(5289), new DateTime(2024, 1, 19, 10, 26, 47, 164, DateTimeKind.Local).AddTicks(5290), "images/bandaids.jpg", "Bandaids", 7.4900000000000002, "System", "For any and all injuries", null },
-                    { 4, null, 0, "System", new DateTime(2024, 1, 19, 10, 26, 47, 164, DateTimeKind.Local).AddTicks(5293), new DateTime(2024, 1, 19, 10, 26, 47, 164, DateTimeKind.Local).AddTicks(5294), "images/strepsils.jpg", "Strepsils", 4.29, "System", "To soothe your sore throat", null },
-                    { 5, null, 0, "System", new DateTime(2024, 1, 19, 10, 26, 47, 164, DateTimeKind.Local).AddTicks(5298), new DateTime(2024, 1, 19, 10, 26, 47, 164, DateTimeKind.Local).AddTicks(5298), "images/tylenol.jpg", "Tylenol", 9.9900000000000002, "System", "Pain reliever and fever reducer", true },
-                    { 6, null, 0, "System", new DateTime(2024, 1, 19, 10, 26, 47, 164, DateTimeKind.Local).AddTicks(5302), new DateTime(2024, 1, 19, 10, 26, 47, 164, DateTimeKind.Local).AddTicks(5303), "images/ibuprofen.jpg", "Ibuprofen", 7.4900000000000002, "System", "Nonsteroidal anti-inflammatory drug (NSAID)", true },
-                    { 7, null, 0, "System", new DateTime(2024, 1, 19, 10, 26, 47, 164, DateTimeKind.Local).AddTicks(5305), new DateTime(2024, 1, 19, 10, 26, 47, 164, DateTimeKind.Local).AddTicks(5306), "images/claritin.jpg", "Claritin", 5.9900000000000002, "System", "Antihistamine for allergy relief", null }
+                    { 1, null, 0, "System", new DateTime(2024, 1, 28, 15, 46, 41, 695, DateTimeKind.Local).AddTicks(3764), new DateTime(2024, 1, 28, 15, 46, 41, 695, DateTimeKind.Local).AddTicks(3774), "images/Glucosamine.jpg", "Glucosamine", null, 10.99, "System", "Best Vitamins to stay healthy", true },
+                    { 2, null, 0, "System", new DateTime(2024, 1, 28, 15, 46, 41, 695, DateTimeKind.Local).AddTicks(3777), new DateTime(2024, 1, 28, 15, 46, 41, 695, DateTimeKind.Local).AddTicks(3777), "images/panadol.jpg", "Panadol", null, 5.9900000000000002, "System", "Most Popular Item for Cold and Fever", true },
+                    { 3, null, 0, "System", new DateTime(2024, 1, 28, 15, 46, 41, 695, DateTimeKind.Local).AddTicks(3779), new DateTime(2024, 1, 28, 15, 46, 41, 695, DateTimeKind.Local).AddTicks(3779), "images/bandaids.jpg", "Bandaids", null, 7.4900000000000002, "System", "For any and all injuries", null },
+                    { 4, null, 0, "System", new DateTime(2024, 1, 28, 15, 46, 41, 695, DateTimeKind.Local).AddTicks(3780), new DateTime(2024, 1, 28, 15, 46, 41, 695, DateTimeKind.Local).AddTicks(3781), "images/strepsils.jpg", "Strepsils", null, 4.29, "System", "To soothe your sore throat", null },
+                    { 5, null, 0, "System", new DateTime(2024, 1, 28, 15, 46, 41, 695, DateTimeKind.Local).AddTicks(3782), new DateTime(2024, 1, 28, 15, 46, 41, 695, DateTimeKind.Local).AddTicks(3783), "images/tylenol.jpg", "Tylenol", null, 9.9900000000000002, "System", "Pain reliever and fever reducer", true },
+                    { 6, null, 0, "System", new DateTime(2024, 1, 28, 15, 46, 41, 695, DateTimeKind.Local).AddTicks(3784), new DateTime(2024, 1, 28, 15, 46, 41, 695, DateTimeKind.Local).AddTicks(3785), "images/ibuprofen.jpg", "Ibuprofen", null, 7.4900000000000002, "System", "Nonsteroidal anti-inflammatory drug (NSAID)", true },
+                    { 7, null, 0, "System", new DateTime(2024, 1, 28, 15, 46, 41, 695, DateTimeKind.Local).AddTicks(3787), new DateTime(2024, 1, 28, 15, 46, 41, 695, DateTimeKind.Local).AddTicks(3788), "images/claritin.jpg", "Claritin", null, 5.9900000000000002, "System", "Antihistamine for allergy relief", null }
                 });
 
             migrationBuilder.CreateIndex(
@@ -466,6 +466,11 @@ namespace MedicineInc.Server.Migrations
                 column: "CartId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Medicines_OrderId",
+                table: "Medicines",
+                column: "OrderId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Orders_BranchID",
                 table: "Orders",
                 column: "BranchID");
@@ -517,6 +522,10 @@ namespace MedicineInc.Server.Migrations
                 table: "Carts");
 
             migrationBuilder.DropForeignKey(
+                name: "FK_Orders_Customers_CustomerID",
+                table: "Orders");
+
+            migrationBuilder.DropForeignKey(
                 name: "FK_Carts_Medicines_MedicineId",
                 table: "Carts");
 
@@ -542,9 +551,6 @@ namespace MedicineInc.Server.Migrations
                 name: "Keys");
 
             migrationBuilder.DropTable(
-                name: "Orders");
-
-            migrationBuilder.DropTable(
                 name: "PersistedGrants");
 
             migrationBuilder.DropTable(
@@ -557,9 +563,6 @@ namespace MedicineInc.Server.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "Branches");
-
-            migrationBuilder.DropTable(
                 name: "Customers");
 
             migrationBuilder.DropTable(
@@ -567,6 +570,12 @@ namespace MedicineInc.Server.Migrations
 
             migrationBuilder.DropTable(
                 name: "Carts");
+
+            migrationBuilder.DropTable(
+                name: "Orders");
+
+            migrationBuilder.DropTable(
+                name: "Branches");
         }
     }
 }

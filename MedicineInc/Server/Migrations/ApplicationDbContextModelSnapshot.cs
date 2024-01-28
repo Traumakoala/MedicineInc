@@ -410,8 +410,8 @@ namespace MedicineInc.Server.Migrations
                             Id = 1,
                             Count = 0,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 1, 25, 14, 58, 52, 578, DateTimeKind.Local).AddTicks(222),
-                            DateUpdated = new DateTime(2024, 1, 25, 14, 58, 52, 578, DateTimeKind.Local).AddTicks(234),
+                            DateCreated = new DateTime(2024, 1, 28, 16, 6, 11, 847, DateTimeKind.Local).AddTicks(9502),
+                            DateUpdated = new DateTime(2024, 1, 28, 16, 6, 11, 847, DateTimeKind.Local).AddTicks(9512),
                             ImageRef = "images/Glucosamine.jpg",
                             MediName = "Glucosamine",
                             Price = 10.99,
@@ -424,8 +424,8 @@ namespace MedicineInc.Server.Migrations
                             Id = 2,
                             Count = 0,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 1, 25, 14, 58, 52, 578, DateTimeKind.Local).AddTicks(237),
-                            DateUpdated = new DateTime(2024, 1, 25, 14, 58, 52, 578, DateTimeKind.Local).AddTicks(238),
+                            DateCreated = new DateTime(2024, 1, 28, 16, 6, 11, 847, DateTimeKind.Local).AddTicks(9516),
+                            DateUpdated = new DateTime(2024, 1, 28, 16, 6, 11, 847, DateTimeKind.Local).AddTicks(9516),
                             ImageRef = "images/panadol.jpg",
                             MediName = "Panadol",
                             Price = 5.9900000000000002,
@@ -438,8 +438,8 @@ namespace MedicineInc.Server.Migrations
                             Id = 3,
                             Count = 0,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 1, 25, 14, 58, 52, 578, DateTimeKind.Local).AddTicks(267),
-                            DateUpdated = new DateTime(2024, 1, 25, 14, 58, 52, 578, DateTimeKind.Local).AddTicks(268),
+                            DateCreated = new DateTime(2024, 1, 28, 16, 6, 11, 847, DateTimeKind.Local).AddTicks(9518),
+                            DateUpdated = new DateTime(2024, 1, 28, 16, 6, 11, 847, DateTimeKind.Local).AddTicks(9518),
                             ImageRef = "images/bandaids.jpg",
                             MediName = "Bandaids",
                             Price = 7.4900000000000002,
@@ -451,8 +451,8 @@ namespace MedicineInc.Server.Migrations
                             Id = 4,
                             Count = 0,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 1, 25, 14, 58, 52, 578, DateTimeKind.Local).AddTicks(269),
-                            DateUpdated = new DateTime(2024, 1, 25, 14, 58, 52, 578, DateTimeKind.Local).AddTicks(270),
+                            DateCreated = new DateTime(2024, 1, 28, 16, 6, 11, 847, DateTimeKind.Local).AddTicks(9520),
+                            DateUpdated = new DateTime(2024, 1, 28, 16, 6, 11, 847, DateTimeKind.Local).AddTicks(9520),
                             ImageRef = "images/strepsils.jpg",
                             MediName = "Strepsils",
                             Price = 4.29,
@@ -464,8 +464,8 @@ namespace MedicineInc.Server.Migrations
                             Id = 5,
                             Count = 0,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 1, 25, 14, 58, 52, 578, DateTimeKind.Local).AddTicks(271),
-                            DateUpdated = new DateTime(2024, 1, 25, 14, 58, 52, 578, DateTimeKind.Local).AddTicks(272),
+                            DateCreated = new DateTime(2024, 1, 28, 16, 6, 11, 847, DateTimeKind.Local).AddTicks(9521),
+                            DateUpdated = new DateTime(2024, 1, 28, 16, 6, 11, 847, DateTimeKind.Local).AddTicks(9522),
                             ImageRef = "images/tylenol.jpg",
                             MediName = "Tylenol",
                             Price = 9.9900000000000002,
@@ -478,8 +478,8 @@ namespace MedicineInc.Server.Migrations
                             Id = 6,
                             Count = 0,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 1, 25, 14, 58, 52, 578, DateTimeKind.Local).AddTicks(274),
-                            DateUpdated = new DateTime(2024, 1, 25, 14, 58, 52, 578, DateTimeKind.Local).AddTicks(274),
+                            DateCreated = new DateTime(2024, 1, 28, 16, 6, 11, 847, DateTimeKind.Local).AddTicks(9523),
+                            DateUpdated = new DateTime(2024, 1, 28, 16, 6, 11, 847, DateTimeKind.Local).AddTicks(9524),
                             ImageRef = "images/ibuprofen.jpg",
                             MediName = "Ibuprofen",
                             Price = 7.4900000000000002,
@@ -492,8 +492,8 @@ namespace MedicineInc.Server.Migrations
                             Id = 7,
                             Count = 0,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 1, 25, 14, 58, 52, 578, DateTimeKind.Local).AddTicks(275),
-                            DateUpdated = new DateTime(2024, 1, 25, 14, 58, 52, 578, DateTimeKind.Local).AddTicks(276),
+                            DateCreated = new DateTime(2024, 1, 28, 16, 6, 11, 847, DateTimeKind.Local).AddTicks(9525),
+                            DateUpdated = new DateTime(2024, 1, 28, 16, 6, 11, 847, DateTimeKind.Local).AddTicks(9526),
                             ImageRef = "images/claritin.jpg",
                             MediName = "Claritin",
                             Price = 5.9900000000000002,
@@ -560,17 +560,11 @@ namespace MedicineInc.Server.Migrations
                     b.Property<DateTime>("DateUpdated")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Gender")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<bool>("IsManager")
                         .HasColumnType("bit");
 
                     b.Property<int?>("ManagerID")
                         .HasColumnType("int");
-
-                    b.Property<string>("StaffAddress")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("StaffEmail")
                         .HasColumnType("nvarchar(max)");
@@ -578,13 +572,7 @@ namespace MedicineInc.Server.Migrations
                     b.Property<string>("StaffName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("StaffPassword")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("StaffPhone")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("StaffUser")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UpdatedBy")
