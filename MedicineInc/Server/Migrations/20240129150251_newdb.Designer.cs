@@ -4,6 +4,7 @@ using MedicineInc.Server.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MedicineInc.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240129150251_newdb")]
+    partial class newdb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -410,8 +413,8 @@ namespace MedicineInc.Server.Migrations
                             Id = 1,
                             Count = 0,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 1, 29, 23, 53, 45, 519, DateTimeKind.Local).AddTicks(8565),
-                            DateUpdated = new DateTime(2024, 1, 29, 23, 53, 45, 519, DateTimeKind.Local).AddTicks(8578),
+                            DateCreated = new DateTime(2024, 1, 29, 23, 2, 51, 312, DateTimeKind.Local).AddTicks(9365),
+                            DateUpdated = new DateTime(2024, 1, 29, 23, 2, 51, 312, DateTimeKind.Local).AddTicks(9379),
                             ImageRef = "images/Glucosamine.jpg",
                             MediName = "Glucosamine",
                             Price = 10.99,
@@ -424,8 +427,8 @@ namespace MedicineInc.Server.Migrations
                             Id = 2,
                             Count = 0,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 1, 29, 23, 53, 45, 519, DateTimeKind.Local).AddTicks(8582),
-                            DateUpdated = new DateTime(2024, 1, 29, 23, 53, 45, 519, DateTimeKind.Local).AddTicks(8583),
+                            DateCreated = new DateTime(2024, 1, 29, 23, 2, 51, 312, DateTimeKind.Local).AddTicks(9381),
+                            DateUpdated = new DateTime(2024, 1, 29, 23, 2, 51, 312, DateTimeKind.Local).AddTicks(9382),
                             ImageRef = "images/panadol.jpg",
                             MediName = "Panadol",
                             Price = 5.9900000000000002,
@@ -438,8 +441,8 @@ namespace MedicineInc.Server.Migrations
                             Id = 3,
                             Count = 0,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 1, 29, 23, 53, 45, 519, DateTimeKind.Local).AddTicks(8584),
-                            DateUpdated = new DateTime(2024, 1, 29, 23, 53, 45, 519, DateTimeKind.Local).AddTicks(8585),
+                            DateCreated = new DateTime(2024, 1, 29, 23, 2, 51, 312, DateTimeKind.Local).AddTicks(9384),
+                            DateUpdated = new DateTime(2024, 1, 29, 23, 2, 51, 312, DateTimeKind.Local).AddTicks(9384),
                             ImageRef = "images/bandaids.jpg",
                             MediName = "Bandaids",
                             Price = 7.4900000000000002,
@@ -452,8 +455,8 @@ namespace MedicineInc.Server.Migrations
                             Id = 4,
                             Count = 0,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 1, 29, 23, 53, 45, 519, DateTimeKind.Local).AddTicks(8586),
-                            DateUpdated = new DateTime(2024, 1, 29, 23, 53, 45, 519, DateTimeKind.Local).AddTicks(8587),
+                            DateCreated = new DateTime(2024, 1, 29, 23, 2, 51, 312, DateTimeKind.Local).AddTicks(9386),
+                            DateUpdated = new DateTime(2024, 1, 29, 23, 2, 51, 312, DateTimeKind.Local).AddTicks(9387),
                             ImageRef = "images/strepsils.jpg",
                             MediName = "Strepsils",
                             Price = 4.29,
@@ -466,8 +469,8 @@ namespace MedicineInc.Server.Migrations
                             Id = 5,
                             Count = 0,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 1, 29, 23, 53, 45, 519, DateTimeKind.Local).AddTicks(8589),
-                            DateUpdated = new DateTime(2024, 1, 29, 23, 53, 45, 519, DateTimeKind.Local).AddTicks(8589),
+                            DateCreated = new DateTime(2024, 1, 29, 23, 2, 51, 312, DateTimeKind.Local).AddTicks(9388),
+                            DateUpdated = new DateTime(2024, 1, 29, 23, 2, 51, 312, DateTimeKind.Local).AddTicks(9388),
                             ImageRef = "images/tylenol.jpg",
                             MediName = "Tylenol",
                             Price = 9.9900000000000002,
@@ -480,8 +483,8 @@ namespace MedicineInc.Server.Migrations
                             Id = 6,
                             Count = 0,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 1, 29, 23, 53, 45, 519, DateTimeKind.Local).AddTicks(8591),
-                            DateUpdated = new DateTime(2024, 1, 29, 23, 53, 45, 519, DateTimeKind.Local).AddTicks(8591),
+                            DateCreated = new DateTime(2024, 1, 29, 23, 2, 51, 312, DateTimeKind.Local).AddTicks(9390),
+                            DateUpdated = new DateTime(2024, 1, 29, 23, 2, 51, 312, DateTimeKind.Local).AddTicks(9390),
                             ImageRef = "images/ibuprofen.jpg",
                             MediName = "Ibuprofen",
                             Price = 7.4900000000000002,
@@ -494,8 +497,8 @@ namespace MedicineInc.Server.Migrations
                             Id = 7,
                             Count = 0,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 1, 29, 23, 53, 45, 519, DateTimeKind.Local).AddTicks(8592),
-                            DateUpdated = new DateTime(2024, 1, 29, 23, 53, 45, 519, DateTimeKind.Local).AddTicks(8593),
+                            DateCreated = new DateTime(2024, 1, 29, 23, 2, 51, 312, DateTimeKind.Local).AddTicks(9392),
+                            DateUpdated = new DateTime(2024, 1, 29, 23, 2, 51, 312, DateTimeKind.Local).AddTicks(9392),
                             ImageRef = "images/claritin.jpg",
                             MediName = "Claritin",
                             Price = 5.9900000000000002,
