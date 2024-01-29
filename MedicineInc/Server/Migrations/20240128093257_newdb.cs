@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace MedicineInc.Server.Migrations
 {
     /// <inheritdoc />
-    public partial class fhubsauihfgasdhfljkasdh : Migration
+    public partial class newdb : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -269,12 +269,8 @@ namespace MedicineInc.Server.Migrations
                     StaffName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     StaffEmail = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     StaffPhone = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StaffUser = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StaffPassword = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StaffAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsManager = table.Column<bool>(type: "bit", nullable: false),
                     ManagerID = table.Column<int>(type: "int", nullable: true),
-                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     BranchID = table.Column<int>(type: "int", nullable: false),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DateUpdated = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -386,13 +382,13 @@ namespace MedicineInc.Server.Migrations
                 columns: new[] { "Id", "CartId", "Count", "CreatedBy", "DateCreated", "DateUpdated", "ImageRef", "MediName", "OrderId", "Price", "UpdatedBy", "Usage", "feat" },
                 values: new object[,]
                 {
-                    { 1, null, 0, "System", new DateTime(2024, 1, 28, 15, 46, 41, 695, DateTimeKind.Local).AddTicks(3764), new DateTime(2024, 1, 28, 15, 46, 41, 695, DateTimeKind.Local).AddTicks(3774), "images/Glucosamine.jpg", "Glucosamine", null, 10.99, "System", "Best Vitamins to stay healthy", true },
-                    { 2, null, 0, "System", new DateTime(2024, 1, 28, 15, 46, 41, 695, DateTimeKind.Local).AddTicks(3777), new DateTime(2024, 1, 28, 15, 46, 41, 695, DateTimeKind.Local).AddTicks(3777), "images/panadol.jpg", "Panadol", null, 5.9900000000000002, "System", "Most Popular Item for Cold and Fever", true },
-                    { 3, null, 0, "System", new DateTime(2024, 1, 28, 15, 46, 41, 695, DateTimeKind.Local).AddTicks(3779), new DateTime(2024, 1, 28, 15, 46, 41, 695, DateTimeKind.Local).AddTicks(3779), "images/bandaids.jpg", "Bandaids", null, 7.4900000000000002, "System", "For any and all injuries", null },
-                    { 4, null, 0, "System", new DateTime(2024, 1, 28, 15, 46, 41, 695, DateTimeKind.Local).AddTicks(3780), new DateTime(2024, 1, 28, 15, 46, 41, 695, DateTimeKind.Local).AddTicks(3781), "images/strepsils.jpg", "Strepsils", null, 4.29, "System", "To soothe your sore throat", null },
-                    { 5, null, 0, "System", new DateTime(2024, 1, 28, 15, 46, 41, 695, DateTimeKind.Local).AddTicks(3782), new DateTime(2024, 1, 28, 15, 46, 41, 695, DateTimeKind.Local).AddTicks(3783), "images/tylenol.jpg", "Tylenol", null, 9.9900000000000002, "System", "Pain reliever and fever reducer", true },
-                    { 6, null, 0, "System", new DateTime(2024, 1, 28, 15, 46, 41, 695, DateTimeKind.Local).AddTicks(3784), new DateTime(2024, 1, 28, 15, 46, 41, 695, DateTimeKind.Local).AddTicks(3785), "images/ibuprofen.jpg", "Ibuprofen", null, 7.4900000000000002, "System", "Nonsteroidal anti-inflammatory drug (NSAID)", true },
-                    { 7, null, 0, "System", new DateTime(2024, 1, 28, 15, 46, 41, 695, DateTimeKind.Local).AddTicks(3787), new DateTime(2024, 1, 28, 15, 46, 41, 695, DateTimeKind.Local).AddTicks(3788), "images/claritin.jpg", "Claritin", null, 5.9900000000000002, "System", "Antihistamine for allergy relief", null }
+                    { 1, null, 0, "System", new DateTime(2024, 1, 28, 17, 32, 56, 932, DateTimeKind.Local).AddTicks(1928), new DateTime(2024, 1, 28, 17, 32, 56, 932, DateTimeKind.Local).AddTicks(1937), "images/Glucosamine.jpg", "Glucosamine", null, 10.99, "System", "Best Vitamins to stay healthy", true },
+                    { 2, null, 0, "System", new DateTime(2024, 1, 28, 17, 32, 56, 932, DateTimeKind.Local).AddTicks(1941), new DateTime(2024, 1, 28, 17, 32, 56, 932, DateTimeKind.Local).AddTicks(1941), "images/panadol.jpg", "Panadol", null, 5.9900000000000002, "System", "Most Popular Item for Cold and Fever", true },
+                    { 3, null, 0, "System", new DateTime(2024, 1, 28, 17, 32, 56, 932, DateTimeKind.Local).AddTicks(1943), new DateTime(2024, 1, 28, 17, 32, 56, 932, DateTimeKind.Local).AddTicks(1943), "images/bandaids.jpg", "Bandaids", null, 7.4900000000000002, "System", "For any and all injuries", null },
+                    { 4, null, 0, "System", new DateTime(2024, 1, 28, 17, 32, 56, 932, DateTimeKind.Local).AddTicks(1945), new DateTime(2024, 1, 28, 17, 32, 56, 932, DateTimeKind.Local).AddTicks(1945), "images/strepsils.jpg", "Strepsils", null, 4.29, "System", "To soothe your sore throat", null },
+                    { 5, null, 0, "System", new DateTime(2024, 1, 28, 17, 32, 56, 932, DateTimeKind.Local).AddTicks(1947), new DateTime(2024, 1, 28, 17, 32, 56, 932, DateTimeKind.Local).AddTicks(1947), "images/tylenol.jpg", "Tylenol", null, 9.9900000000000002, "System", "Pain reliever and fever reducer", true },
+                    { 6, null, 0, "System", new DateTime(2024, 1, 28, 17, 32, 56, 932, DateTimeKind.Local).AddTicks(1950), new DateTime(2024, 1, 28, 17, 32, 56, 932, DateTimeKind.Local).AddTicks(1950), "images/ibuprofen.jpg", "Ibuprofen", null, 7.4900000000000002, "System", "Nonsteroidal anti-inflammatory drug (NSAID)", true },
+                    { 7, null, 0, "System", new DateTime(2024, 1, 28, 17, 32, 56, 932, DateTimeKind.Local).AddTicks(1953), new DateTime(2024, 1, 28, 17, 32, 56, 932, DateTimeKind.Local).AddTicks(1953), "images/claritin.jpg", "Claritin", null, 5.9900000000000002, "System", "Antihistamine for allergy relief", null }
                 });
 
             migrationBuilder.CreateIndex(

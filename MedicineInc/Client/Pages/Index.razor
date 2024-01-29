@@ -2,7 +2,8 @@
 @inject HttpClient _client
 @inject IJSRuntime js
 @inject AuthenticationStateProvider AuthenticationStateProvider
-@attribute [Authorize]
+@inject CartService CartService
+
 
 <PageTitle>Index</PageTitle>
 <h1>Featured Items!</h1>
@@ -56,41 +57,15 @@
     {
         if (CurrentCustomerId != 0)
         {
-            Carts = await _client.GetFromJsonAsync<List<Cart>>($"{Endpoints.CartsEndPoint}");
+            Carts = await CartService.GetCartsAsync();
         }
     }
 
     private async Task AddToCart(int medicineId)
     {
-        if (CurrentCustomerId != 0)
-        {
-            var currentCart = await _client.GetFromJsonAsync<Cart>($"{Endpoints.CartsEndPoint}/{CurrentCustomerId}");
-
-            if (currentCart == null)
-            {
-                currentCart = new Cart { CustomerId = CurrentCustomerId, CartItems = new List<Medicine>() };
-            }
-
-            var existingCartItem = currentCart.CartItems?.FirstOrDefault(item => item.Id == medicineId);
-
-            if (existingCartItem != null)
-            {
-                existingCartItem.Count++;
-            }
-            else
-            {
-                currentCart.CartItems?.Add(new Medicine { Id = medicineId, Count = 1 });
-            }
-
-            Console.WriteLine($"Added medicine with ID {medicineId} to the cart for customer {CurrentCustomerId}.");
-            Console.WriteLine($"Current cart items count: {currentCart.CartItems?.Count}");
-
-            await _client.PutAsJsonAsync($"{Endpoints.CartsEndPoint}/{CurrentCustomerId}", currentCart);
-            await LoadCarts();
-        }
+        await CartService.AddToCartAsync(CurrentCustomerId, Medicines.FirstOrDefault(m => m.Id == medicineId), 1);
+        await LoadCarts();
     }
-
-
 
     private async Task<int> GetCurrentCustomerId()
     {
