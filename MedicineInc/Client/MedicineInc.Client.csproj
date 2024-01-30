@@ -24,6 +24,11 @@
 
   <ItemGroup>
     <Folder Include="Components\" />
+    <Folder Include="Pages\Medicine\" />
+    <Folder Include="Pages\Customer\" />
+    <Folder Include="Pages\Cart\" />
+    <Folder Include="Pages\Order\" />
+    <Folder Include="Pages\Staff\" />
   </ItemGroup>
 
 </Project>
