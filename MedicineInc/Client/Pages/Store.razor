@@ -1,12 +1,9 @@
 ﻿@page "/storepage"
 @inject IJSRuntime js
 @inject HttpClient _client
-@inject AuthenticationStateProvider AuthenticationStateProvider
-@inject CartService CartService
 
-
-<h1>Main store!</h1>
-<link rel="stylesheet" href="css/index.css">
+<PageTitle>Main store!</PageTitle>
+<link rel="stylesheet" href="css/index.css" />
 
 <div class="products-container">
     @if (Medicines != null && Medicines.Any())
@@ -18,7 +15,10 @@
                 <div class="medicine-details">
                     <h2>@item.MediName</h2>
                     <p>Price: $@item.Price</p>
-                    <button @onclick='() => AddToCart(item.Id, item, 1)'>Add to Cart</button>
+                    <div class="quantity-input">
+                        <button @onclick='() => AddToCart(item.Id, item.Count)'>Add to Cart</button>
+                        <input type="number" @bind="item.Count" min="1" />
+                    </div>
                 </div>
             </div>
         }
@@ -48,8 +48,29 @@
         Medicines = await _client.GetFromJsonAsync<List<Medicine>>($"{Endpoints.MedicinesEndPoint}");
     }
 
-    private async Task AddToCart(int medicineId, Medicine medicine, int count)
+    private async Task AddToCart(int medicineId, int quantity)
     {
-        await CartService.AddToCartAsync(medicineId, medicine, count);
+        var selectedMedicine = Medicines?.FirstOrDefault(m => m.Id == medicineId);
+
+        if (selectedMedicine != null)
+        {
+            var cartItem = new
+            {
+                MedicineId = selectedMedicine.Id,
+                Quantity = quantity
+            };
+
+            var response = await _client.PostAsJsonAsync($"{Endpoints.CartsEndPoint}", cartItem);
+
+            if (response.IsSuccessStatusCode)
+            {
+                await LoadMedicines();
+            }
+            else
+            {
+                var errorMessage = await response.Content.ReadAsStringAsync();
+                Console.WriteLine($"Error adding to cart: {errorMessage}");
+            }
+        }
     }
 }

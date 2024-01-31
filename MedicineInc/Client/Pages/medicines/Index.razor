@@ -4,7 +4,7 @@
 @attribute [Authorize]
 
 <h3 class="card-title">Medicine Creation</h3>
-<a href="/staffs/create" class="btn btn-secondary">
+<a href="/medicines/create" class="btn btn-secondary">
     <span class="oi oi plus"></span>
     Create New Medicine
 </a>
@@ -33,7 +33,7 @@ else
                 <tr>
                     <td>@medicine.MediName</td>
                     <td>@medicine.Price</td>
-                    <td>@medicine.feat</td>
+                    <td>@medicine.Feat</td>
                     <td>@medicine.Usage</td>
                     <td>
                         <a href="/medicines/view/@medicine.Id" class="btn btn-primary">
@@ -51,6 +51,7 @@ else
         </tbody>
     </table>
 }
+
 @code {
     private List<Medicine>? Medicines;
 

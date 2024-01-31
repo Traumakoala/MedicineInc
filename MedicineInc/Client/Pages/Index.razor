@@ -1,8 +1,6 @@
 ﻿@page "/"
 @inject HttpClient _client
 @inject IJSRuntime js
-@inject CartService CartService
-
 
 <PageTitle>Index</PageTitle>
 <h1>Featured Items!</h1>
@@ -11,18 +9,21 @@
 <div class="products-container">
     @if (Medicines != null && Medicines.Any())
     {
-        @foreach (var item in Medicines.Where(q => q.feat == true).Take(4))
+        @foreach (var item in Medicines.Where(q => q.Feat).Take(4))
         {
             <div class="product">
                 <img src="@item.ImageRef" alt="@item.MediName" class="product-image">
                 <div class="medicine-details">
                     <h2>@item.MediName</h2>
                     <p>Price: $@item.Price</p>
-                    <button @onclick='() => AddToCart(item.Id)'>Add to Cart</button>
+                    <div class="quantity-input">
+                        <button @onclick='() => AddToCart(item.Id, item.Count)'>Add to Cart</button>
+                        <input type="number" @bind="item.Count" min="1" />
+                    </div>
                 </div>
             </div>
         }
-    } 
+    }
     else
     {
         <div class="product">
@@ -31,23 +32,16 @@
     }
 </div>
 
-
-
-
 <footer>
     <p>&copy; 2024 Online Pharmacy</p>
 </footer>
 
 @code {
     private IList<Medicine>? Medicines;
-    private IList<Cart>? Carts;
-    //private int CurrentCustomerId;
 
     protected override async Task OnInitializedAsync()
     {
         await LoadMedicines();
-        await LoadCarts();
-        //CurrentCustomerId = await GetCurrentCustomerId();
     }
 
     private async Task LoadMedicines()
@@ -55,32 +49,29 @@
         Medicines = await _client.GetFromJsonAsync<List<Medicine>>($"{Endpoints.MedicinesEndPoint}");
     }
 
-    private async Task LoadCarts()
+    private async Task AddToCart(int medicineId, int quantity)
     {
-        //if (CurrentCustomerId != 0)
-        //{
-        Carts = await CartService.GetCartsAsync();
-        //}
-    }
+        var selectedMedicine = Medicines?.FirstOrDefault(m => m.Id == medicineId);
 
-    private async Task AddToCart(int medicineId)
-    { 
-        //await CartService.AddToCartAsync(CurrentCustomerId, Medicines.FirstOrDefault(m => m.Id == medicineId), 1);
-        await LoadCarts();
-    }
-    /*
-    private async Task<int> GetCurrentCustomerId()
-    {
-        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-        var user = authState.User;
-
-        var customerIdClaim = user.FindFirst("customerId");
-
-        if (customerIdClaim != null && int.TryParse(customerIdClaim.Value, out var customerId))
+        if (selectedMedicine != null)
         {
-            return customerId;
-        }
+            var cartItem = new
+            {
+                MedicineId = selectedMedicine.Id,
+                Quantity = quantity
+            };
 
-        return 0;
-    } */
+            var response = await _client.PostAsJsonAsync($"{Endpoints.CartsEndPoint}", cartItem);
+
+            if (response.IsSuccessStatusCode)
+            {
+                await LoadMedicines();
+            }
+            else
+            {
+                var errorMessage = await response.Content.ReadAsStringAsync();
+                Console.WriteLine($"Error adding to cart: {errorMessage}");
+            }
+        }
+    }
 }

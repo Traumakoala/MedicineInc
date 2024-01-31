@@ -9,7 +9,7 @@ using MedicineInc.Server.Data;
 using MedicineInc.Shared.Domain;
 using MedicineInc.Server.IRepository;
 
-namespace CartInc.Server.Controllers
+namespace MedicineInc.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -22,38 +22,39 @@ namespace CartInc.Server.Controllers
             _unitOfWork = unitOfWork;
         }
 
-        // GET: api/carts
+        // GET: api/Carts
         [HttpGet]
         public async Task<IActionResult> GetCarts()
         {
-            var carts = await _unitOfWork.Carts.GetAll(includes: q => q.Include(x =>x.Customer).Include(x => x.Medicine));
-            return Ok(carts);
+            var Carts = await _unitOfWork.Carts.GetAll();
+            return Ok(Carts);
         }
 
         // GET: api/Carts/5
         [HttpGet("{id}")]
         public async Task<IActionResult> GetCart(int id)
         {
-            var cart = await _unitOfWork.Carts.Get(q => q.Id == id);
-            
-            if (cart == null)
+            var Cart = await _unitOfWork.Carts.Get(q => q.Id == id);
+
+            if (Cart == null)
             {
                 return NotFound();
             }
 
-            return Ok(cart);
+            return Ok(Cart);
         }
 
         // PUT: api/Carts/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCart(int id, Cart cart)
+        public async Task<IActionResult> PutCart(int id, Cart Cart)
         {
-            if (id != cart.Id)
+            if (id != Cart.Id)
             {
                 return BadRequest();
             }
-            _unitOfWork.Carts.Update(cart);
+
+            _unitOfWork.Carts.Update(Cart);
 
             try
             {
@@ -77,13 +78,13 @@ namespace CartInc.Server.Controllers
         // POST: api/Carts
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Cart>> PostCart(Cart cart)
+        public async Task<ActionResult<Cart>> PostCart(Cart Cart)
         {
 
-            await _unitOfWork.Carts.Insert(cart);
+            await _unitOfWork.Carts.Insert(Cart);
             await _unitOfWork.Save(HttpContext);
 
-            return CreatedAtAction("GetCart", new { id = cart.Id }, cart);
+            return CreatedAtAction("GetCart", new { id = Cart.Id }, Cart);
         }
 
         // DELETE: api/Carts/5

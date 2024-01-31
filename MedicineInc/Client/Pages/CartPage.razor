@@ -1,9 +1,6 @@
 ﻿@page "/cart"
 @inject IJSRuntime js
 @inject HttpClient _client
-@inject AuthenticationStateProvider AuthenticationStateProvider
-@inject CartService CartService
-
 
 <h1>Your Shopping Cart</h1>
 <link href="css/cart.css" rel="stylesheet">
@@ -12,7 +9,7 @@
 {
     <div class="cart-container">
         <ul class="cart-items">
-            @foreach (var cart in Carts.Where(c => c.CustomerId == CurrentCustomerId))
+            @foreach (var cart in Carts)
             {
                 foreach (var cartItem in cart.CartItems)
                 {
@@ -42,49 +39,44 @@ else
 
 @code {
     private IList<Cart>? Carts;
-    private int CurrentCustomerId;
 
     protected override async Task OnInitializedAsync()
     {
         await LoadCarts();
-        CurrentCustomerId = await GetCurrentCustomerId();
     }
 
     private async Task LoadCarts()
     {
-        if (CurrentCustomerId != 0)
-        {
-            // Use CartService to retrieve carts
-            Carts = await CartService.GetCartsAsync();
-        }
-    }
-
-    private async Task<int> GetCurrentCustomerId()
-    {
-        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-        var user = authState.User;
-
-        var customerIdClaim = user.FindFirst("customerId");
-
-        if (customerIdClaim != null && int.TryParse(customerIdClaim.Value, out var customerId))
-        {
-            return customerId;
-        }
-
-        return 0;
+        Carts = await _client.GetFromJsonAsync<List<Cart>>($"{Endpoints.CartsEndPoint}");
     }
 
     private async Task RemoveFromCart(int medicineId)
     {
-        // Use CartService to remove items from the cart
-        await CartService.RemoveFromCartAsync(CurrentCustomerId, medicineId);
-        await LoadCarts();
+        var response = await _client.DeleteAsync($"{Endpoints.CartsEndPoint}/{medicineId}");
+
+        if (response.IsSuccessStatusCode)
+        {
+            await LoadCarts();
+        }
+        else
+        {
+            var errorMessage = await response.Content.ReadAsStringAsync();
+            Console.WriteLine($"Error removing from cart: {errorMessage}");
+        }
     }
 
     private async Task ClearCart()
     {
-        // Use CartService to clear the cart
-        await CartService.ClearCartAsync(CurrentCustomerId);
-        await LoadCarts();
+        var response = await _client.DeleteAsync($"{Endpoints.CartsEndPoint}");
+
+        if (response.IsSuccessStatusCode)
+        {
+            await LoadCarts();
+        }
+        else
+        {
+            var errorMessage = await response.Content.ReadAsStringAsync();
+            Console.WriteLine($"Error clearing cart: {errorMessage}");
+        }
     }
 }

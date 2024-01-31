@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace MedicineInc.Server.Migrations
 {
     /// <inheritdoc />
-    public partial class des : Migration
+    public partial class BigNerd : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -55,7 +55,7 @@ namespace MedicineInc.Server.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Branches",
+                name: "Branchs",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -70,7 +70,7 @@ namespace MedicineInc.Server.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Branches", x => x.Id);
+                    table.PrimaryKey("PK_Branchs", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -281,9 +281,9 @@ namespace MedicineInc.Server.Migrations
                 {
                     table.PrimaryKey("PK_Staffs", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Staffs_Branches_BranchID",
+                        name: "FK_Staffs_Branchs_BranchID",
                         column: x => x.BranchID,
-                        principalTable: "Branches",
+                        principalTable: "Branchs",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -306,9 +306,9 @@ namespace MedicineInc.Server.Migrations
                 {
                     table.PrimaryKey("PK_Orders", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Orders_Branches_BranchID",
+                        name: "FK_Orders_Branchs_BranchID",
                         column: x => x.BranchID,
-                        principalTable: "Branches",
+                        principalTable: "Branchs",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -351,7 +351,7 @@ namespace MedicineInc.Server.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     MediName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Price = table.Column<double>(type: "float", nullable: false),
-                    feat = table.Column<bool>(type: "bit", nullable: false),
+                    Feat = table.Column<bool>(type: "bit", nullable: false),
                     Count = table.Column<int>(type: "int", nullable: false),
                     Usage = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ImageRef = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -378,18 +378,33 @@ namespace MedicineInc.Server.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "Branchs",
+                columns: new[] { "Id", "BranchAddress", "BranchName", "CreatedBy", "DateCreated", "DateUpdated", "ManagerID", "UpdatedBy" },
+                values: new object[] { 1, "311 New Upper Changi Road, #B2 - 12/13, Bedok Mall, 467360", "MedicineInc", "System", new DateTime(2024, 2, 1, 6, 21, 37, 531, DateTimeKind.Local).AddTicks(1182), new DateTime(2024, 2, 1, 6, 21, 37, 531, DateTimeKind.Local).AddTicks(1183), 1, "System" });
+
+            migrationBuilder.InsertData(
+                table: "Customers",
+                columns: new[] { "Id", "Allergies", "CreatedBy", "CustomerAddress", "CustomerEmail", "CustomerName", "CustomerPassword", "CustomerPhone", "CustomerUser", "DateCreated", "DateUpdated", "Gender", "UpdatedBy" },
+                values: new object[] { 1, "None", "System", "123 Main St, City, Country", "john.doe@example.com", "John Doe", "hashed_password", "123-456-7890", "john_doe", new DateTime(2024, 2, 1, 6, 21, 37, 531, DateTimeKind.Local).AddTicks(999), new DateTime(2024, 2, 1, 6, 21, 37, 531, DateTimeKind.Local).AddTicks(1000), "Male", "System" });
+
+            migrationBuilder.InsertData(
                 table: "Medicines",
-                columns: new[] { "Id", "CartId", "Count", "CreatedBy", "DateCreated", "DateUpdated", "ImageRef", "MediName", "OrderId", "Price", "UpdatedBy", "Usage", "feat" },
+                columns: new[] { "Id", "CartId", "Count", "CreatedBy", "DateCreated", "DateUpdated", "Feat", "ImageRef", "MediName", "OrderId", "Price", "UpdatedBy", "Usage" },
                 values: new object[,]
                 {
-                    { 1, null, 0, "System", new DateTime(2024, 1, 30, 11, 26, 41, 565, DateTimeKind.Local).AddTicks(5685), new DateTime(2024, 1, 30, 11, 26, 41, 565, DateTimeKind.Local).AddTicks(5699), "images/Glucosamine.jpg", "Glucosamine", null, 10.99, "System", "Best Vitamins to stay healthy", true },
-                    { 2, null, 0, "System", new DateTime(2024, 1, 30, 11, 26, 41, 565, DateTimeKind.Local).AddTicks(5702), new DateTime(2024, 1, 30, 11, 26, 41, 565, DateTimeKind.Local).AddTicks(5703), "images/panadol.jpg", "Panadol", null, 5.9900000000000002, "System", "Most Popular Item for Cold and Fever", true },
-                    { 3, null, 0, "System", new DateTime(2024, 1, 30, 11, 26, 41, 565, DateTimeKind.Local).AddTicks(5706), new DateTime(2024, 1, 30, 11, 26, 41, 565, DateTimeKind.Local).AddTicks(5706), "images/bandaids.jpg", "Bandaids", null, 7.4900000000000002, "System", "For any and all injuries", false },
-                    { 4, null, 0, "System", new DateTime(2024, 1, 30, 11, 26, 41, 565, DateTimeKind.Local).AddTicks(5709), new DateTime(2024, 1, 30, 11, 26, 41, 565, DateTimeKind.Local).AddTicks(5709), "images/strepsils.jpg", "Strepsils", null, 4.29, "System", "To soothe your sore throat", false },
-                    { 5, null, 0, "System", new DateTime(2024, 1, 30, 11, 26, 41, 565, DateTimeKind.Local).AddTicks(5712), new DateTime(2024, 1, 30, 11, 26, 41, 565, DateTimeKind.Local).AddTicks(5712), "images/tylenol.jpg", "Tylenol", null, 9.9900000000000002, "System", "Pain reliever and fever reducer", true },
-                    { 6, null, 0, "System", new DateTime(2024, 1, 30, 11, 26, 41, 565, DateTimeKind.Local).AddTicks(5715), new DateTime(2024, 1, 30, 11, 26, 41, 565, DateTimeKind.Local).AddTicks(5715), "images/ibuprofen.jpg", "Ibuprofen", null, 7.4900000000000002, "System", "Nonsteroidal anti-inflammatory drug (NSAID)", true },
-                    { 7, null, 0, "System", new DateTime(2024, 1, 30, 11, 26, 41, 565, DateTimeKind.Local).AddTicks(5718), new DateTime(2024, 1, 30, 11, 26, 41, 565, DateTimeKind.Local).AddTicks(5718), "images/claritin.jpg", "Claritin", null, 5.9900000000000002, "System", "Antihistamine for allergy relief", false }
+                    { 1, null, 0, "System", new DateTime(2024, 2, 1, 6, 21, 37, 531, DateTimeKind.Local).AddTicks(618), new DateTime(2024, 2, 1, 6, 21, 37, 531, DateTimeKind.Local).AddTicks(629), true, "images/Glucosamine.jpg", "Glucosamine", null, 10.99, "System", "Best Vitamins to stay healthy" },
+                    { 2, null, 0, "System", new DateTime(2024, 2, 1, 6, 21, 37, 531, DateTimeKind.Local).AddTicks(632), new DateTime(2024, 2, 1, 6, 21, 37, 531, DateTimeKind.Local).AddTicks(632), true, "images/panadol.jpg", "Panadol", null, 5.9900000000000002, "System", "Most Popular Item for Cold and Fever" },
+                    { 3, null, 0, "System", new DateTime(2024, 2, 1, 6, 21, 37, 531, DateTimeKind.Local).AddTicks(634), new DateTime(2024, 2, 1, 6, 21, 37, 531, DateTimeKind.Local).AddTicks(634), false, "images/bandaids.jpg", "Bandaids", null, 7.4900000000000002, "System", "For any and all injuries" },
+                    { 4, null, 0, "System", new DateTime(2024, 2, 1, 6, 21, 37, 531, DateTimeKind.Local).AddTicks(636), new DateTime(2024, 2, 1, 6, 21, 37, 531, DateTimeKind.Local).AddTicks(636), false, "images/strepsils.jpg", "Strepsils", null, 4.29, "System", "To soothe your sore throat" },
+                    { 5, null, 0, "System", new DateTime(2024, 2, 1, 6, 21, 37, 531, DateTimeKind.Local).AddTicks(638), new DateTime(2024, 2, 1, 6, 21, 37, 531, DateTimeKind.Local).AddTicks(638), true, "images/tylenol.jpg", "Tylenol", null, 9.9900000000000002, "System", "Pain reliever and fever reducer" },
+                    { 6, null, 0, "System", new DateTime(2024, 2, 1, 6, 21, 37, 531, DateTimeKind.Local).AddTicks(640), new DateTime(2024, 2, 1, 6, 21, 37, 531, DateTimeKind.Local).AddTicks(640), true, "images/ibuprofen.jpg", "Ibuprofen", null, 7.4900000000000002, "System", "Nonsteroidal anti-inflammatory drug (NSAID)" },
+                    { 7, null, 0, "System", new DateTime(2024, 2, 1, 6, 21, 37, 531, DateTimeKind.Local).AddTicks(642), new DateTime(2024, 2, 1, 6, 21, 37, 531, DateTimeKind.Local).AddTicks(642), false, "images/claritin.jpg", "Claritin", null, 5.9900000000000002, "System", "Antihistamine for allergy relief" }
                 });
+
+            migrationBuilder.InsertData(
+                table: "Staffs",
+                columns: new[] { "Id", "BranchID", "CreatedBy", "DateCreated", "DateUpdated", "IsManager", "ManagerID", "StaffEmail", "StaffName", "StaffPhone", "UpdatedBy" },
+                values: new object[] { 1, 1, "System", new DateTime(2024, 2, 1, 6, 21, 37, 531, DateTimeKind.Local).AddTicks(1557), new DateTime(2024, 2, 1, 6, 21, 37, 531, DateTimeKind.Local).AddTicks(1559), true, 1, "TenSeconds@gmail.com", "Ten", "10101010", "System" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -571,7 +586,7 @@ namespace MedicineInc.Server.Migrations
                 name: "Orders");
 
             migrationBuilder.DropTable(
-                name: "Branches");
+                name: "Branchs");
         }
     }
 }
