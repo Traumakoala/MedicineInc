@@ -49,6 +49,10 @@ namespace MedicineInc.Server.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutStaff(int id, Staff staff)
         {
+            if (id != staff.Id)
+            {
+                return BadRequest();
+            }
             _unitOfWork.Staffs.Update(staff);
 
             try

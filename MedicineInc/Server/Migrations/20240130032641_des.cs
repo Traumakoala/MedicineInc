@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace MedicineInc.Server.Migrations
 {
     /// <inheritdoc />
-    public partial class newdb : Migration
+    public partial class des : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -382,13 +382,13 @@ namespace MedicineInc.Server.Migrations
                 columns: new[] { "Id", "CartId", "Count", "CreatedBy", "DateCreated", "DateUpdated", "ImageRef", "MediName", "OrderId", "Price", "UpdatedBy", "Usage", "feat" },
                 values: new object[,]
                 {
-                    { 1, null, 0, "System", new DateTime(2024, 1, 29, 23, 2, 51, 312, DateTimeKind.Local).AddTicks(9365), new DateTime(2024, 1, 29, 23, 2, 51, 312, DateTimeKind.Local).AddTicks(9379), "images/Glucosamine.jpg", "Glucosamine", null, 10.99, "System", "Best Vitamins to stay healthy", true },
-                    { 2, null, 0, "System", new DateTime(2024, 1, 29, 23, 2, 51, 312, DateTimeKind.Local).AddTicks(9381), new DateTime(2024, 1, 29, 23, 2, 51, 312, DateTimeKind.Local).AddTicks(9382), "images/panadol.jpg", "Panadol", null, 5.9900000000000002, "System", "Most Popular Item for Cold and Fever", true },
-                    { 3, null, 0, "System", new DateTime(2024, 1, 29, 23, 2, 51, 312, DateTimeKind.Local).AddTicks(9384), new DateTime(2024, 1, 29, 23, 2, 51, 312, DateTimeKind.Local).AddTicks(9384), "images/bandaids.jpg", "Bandaids", null, 7.4900000000000002, "System", "For any and all injuries", false },
-                    { 4, null, 0, "System", new DateTime(2024, 1, 29, 23, 2, 51, 312, DateTimeKind.Local).AddTicks(9386), new DateTime(2024, 1, 29, 23, 2, 51, 312, DateTimeKind.Local).AddTicks(9387), "images/strepsils.jpg", "Strepsils", null, 4.29, "System", "To soothe your sore throat", false },
-                    { 5, null, 0, "System", new DateTime(2024, 1, 29, 23, 2, 51, 312, DateTimeKind.Local).AddTicks(9388), new DateTime(2024, 1, 29, 23, 2, 51, 312, DateTimeKind.Local).AddTicks(9388), "images/tylenol.jpg", "Tylenol", null, 9.9900000000000002, "System", "Pain reliever and fever reducer", true },
-                    { 6, null, 0, "System", new DateTime(2024, 1, 29, 23, 2, 51, 312, DateTimeKind.Local).AddTicks(9390), new DateTime(2024, 1, 29, 23, 2, 51, 312, DateTimeKind.Local).AddTicks(9390), "images/ibuprofen.jpg", "Ibuprofen", null, 7.4900000000000002, "System", "Nonsteroidal anti-inflammatory drug (NSAID)", true },
-                    { 7, null, 0, "System", new DateTime(2024, 1, 29, 23, 2, 51, 312, DateTimeKind.Local).AddTicks(9392), new DateTime(2024, 1, 29, 23, 2, 51, 312, DateTimeKind.Local).AddTicks(9392), "images/claritin.jpg", "Claritin", null, 5.9900000000000002, "System", "Antihistamine for allergy relief", false }
+                    { 1, null, 0, "System", new DateTime(2024, 1, 30, 11, 26, 41, 565, DateTimeKind.Local).AddTicks(5685), new DateTime(2024, 1, 30, 11, 26, 41, 565, DateTimeKind.Local).AddTicks(5699), "images/Glucosamine.jpg", "Glucosamine", null, 10.99, "System", "Best Vitamins to stay healthy", true },
+                    { 2, null, 0, "System", new DateTime(2024, 1, 30, 11, 26, 41, 565, DateTimeKind.Local).AddTicks(5702), new DateTime(2024, 1, 30, 11, 26, 41, 565, DateTimeKind.Local).AddTicks(5703), "images/panadol.jpg", "Panadol", null, 5.9900000000000002, "System", "Most Popular Item for Cold and Fever", true },
+                    { 3, null, 0, "System", new DateTime(2024, 1, 30, 11, 26, 41, 565, DateTimeKind.Local).AddTicks(5706), new DateTime(2024, 1, 30, 11, 26, 41, 565, DateTimeKind.Local).AddTicks(5706), "images/bandaids.jpg", "Bandaids", null, 7.4900000000000002, "System", "For any and all injuries", false },
+                    { 4, null, 0, "System", new DateTime(2024, 1, 30, 11, 26, 41, 565, DateTimeKind.Local).AddTicks(5709), new DateTime(2024, 1, 30, 11, 26, 41, 565, DateTimeKind.Local).AddTicks(5709), "images/strepsils.jpg", "Strepsils", null, 4.29, "System", "To soothe your sore throat", false },
+                    { 5, null, 0, "System", new DateTime(2024, 1, 30, 11, 26, 41, 565, DateTimeKind.Local).AddTicks(5712), new DateTime(2024, 1, 30, 11, 26, 41, 565, DateTimeKind.Local).AddTicks(5712), "images/tylenol.jpg", "Tylenol", null, 9.9900000000000002, "System", "Pain reliever and fever reducer", true },
+                    { 6, null, 0, "System", new DateTime(2024, 1, 30, 11, 26, 41, 565, DateTimeKind.Local).AddTicks(5715), new DateTime(2024, 1, 30, 11, 26, 41, 565, DateTimeKind.Local).AddTicks(5715), "images/ibuprofen.jpg", "Ibuprofen", null, 7.4900000000000002, "System", "Nonsteroidal anti-inflammatory drug (NSAID)", true },
+                    { 7, null, 0, "System", new DateTime(2024, 1, 30, 11, 26, 41, 565, DateTimeKind.Local).AddTicks(5718), new DateTime(2024, 1, 30, 11, 26, 41, 565, DateTimeKind.Local).AddTicks(5718), "images/claritin.jpg", "Claritin", null, 5.9900000000000002, "System", "Antihistamine for allergy relief", false }
                 });
 
             migrationBuilder.CreateIndex(

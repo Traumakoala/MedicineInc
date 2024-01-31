@@ -26,6 +26,11 @@ namespace MedicineInc.Server.Data
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfiguration(new MedicineSeedConfiguration());
+            modelBuilder.ApplyConfiguration(new CartSeedConfiguration());
+            modelBuilder.ApplyConfiguration(new CustomerSeedConfiguration());
+            modelBuilder.ApplyConfiguration(new BranchSeedConfiguration());
+            modelBuilder.ApplyConfiguration(new OrderSeedConfiguration());
+            modelBuilder.ApplyConfiguration(new StaffSeedConfiguration());
         }
 
     }

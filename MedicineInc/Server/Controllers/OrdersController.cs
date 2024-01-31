@@ -49,6 +49,10 @@ namespace MedicineInc.Server.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutOrder(int id, Order order)
         {
+            if (id != order.Id)
+            {
+                return BadRequest();
+            }
             _unitOfWork.Orders.Update(order);
 
             try

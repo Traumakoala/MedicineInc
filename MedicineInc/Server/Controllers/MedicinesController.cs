@@ -49,6 +49,10 @@ namespace MedicineInc.Server.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutMedicine(int id, Medicine medicine)
         {
+            if (id != medicine.Id)
+            {
+                return BadRequest();
+            }
 
             _unitOfWork.Medicines.Update(medicine);
 

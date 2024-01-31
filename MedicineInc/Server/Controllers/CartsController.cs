@@ -26,7 +26,7 @@ namespace CartInc.Server.Controllers
         [HttpGet]
         public async Task<IActionResult> GetCarts()
         {
-            var carts = await _unitOfWork.Carts.GetAll(includes: q => q.Include(x => x.Customer));
+            var carts = await _unitOfWork.Carts.GetAll(includes: q => q.Include(x =>x.Customer).Include(x => x.Medicine));
             return Ok(carts);
         }
 
@@ -49,7 +49,10 @@ namespace CartInc.Server.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCart(int id, Cart cart)
         {
-
+            if (id != cart.Id)
+            {
+                return BadRequest();
+            }
             _unitOfWork.Carts.Update(cart);
 
             try

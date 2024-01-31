@@ -49,6 +49,10 @@ namespace MedicineInc.Server.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutBranch(int id, Branch branch)
         {
+            if (id != branch.Id)
+            {
+                return BadRequest();
+            }
             _unitOfWork.Branches.Update(branch);
 
             try

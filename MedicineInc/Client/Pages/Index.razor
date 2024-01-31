@@ -1,7 +1,6 @@
 ﻿@page "/"
 @inject HttpClient _client
 @inject IJSRuntime js
-@inject AuthenticationStateProvider AuthenticationStateProvider
 @inject CartService CartService
 
 
@@ -47,13 +46,13 @@
 @code {
     private IList<Medicine>? Medicines;
     private IList<Cart>? Carts;
-    private int CurrentCustomerId;
+    //private int CurrentCustomerId;
 
     protected override async Task OnInitializedAsync()
     {
         await LoadMedicines();
         await LoadCarts();
-        CurrentCustomerId = await GetCurrentCustomerId();
+        //CurrentCustomerId = await GetCurrentCustomerId();
     }
 
     private async Task LoadMedicines()
@@ -63,18 +62,18 @@
 
     private async Task LoadCarts()
     {
-        if (CurrentCustomerId != 0)
-        {
-            Carts = await CartService.GetCartsAsync();
-        }
+        //if (CurrentCustomerId != 0)
+        //{
+        Carts = await CartService.GetCartsAsync();
+        //}
     }
 
     private async Task AddToCart(int medicineId)
-    {
+    { 
         await CartService.AddToCartAsync(CurrentCustomerId, Medicines.FirstOrDefault(m => m.Id == medicineId), 1);
         await LoadCarts();
     }
-
+    /*
     private async Task<int> GetCurrentCustomerId()
     {
         var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
@@ -88,5 +87,5 @@
         }
 
         return 0;
-    }
+    } */
 }
