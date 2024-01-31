@@ -20,7 +20,7 @@ namespace MedicineInc.Server.Repository
         private IGenericRepository<Medicine> _medicines;
         private IGenericRepository<Staff> _staffs;
         private IGenericRepository<Order> _orders;
-        private IGenericRepository<Branch> _branches;
+        private IGenericRepository<Branch> _branchs;
         private IGenericRepository<Customer> _customers;
         private IGenericRepository<Cart> _carts;
  
@@ -41,8 +41,8 @@ namespace MedicineInc.Server.Repository
         public IGenericRepository<Order> Orders
             => _orders ??= new GenericRepository<Order>(_context);
 
-        public IGenericRepository<Branch> Branches
-            => _branches ??= new GenericRepository<Branch>(_context);
+        public IGenericRepository<Branch> Branchs
+            => _branchs ??= new GenericRepository<Branch>(_context);
 
         public IGenericRepository<Customer> Customers
             => _customers ??= new GenericRepository<Customer>(_context);

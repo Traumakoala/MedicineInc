@@ -1,0 +1,89 @@
+﻿@page "/medicines/create/"
+@inject HttpClient _client
+@inject NavigationManager _navManager
+
+<h3 class="card-title">Create New Medicines</h3>
+<hr />
+<br />
+
+<EditForm Model="@medicine" OnValidSubmit="CreateMedicine">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-group">
+        <label>Medicine Name: </label>
+        <div>
+            <InputText @bind-Value="@medicine.MediName" class="form-control" />
+            <ValidationMessage For="@(() => medicine.MediName)" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Medicine Price: </label>
+        <div>
+            <InputNumber @bind-Value="@medicine.Price" class="form-control" />
+            <ValidationMessage For="@(() => medicine.Price)" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Featured: </label>
+        <div>
+            <InputCheckbox @bind-Value="@medicine.feat" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Usage: </label>
+        <div>
+            <InputText @bind-Value="@medicine.Usage" class="form-control" />
+            <ValidationMessage For="@(() => medicine.Usage)" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Upload Image: </label>
+        <div>
+            <InputFile OnChange="@HandleFileChanged" />
+        </div>
+    </div>
+    @if (!string.IsNullOrEmpty(medicine.ImageRef))
+    {
+        <div>
+            <img src="@medicine.ImageRef" alt="Uploaded Image" style="max-width: 200px; max-height: 200px;" />
+        </div>
+    }
+    <button type="submit" class="btn btn-success btn-block">
+        Create Medicine
+    </button>
+</EditForm>
+
+@code {
+    Medicine medicine = new Medicine();
+
+    private IList<Medicine>? Medicines;
+
+    protected async override Task OnInitializedAsync()
+    {
+        Medicines = await _client.GetFromJsonAsync<List<Medicine>>($"{Endpoints.MedicinesEndPoint}");
+    }
+
+    private async Task CreateMedicine()
+    {
+        await _client.PostAsJsonAsync(Endpoints.MedicinesEndPoint, medicine);
+        _navManager.NavigateTo("/medicines/");
+    }
+
+    private async Task HandleFileChanged(InputFileChangeEventArgs e)
+    {
+        var file = e.File;
+
+        var fileName = Path.GetFileName(file.Name);
+
+        var imagePath = Path.Combine("images", fileName);
+        var imagePathInWwwRoot = Path.Combine("wwwroot", imagePath);
+
+        using var fileStream = new FileStream(imagePathInWwwRoot, FileMode.Create);
+        await file.OpenReadStream().CopyToAsync(fileStream);
+
+        medicine.ImageRef = "/" + imagePath;
+    }
+}
+
+}

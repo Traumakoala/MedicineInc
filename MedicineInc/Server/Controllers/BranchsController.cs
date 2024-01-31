@@ -25,17 +25,17 @@ namespace MedicineInc.Server.Controllers
 
         // GET: api/Branch
         [HttpGet]
-        public async Task<IActionResult> GetBranches()
+        public async Task<IActionResult> GetBranchs()
         {
-            var branches = await _unitOfWork.Branches.GetAll();
-            return Ok(branches);
+            var branchs = await _unitOfWork.Branchs.GetAll();
+            return Ok(branchs);
         }
 
         // GET: api/Branch/5
         [HttpGet("{id}")]
         public async Task<IActionResult> GetBranch(int id)
         {
-            var branch = await _unitOfWork.Branches.Get(q => q.Id == id);
+            var branch = await _unitOfWork.Branchs.Get(q => q.Id == id);
 
             if (branch == null)
             {
@@ -53,7 +53,7 @@ namespace MedicineInc.Server.Controllers
             {
                 return BadRequest();
             }
-            _unitOfWork.Branches.Update(branch);
+            _unitOfWork.Branchs.Update(branch);
 
             try
             {
@@ -78,7 +78,7 @@ namespace MedicineInc.Server.Controllers
         [HttpPost]
         public async Task<ActionResult<Branch>> PostBranch(Branch branch)
         {
-            await _unitOfWork.Branches.Insert(branch);
+            await _unitOfWork.Branchs.Insert(branch);
             await _unitOfWork.Save(HttpContext);
 
             return CreatedAtAction("GetBranch", new { id = branch.Id }, branch);
@@ -88,13 +88,13 @@ namespace MedicineInc.Server.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteBranch(int id)
         {
-            var branch = await _unitOfWork.Branches.Get(q => q.Id == id);
+            var branch = await _unitOfWork.Branchs.Get(q => q.Id == id);
             if (branch == null)
             {
                 return NotFound();
             }
 
-            await _unitOfWork.Branches.Delete(id);
+            await _unitOfWork.Branchs.Delete(id);
             await _unitOfWork.Save(HttpContext);
 
             return NoContent();
@@ -102,7 +102,7 @@ namespace MedicineInc.Server.Controllers
 
         private async Task<bool> BranchExists(int id)
         {
-            var branch = await _unitOfWork.Branches.Get(q => q.Id == id);
+            var branch = await _unitOfWork.Branchs.Get(q => q.Id == id);
             return branch != null;
         }
     }

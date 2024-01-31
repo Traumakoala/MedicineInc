@@ -22,7 +22,7 @@
                 </div>
             </div>
         }
-    }
+    } 
     else
     {
         <div class="product">
@@ -30,12 +30,7 @@
         </div>
     }
 </div>
-<a href="/staffs/create" class="btn btn-secondary">
-    <span class="oi oi plus"></span>
-    Create New Staff
-</a>
-<br />
-<br />
+
 
 
 
@@ -70,7 +65,7 @@
 
     private async Task AddToCart(int medicineId)
     { 
-        await CartService.AddToCartAsync(CurrentCustomerId, Medicines.FirstOrDefault(m => m.Id == medicineId), 1);
+        //await CartService.AddToCartAsync(CurrentCustomerId, Medicines.FirstOrDefault(m => m.Id == medicineId), 1);
         await LoadCarts();
     }
     /*

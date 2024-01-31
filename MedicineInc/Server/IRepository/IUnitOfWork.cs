@@ -13,7 +13,7 @@ namespace MedicineInc.Server.IRepository
         IGenericRepository<Medicine> Medicines { get; }
         IGenericRepository<Staff> Staffs { get; }
         IGenericRepository<Order> Orders { get; }
-        IGenericRepository<Branch> Branches { get; }
+        IGenericRepository<Branch> Branchs { get; }
         IGenericRepository<Customer> Customers { get; }
         IGenericRepository<Cart> Carts { get; }
     }
