@@ -17,8 +17,8 @@
                     <h2>@item.MediName</h2>
                     <p>Price: $@item.Price</p>
                     <div class="quantity-input">
-                        <button @onclick='() => AddToCart(item.Id, item.Count)'>Add to Cart</button>
                         <input type="number" @bind="item.Count" min="1" />
+                        <button @onclick='() => AddToCart(item.Id, item.Count)'>Add to Cart</button>
                     </div>
                 </div>
             </div>

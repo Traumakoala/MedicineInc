@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace MedicineInc.Server.Migrations
 {
     /// <inheritdoc />
-    public partial class BigNerd : Migration
+    public partial class Bird : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -380,31 +380,31 @@ namespace MedicineInc.Server.Migrations
             migrationBuilder.InsertData(
                 table: "Branchs",
                 columns: new[] { "Id", "BranchAddress", "BranchName", "CreatedBy", "DateCreated", "DateUpdated", "ManagerID", "UpdatedBy" },
-                values: new object[] { 1, "311 New Upper Changi Road, #B2 - 12/13, Bedok Mall, 467360", "MedicineInc", "System", new DateTime(2024, 2, 1, 6, 21, 37, 531, DateTimeKind.Local).AddTicks(1182), new DateTime(2024, 2, 1, 6, 21, 37, 531, DateTimeKind.Local).AddTicks(1183), 1, "System" });
+                values: new object[] { 1, "311 New Upper Changi Road, #B2 - 12/13, Bedok Mall, 467360", "MedicineInc", "System", new DateTime(2024, 2, 1, 9, 11, 7, 313, DateTimeKind.Local).AddTicks(4747), new DateTime(2024, 2, 1, 9, 11, 7, 313, DateTimeKind.Local).AddTicks(4750), 1, "System" });
 
             migrationBuilder.InsertData(
                 table: "Customers",
                 columns: new[] { "Id", "Allergies", "CreatedBy", "CustomerAddress", "CustomerEmail", "CustomerName", "CustomerPassword", "CustomerPhone", "CustomerUser", "DateCreated", "DateUpdated", "Gender", "UpdatedBy" },
-                values: new object[] { 1, "None", "System", "123 Main St, City, Country", "john.doe@example.com", "John Doe", "hashed_password", "123-456-7890", "john_doe", new DateTime(2024, 2, 1, 6, 21, 37, 531, DateTimeKind.Local).AddTicks(999), new DateTime(2024, 2, 1, 6, 21, 37, 531, DateTimeKind.Local).AddTicks(1000), "Male", "System" });
+                values: new object[] { 1, "None", "System", "123 Main St, City, Country", "john.doe@example.com", "John Doe", "hashed_password", "123-456-7890", "john_doe", new DateTime(2024, 2, 1, 9, 11, 7, 313, DateTimeKind.Local).AddTicks(4061), new DateTime(2024, 2, 1, 9, 11, 7, 313, DateTimeKind.Local).AddTicks(4065), "Male", "System" });
 
             migrationBuilder.InsertData(
                 table: "Medicines",
                 columns: new[] { "Id", "CartId", "Count", "CreatedBy", "DateCreated", "DateUpdated", "Feat", "ImageRef", "MediName", "OrderId", "Price", "UpdatedBy", "Usage" },
                 values: new object[,]
                 {
-                    { 1, null, 0, "System", new DateTime(2024, 2, 1, 6, 21, 37, 531, DateTimeKind.Local).AddTicks(618), new DateTime(2024, 2, 1, 6, 21, 37, 531, DateTimeKind.Local).AddTicks(629), true, "images/Glucosamine.jpg", "Glucosamine", null, 10.99, "System", "Best Vitamins to stay healthy" },
-                    { 2, null, 0, "System", new DateTime(2024, 2, 1, 6, 21, 37, 531, DateTimeKind.Local).AddTicks(632), new DateTime(2024, 2, 1, 6, 21, 37, 531, DateTimeKind.Local).AddTicks(632), true, "images/panadol.jpg", "Panadol", null, 5.9900000000000002, "System", "Most Popular Item for Cold and Fever" },
-                    { 3, null, 0, "System", new DateTime(2024, 2, 1, 6, 21, 37, 531, DateTimeKind.Local).AddTicks(634), new DateTime(2024, 2, 1, 6, 21, 37, 531, DateTimeKind.Local).AddTicks(634), false, "images/bandaids.jpg", "Bandaids", null, 7.4900000000000002, "System", "For any and all injuries" },
-                    { 4, null, 0, "System", new DateTime(2024, 2, 1, 6, 21, 37, 531, DateTimeKind.Local).AddTicks(636), new DateTime(2024, 2, 1, 6, 21, 37, 531, DateTimeKind.Local).AddTicks(636), false, "images/strepsils.jpg", "Strepsils", null, 4.29, "System", "To soothe your sore throat" },
-                    { 5, null, 0, "System", new DateTime(2024, 2, 1, 6, 21, 37, 531, DateTimeKind.Local).AddTicks(638), new DateTime(2024, 2, 1, 6, 21, 37, 531, DateTimeKind.Local).AddTicks(638), true, "images/tylenol.jpg", "Tylenol", null, 9.9900000000000002, "System", "Pain reliever and fever reducer" },
-                    { 6, null, 0, "System", new DateTime(2024, 2, 1, 6, 21, 37, 531, DateTimeKind.Local).AddTicks(640), new DateTime(2024, 2, 1, 6, 21, 37, 531, DateTimeKind.Local).AddTicks(640), true, "images/ibuprofen.jpg", "Ibuprofen", null, 7.4900000000000002, "System", "Nonsteroidal anti-inflammatory drug (NSAID)" },
-                    { 7, null, 0, "System", new DateTime(2024, 2, 1, 6, 21, 37, 531, DateTimeKind.Local).AddTicks(642), new DateTime(2024, 2, 1, 6, 21, 37, 531, DateTimeKind.Local).AddTicks(642), false, "images/claritin.jpg", "Claritin", null, 5.9900000000000002, "System", "Antihistamine for allergy relief" }
+                    { 1, null, 0, "System", new DateTime(2024, 2, 1, 9, 11, 7, 313, DateTimeKind.Local).AddTicks(2818), new DateTime(2024, 2, 1, 9, 11, 7, 313, DateTimeKind.Local).AddTicks(2833), true, "images/Glucosamine.jpg", "Glucosamine", null, 10.99, "System", "Best Vitamins to stay healthy" },
+                    { 2, null, 0, "System", new DateTime(2024, 2, 1, 9, 11, 7, 313, DateTimeKind.Local).AddTicks(2841), new DateTime(2024, 2, 1, 9, 11, 7, 313, DateTimeKind.Local).AddTicks(2844), true, "images/panadol.jpg", "Panadol", null, 5.9900000000000002, "System", "Most Popular Item for Cold and Fever" },
+                    { 3, null, 0, "System", new DateTime(2024, 2, 1, 9, 11, 7, 313, DateTimeKind.Local).AddTicks(2849), new DateTime(2024, 2, 1, 9, 11, 7, 313, DateTimeKind.Local).AddTicks(2850), false, "images/bandaids.jpg", "Bandaids", null, 7.4900000000000002, "System", "For any and all injuries" },
+                    { 4, null, 0, "System", new DateTime(2024, 2, 1, 9, 11, 7, 313, DateTimeKind.Local).AddTicks(2853), new DateTime(2024, 2, 1, 9, 11, 7, 313, DateTimeKind.Local).AddTicks(2854), false, "images/strepsils.jpg", "Strepsils", null, 4.29, "System", "To soothe your sore throat" },
+                    { 5, null, 0, "System", new DateTime(2024, 2, 1, 9, 11, 7, 313, DateTimeKind.Local).AddTicks(2857), new DateTime(2024, 2, 1, 9, 11, 7, 313, DateTimeKind.Local).AddTicks(2858), true, "images/tylenol.jpg", "Tylenol", null, 9.9900000000000002, "System", "Pain reliever and fever reducer" },
+                    { 6, null, 0, "System", new DateTime(2024, 2, 1, 9, 11, 7, 313, DateTimeKind.Local).AddTicks(2860), new DateTime(2024, 2, 1, 9, 11, 7, 313, DateTimeKind.Local).AddTicks(2861), true, "images/ibuprofen.jpg", "Ibuprofen", null, 7.4900000000000002, "System", "Nonsteroidal anti-inflammatory drug (NSAID)" },
+                    { 7, null, 0, "System", new DateTime(2024, 2, 1, 9, 11, 7, 313, DateTimeKind.Local).AddTicks(2864), new DateTime(2024, 2, 1, 9, 11, 7, 313, DateTimeKind.Local).AddTicks(2864), false, "images/claritin.jpg", "Claritin", null, 5.9900000000000002, "System", "Antihistamine for allergy relief" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Staffs",
                 columns: new[] { "Id", "BranchID", "CreatedBy", "DateCreated", "DateUpdated", "IsManager", "ManagerID", "StaffEmail", "StaffName", "StaffPhone", "UpdatedBy" },
-                values: new object[] { 1, 1, "System", new DateTime(2024, 2, 1, 6, 21, 37, 531, DateTimeKind.Local).AddTicks(1557), new DateTime(2024, 2, 1, 6, 21, 37, 531, DateTimeKind.Local).AddTicks(1559), true, 1, "TenSeconds@gmail.com", "Ten", "10101010", "System" });
+                values: new object[] { 1, 1, "System", new DateTime(2024, 2, 1, 9, 11, 7, 313, DateTimeKind.Local).AddTicks(6250), new DateTime(2024, 2, 1, 9, 11, 7, 313, DateTimeKind.Local).AddTicks(6255), true, 1, "TenSeconds@gmail.com", "Ten", "10101010", "System" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

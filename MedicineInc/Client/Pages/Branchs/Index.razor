@@ -1,0 +1,73 @@
+﻿@page "/branchs/"
+@inject HttpClient _client
+@inject IJSRuntime js
+@attribute [Authorize]
+
+<h3 class="card-title">Branch Creation</h3>
+<a href="/branchs/create" class="btn btn-secondary">
+    <span class="oi oi plus"></span>
+    Create New Branch
+</a>
+<br />
+<br />
+
+@if (Branchs == null)
+{
+    <div class="alert alert-info">Loading Branches...</div>
+}
+else
+{
+    <table class="table table-responsive">
+        <thead>
+            <tr>
+                <th>Branch Name</th>
+                <th>Branch Address</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var branch in Branchs)
+            {
+                <tr>
+                    <td>@branch.BranchName</td>
+                    <td>@branch.BranchAddress</td>
+                    
+                    <td>
+                        <a href="/branchs/view/@branch.Id" class="btn btn-primary">
+                            <span class="oi oi-book"></span>
+                        </a>
+                        <a href="/branchs/edit/@branch.Id" class="btn btn-warning">
+                            <span class="oi oi-pencil"></span>
+                        </a>
+                        <button class="btn btn-danger" onclick="@(()=>Delete(branch.Id))">
+                            <span class="oi oi-delete"></span>
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<Branch>? Branchs;
+
+    protected async override Task OnInitializedAsync()
+    {
+        Branchs = await _client.GetFromJsonAsync<List<Branch>>($"{Endpoints.BranchsEndPoint}");
+    }
+
+    async Task Delete(int branchId)
+    {
+        if (Branchs != null)
+        {
+            var branch = Branchs.First(q => q.Id == branchId);
+            var confirm = await js.InvokeAsync<bool>("confirm", $"Do you want to delete {branch.BranchName}?");
+            if (confirm)
+            {
+                await _client.DeleteAsync($"api/branchs/{branchId}");
+                await OnInitializedAsync();
+            }
+        }
+    }
+}
+

@@ -76,12 +76,6 @@
 
         var fileName = Path.GetFileName(file.Name);
 
-        var imagePath = Path.Combine("images", fileName);
-        var imagePathInWwwRoot = Path.Combine("wwwroot", imagePath);
-
-        using var fileStream = new FileStream(imagePathInWwwRoot, FileMode.Create);
-        await file.OpenReadStream().CopyToAsync(fileStream);
-
-        medicine.ImageRef = "/" + imagePath;
+        medicine.ImageRef = "images/" + fileName;
     }
 }

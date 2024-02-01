@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MedicineInc.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240131222137_BigNerd")]
-    partial class BigNerd
+    [Migration("20240201011107_Bird")]
+    partial class Bird
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -277,8 +277,8 @@ namespace MedicineInc.Server.Migrations
                             BranchAddress = "311 New Upper Changi Road, #B2 - 12/13, Bedok Mall, 467360",
                             BranchName = "MedicineInc",
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 2, 1, 6, 21, 37, 531, DateTimeKind.Local).AddTicks(1182),
-                            DateUpdated = new DateTime(2024, 2, 1, 6, 21, 37, 531, DateTimeKind.Local).AddTicks(1183),
+                            DateCreated = new DateTime(2024, 2, 1, 9, 11, 7, 313, DateTimeKind.Local).AddTicks(4747),
+                            DateUpdated = new DateTime(2024, 2, 1, 9, 11, 7, 313, DateTimeKind.Local).AddTicks(4750),
                             ManagerID = 1,
                             UpdatedBy = "System"
                         });
@@ -379,8 +379,8 @@ namespace MedicineInc.Server.Migrations
                             CustomerPassword = "hashed_password",
                             CustomerPhone = "123-456-7890",
                             CustomerUser = "john_doe",
-                            DateCreated = new DateTime(2024, 2, 1, 6, 21, 37, 531, DateTimeKind.Local).AddTicks(999),
-                            DateUpdated = new DateTime(2024, 2, 1, 6, 21, 37, 531, DateTimeKind.Local).AddTicks(1000),
+                            DateCreated = new DateTime(2024, 2, 1, 9, 11, 7, 313, DateTimeKind.Local).AddTicks(4061),
+                            DateUpdated = new DateTime(2024, 2, 1, 9, 11, 7, 313, DateTimeKind.Local).AddTicks(4065),
                             Gender = "Male",
                             UpdatedBy = "System"
                         });
@@ -444,8 +444,8 @@ namespace MedicineInc.Server.Migrations
                             Id = 1,
                             Count = 0,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 2, 1, 6, 21, 37, 531, DateTimeKind.Local).AddTicks(618),
-                            DateUpdated = new DateTime(2024, 2, 1, 6, 21, 37, 531, DateTimeKind.Local).AddTicks(629),
+                            DateCreated = new DateTime(2024, 2, 1, 9, 11, 7, 313, DateTimeKind.Local).AddTicks(2818),
+                            DateUpdated = new DateTime(2024, 2, 1, 9, 11, 7, 313, DateTimeKind.Local).AddTicks(2833),
                             Feat = true,
                             ImageRef = "images/Glucosamine.jpg",
                             MediName = "Glucosamine",
@@ -458,8 +458,8 @@ namespace MedicineInc.Server.Migrations
                             Id = 2,
                             Count = 0,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 2, 1, 6, 21, 37, 531, DateTimeKind.Local).AddTicks(632),
-                            DateUpdated = new DateTime(2024, 2, 1, 6, 21, 37, 531, DateTimeKind.Local).AddTicks(632),
+                            DateCreated = new DateTime(2024, 2, 1, 9, 11, 7, 313, DateTimeKind.Local).AddTicks(2841),
+                            DateUpdated = new DateTime(2024, 2, 1, 9, 11, 7, 313, DateTimeKind.Local).AddTicks(2844),
                             Feat = true,
                             ImageRef = "images/panadol.jpg",
                             MediName = "Panadol",
@@ -472,8 +472,8 @@ namespace MedicineInc.Server.Migrations
                             Id = 3,
                             Count = 0,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 2, 1, 6, 21, 37, 531, DateTimeKind.Local).AddTicks(634),
-                            DateUpdated = new DateTime(2024, 2, 1, 6, 21, 37, 531, DateTimeKind.Local).AddTicks(634),
+                            DateCreated = new DateTime(2024, 2, 1, 9, 11, 7, 313, DateTimeKind.Local).AddTicks(2849),
+                            DateUpdated = new DateTime(2024, 2, 1, 9, 11, 7, 313, DateTimeKind.Local).AddTicks(2850),
                             Feat = false,
                             ImageRef = "images/bandaids.jpg",
                             MediName = "Bandaids",
@@ -486,8 +486,8 @@ namespace MedicineInc.Server.Migrations
                             Id = 4,
                             Count = 0,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 2, 1, 6, 21, 37, 531, DateTimeKind.Local).AddTicks(636),
-                            DateUpdated = new DateTime(2024, 2, 1, 6, 21, 37, 531, DateTimeKind.Local).AddTicks(636),
+                            DateCreated = new DateTime(2024, 2, 1, 9, 11, 7, 313, DateTimeKind.Local).AddTicks(2853),
+                            DateUpdated = new DateTime(2024, 2, 1, 9, 11, 7, 313, DateTimeKind.Local).AddTicks(2854),
                             Feat = false,
                             ImageRef = "images/strepsils.jpg",
                             MediName = "Strepsils",
@@ -500,8 +500,8 @@ namespace MedicineInc.Server.Migrations
                             Id = 5,
                             Count = 0,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 2, 1, 6, 21, 37, 531, DateTimeKind.Local).AddTicks(638),
-                            DateUpdated = new DateTime(2024, 2, 1, 6, 21, 37, 531, DateTimeKind.Local).AddTicks(638),
+                            DateCreated = new DateTime(2024, 2, 1, 9, 11, 7, 313, DateTimeKind.Local).AddTicks(2857),
+                            DateUpdated = new DateTime(2024, 2, 1, 9, 11, 7, 313, DateTimeKind.Local).AddTicks(2858),
                             Feat = true,
                             ImageRef = "images/tylenol.jpg",
                             MediName = "Tylenol",
@@ -514,8 +514,8 @@ namespace MedicineInc.Server.Migrations
                             Id = 6,
                             Count = 0,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 2, 1, 6, 21, 37, 531, DateTimeKind.Local).AddTicks(640),
-                            DateUpdated = new DateTime(2024, 2, 1, 6, 21, 37, 531, DateTimeKind.Local).AddTicks(640),
+                            DateCreated = new DateTime(2024, 2, 1, 9, 11, 7, 313, DateTimeKind.Local).AddTicks(2860),
+                            DateUpdated = new DateTime(2024, 2, 1, 9, 11, 7, 313, DateTimeKind.Local).AddTicks(2861),
                             Feat = true,
                             ImageRef = "images/ibuprofen.jpg",
                             MediName = "Ibuprofen",
@@ -528,8 +528,8 @@ namespace MedicineInc.Server.Migrations
                             Id = 7,
                             Count = 0,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 2, 1, 6, 21, 37, 531, DateTimeKind.Local).AddTicks(642),
-                            DateUpdated = new DateTime(2024, 2, 1, 6, 21, 37, 531, DateTimeKind.Local).AddTicks(642),
+                            DateCreated = new DateTime(2024, 2, 1, 9, 11, 7, 313, DateTimeKind.Local).AddTicks(2864),
+                            DateUpdated = new DateTime(2024, 2, 1, 9, 11, 7, 313, DateTimeKind.Local).AddTicks(2864),
                             Feat = false,
                             ImageRef = "images/claritin.jpg",
                             MediName = "Claritin",
@@ -628,8 +628,8 @@ namespace MedicineInc.Server.Migrations
                             Id = 1,
                             BranchID = 1,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 2, 1, 6, 21, 37, 531, DateTimeKind.Local).AddTicks(1557),
-                            DateUpdated = new DateTime(2024, 2, 1, 6, 21, 37, 531, DateTimeKind.Local).AddTicks(1559),
+                            DateCreated = new DateTime(2024, 2, 1, 9, 11, 7, 313, DateTimeKind.Local).AddTicks(6250),
+                            DateUpdated = new DateTime(2024, 2, 1, 9, 11, 7, 313, DateTimeKind.Local).AddTicks(6255),
                             IsManager = true,
                             ManagerID = 1,
                             StaffEmail = "TenSeconds@gmail.com",

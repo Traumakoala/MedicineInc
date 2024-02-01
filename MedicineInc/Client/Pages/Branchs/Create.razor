@@ -1,0 +1,66 @@
+﻿@page "/branchs/create/"
+@inject HttpClient _client
+@inject NavigationManager _navManager
+
+<h3 class="card-title">Create New Branches</h3>
+<hr />
+<br />
+
+<EditForm Model="@branch" OnValidSubmit="CreateBranch">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-group">
+        <label>Branch Name: </label>
+        <div>
+            <InputText @bind-Value="@branch.BranchName" class="form-control" />
+            <ValidationMessage For="@(() => branch.BranchName)" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Branch Address: </label>
+        <div>
+            <InputText @bind-Value="@branch.BranchAddress" class="form-control" />
+            <ValidationMessage For="@(() => branch.BranchAddress)" />
+        </div>
+    </div>
+    <div>
+       @*  <InputSelect @bind-Value="branch.ManagerID" class="form-control">
+            <option value="">-- Select Manager --</option>
+        @if (Staffs != null)
+        {
+            foreach (var staff in Staffs)
+            {
+                <option value="@staff.ManagerID">@staff.StaffName</option>
+            }
+        }
+        </InputSelect>
+        <ValidationMessage For="@(() => branch.ManagerID)"/> *@
+    </div>
+    <button type="submit" class="btn btn-success btn-block">
+        Create Branch
+    </button>
+
+</EditForm>
+
+    @code {
+    Branch branch = new Branch();
+    private IList<Staff>? Staffs;
+    private IList<Branch>? Branchs;
+
+    protected async override Task OnInitializedAsync()
+    {
+        Branchs = await _client.GetFromJsonAsync<List<Branch>>($"{Endpoints.BranchsEndPoint}");
+    }
+
+    private async Task CreateBranch()
+    {
+        await _client.PostAsJsonAsync(Endpoints.BranchsEndPoint, branch);
+        _navManager.NavigateTo("/branchs/");
+    }
+
+
+}
+
+}
+
