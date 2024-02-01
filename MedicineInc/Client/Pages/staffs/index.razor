@@ -65,7 +65,7 @@ else
             var confirm = await js.InvokeAsync<bool>("confirm", $"Do you want to delete {staff.StaffName}?");
             if (confirm)
             {
-                await _client.DeleteAsync($"api/staffs/{staffId}");
+                await _client.DeleteAsync($"{Endpoints.StaffsEndPoint}/{staffId}");
                 await OnInitializedAsync();
             }
         }

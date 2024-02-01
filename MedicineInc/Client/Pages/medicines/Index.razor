@@ -68,7 +68,7 @@ else
             var confirm = await js.InvokeAsync<bool>("confirm", $"Do you want to delete {medicine.MediName}?");
             if (confirm)
             {
-                await _client.DeleteAsync($"api/medicines/{medicineId}");
+                await _client.DeleteAsync($"{Endpoints.MedicinesEndPoint}/{medicineId}");
                 await OnInitializedAsync();
             }
         }

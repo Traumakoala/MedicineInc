@@ -14,11 +14,11 @@ namespace MedicineInc.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BranchController : ControllerBase
+    public class BranchsController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public BranchController(IUnitOfWork unitOfWork)
+        public BranchsController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
