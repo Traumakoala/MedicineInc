@@ -47,7 +47,6 @@ else
     {
         Carts = await _client.GetFromJsonAsync<List<Cart>>($"{Endpoints.CartsEndPoint}");
 
-        // Set the cart to the first item in the Carts list
         if (Carts != null && Carts.Count > 0)
         {
             cart = Carts[0];
@@ -57,30 +56,13 @@ else
     private async Task RemoveFromCart(int medicineId)
     {
         var response = await _client.DeleteAsync($"{Endpoints.CartsEndPoint}/{medicineId}");
-
-        if (response.IsSuccessStatusCode)
-        {
-            await LoadCarts();
-        }
-        else
-        {
-            var errorMessage = await response.Content.ReadAsStringAsync();
-            Console.WriteLine($"Error removing from cart: {errorMessage}");
-        }
-    }
+        await LoadCarts();
+     }
 
     private async Task ClearCart()
     {
         var response = await _client.DeleteAsync($"{Endpoints.CartsEndPoint}");
 
-        if (response.IsSuccessStatusCode)
-        {
-            await LoadCarts();
-        }
-        else
-        {
-            var errorMessage = await response.Content.ReadAsStringAsync();
-            Console.WriteLine($"Error clearing cart: {errorMessage}");
-        }
+        await LoadCarts();
     }
 }

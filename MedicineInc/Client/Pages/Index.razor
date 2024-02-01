@@ -68,74 +68,28 @@
     {
         Cart cart = new Cart();
         var selectedMedicine = Medicines?.FirstOrDefault(m => m.Id == medicineId);
+        var cartItem = new Medicine
+            {
+                Id = medicineId,
+                MediName = selectedMedicine.MediName,
+                Price = selectedMedicine.Price,
+                Feat = selectedMedicine.Feat,
+                Count = count,
+                Usage = selectedMedicine.Usage,
+                ImageRef = selectedMedicine.ImageRef
+            };
 
-        Customer customer = null;
-
-        if (selectedMedicine != null)
+        if (cart.CartItems == null)
         {
-            var existingCartItem = cart.CartItems?.FirstOrDefault(ci => ci.MediName == selectedMedicine.MediName);
-
-            if (existingCartItem != null)
-            {
-                existingCartItem.Count += count;
-            }
-            else
-            {
-                var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-                var user = authState.User;
-
-                if (user.Identity.IsAuthenticated)
-                {
-                    var userIdClaim = user.FindFirst(ClaimTypes.NameIdentifier);
-
-                    if (userIdClaim != null)
-                    {
-                        var userId = userIdClaim.Value;
-
-                        customer = Customers?.FirstOrDefault(c => c.Id == int.Parse(userId));
-
-                        if (customer != null)
-                        {
-                            var cartItem = new Medicine
-                                {
-                                    Id = medicineId,
-                                    MediName = selectedMedicine.MediName,
-                                    Price = selectedMedicine.Price,
-                                    Feat = selectedMedicine.Feat,
-                                    Count = count,
-                                    Usage = selectedMedicine.Usage,
-                                    ImageRef = selectedMedicine.ImageRef
-                                };
-
-                            if (cart.CartItems == null)
-                            {
-                                cart.CartItems = new List<Medicine>();
-                            }
-
-                            cart.CartItems.Add(cartItem);
-
-                            cart.CustomerId = customer.Id;
-
-                            var response = await _client.PostAsJsonAsync($"{Endpoints.CartsEndPoint}/", cart);
-
-                            if (response.IsSuccessStatusCode)
-                            {
-                                await LoadMedicines();
-                                await LoadCarts();
-                            }
-                            else
-                            {
-                                var errorMessage = await response.Content.ReadAsStringAsync();
-                                Console.WriteLine($"Error updating cart: {errorMessage}");
-                            }
-                        }
-                        else
-                        {
-                            Console.WriteLine("Customer not found.");
-                        }
-                    }
-                }
-            }
+            cart.CartItems = new List<Medicine>();
         }
+
+        cart.CartItems.Add(cartItem);
+
+        cart.CustomerId = 1;
+
+        var response = await _client.PostAsJsonAsync($"{Endpoints.CartsEndPoint}/", cart);
+        await LoadMedicines();
+        await LoadCarts();
     }
 }
