@@ -24,26 +24,30 @@
             <ValidationMessage For="@(() => branch.BranchAddress)" />
         </div>
     </div>
-    <div>
-       @*  <InputSelect @bind-Value="branch.ManagerID" class="form-control">
-            <option value="">-- Select Manager --</option>
-        @if (Staffs != null)
-        {
-            foreach (var staff in Staffs)
-            {
-                <option value="@staff.ManagerID">@staff.StaffName</option>
-            }
-        }
-        </InputSelect>
-        <ValidationMessage For="@(() => branch.ManagerID)"/> *@
+    <div class="form-group">
+        <label>Branch Manager: </label>
+        <div>
+            <InputSelect @bind-Value="branch.ManagerID" class="form-control">
+                <option value="">-- Select Manager --</option>
+                @if (Staffs != null)
+                {
+                    foreach (var staff in Staffs)
+                    {
+                        <option value="@staff.ManagerID">@staff.StaffName</option>
+                    }
+                }
+            </InputSelect>
+            <ValidationMessage For="@(() => branch.ManagerID)" />
+        </div>
     </div>
+    
     <button type="submit" class="btn btn-success btn-block">
         Create Branch
     </button>
 
 </EditForm>
 
-    @code {
+@code {
     Branch branch = new Branch();
     private IList<Staff>? Staffs;
     private IList<Branch>? Branchs;
@@ -51,6 +55,7 @@
     protected async override Task OnInitializedAsync()
     {
         Branchs = await _client.GetFromJsonAsync<List<Branch>>($"{Endpoints.BranchsEndPoint}");
+        Staffs = await _client.GetFromJsonAsync<List<Staff>>($"{Endpoints.StaffsEndPoint}");
     }
 
     private async Task CreateBranch()
@@ -62,5 +67,5 @@
 
 }
 
-}
+
 

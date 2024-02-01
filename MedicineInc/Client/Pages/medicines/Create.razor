@@ -77,5 +77,8 @@
         var fileName = Path.GetFileName(file.Name);
 
         medicine.ImageRef = "images/" + fileName;
+
+        await _client.PostAsJsonAsync(Endpoints.MedicinesEndPoint, medicine);
+
     }
 }
