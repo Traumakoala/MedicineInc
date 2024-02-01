@@ -1,5 +1,6 @@
 ﻿@page "/"
 @inject HttpClient _client
+@inject AuthenticationStateProvider AuthenticationStateProvider
 @inject IJSRuntime js
 
 <PageTitle>Index</PageTitle>
@@ -38,10 +39,14 @@
 
 @code {
     private IList<Medicine>? Medicines;
+    private IList<Cart>? Carts;
+    private IList<Customer>? Customers;
 
     protected override async Task OnInitializedAsync()
     {
         await LoadMedicines();
+        await LoadCarts();
+        await LoadCustomers();
     }
 
     private async Task LoadMedicines()
@@ -49,28 +54,96 @@
         Medicines = await _client.GetFromJsonAsync<List<Medicine>>($"{Endpoints.MedicinesEndPoint}");
     }
 
-    private async Task AddToCart(int medicineId, int quantity)
+    private async Task LoadCarts()
     {
+        Carts = await _client.GetFromJsonAsync<List<Cart>>($"{Endpoints.CartsEndPoint}");
+    }
+
+    private async Task LoadCustomers()
+    {
+        Customers = await _client.GetFromJsonAsync<List<Customer>>($"{Endpoints.CustomersEndPoint}");
+    }
+
+    private async Task AddToCart(int medicineId, int count)
+    {
+
+        Cart cart = new Cart();
         var selectedMedicine = Medicines?.FirstOrDefault(m => m.Id == medicineId);
+
+        Customer customer = null;  
 
         if (selectedMedicine != null)
         {
-            var cartItem = new
-            {
-                MedicineId = selectedMedicine.Id,
-                Quantity = quantity
-            };
+            var existingCartItem = cart.CartItems?.FirstOrDefault(ci => ci.MediName == selectedMedicine.MediName);
 
-            var response = await _client.PostAsJsonAsync($"{Endpoints.CartsEndPoint}", cartItem);
-
-            if (response.IsSuccessStatusCode)
+            if (existingCartItem != null)
             {
-                await LoadMedicines();
+                existingCartItem.Count += count;
             }
             else
             {
-                var errorMessage = await response.Content.ReadAsStringAsync();
-                Console.WriteLine($"Error adding to cart: {errorMessage}");
+                var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+                var user = authState.User;
+
+                if (user.Identity.IsAuthenticated)
+                {
+                    var userIdClaim = user.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
+
+                    if (userIdClaim != null)
+                    {
+                        var userId = userIdClaim.Value;
+
+                        // Find the corresponding customer
+                        customer = Customers?.FirstOrDefault(c => c.Id == int.Parse(userId));
+                    }
+
+                    if (customer != null)
+                    {
+                        var cartItem = new Medicine
+                            {
+                                Id = medicineId,
+                                MediName = selectedMedicine.MediName,
+                                Price = selectedMedicine.Price,
+                                Feat = selectedMedicine.Feat,
+                                Count = count,
+                                Usage = selectedMedicine.Usage,
+                                ImageRef = selectedMedicine.ImageRef
+                            };
+
+                        // Add the medicine to the cart's items
+                        if (cart.CartItems == null)
+                        {
+                            cart.CartItems = new List<Medicine>();
+                        }
+
+                        cart.CartItems.Add(cartItem);
+
+                        // Set the CustomerId in the Cart
+                        cart.CustomerId = customer.Id;
+
+                        // Update the cart on the server
+                        var response = await _client.PostAsJsonAsync($"{Endpoints.CartsEndPoint}/", cart);
+
+                        if (response.IsSuccessStatusCode)
+                        {
+                            await LoadMedicines();
+                            await LoadCarts();
+                        }
+                        else
+                        {
+                            var errorMessage = await response.Content.ReadAsStringAsync();
+                            Console.WriteLine($"Error updating cart: {errorMessage}");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Customer not found.");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("User is not authenticated. Please log in.");
+                }
             }
         }
     }

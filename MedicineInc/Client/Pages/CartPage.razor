@@ -5,24 +5,21 @@
 <h1>Your Shopping Cart</h1>
 <link href="css/cart.css" rel="stylesheet">
 
-@if (Carts != null && Carts.Count > 0)
+@if (Carts != null && cart != null && cart.CartItems != null)
 {
     <div class="cart-container">
         <ul class="cart-items">
-            @foreach (var cart in Carts)
+            @foreach (var cartItem in cart.CartItems)
             {
-                foreach (var cartItem in cart.CartItems)
-                {
-                    <li class="cart-item">
-                        <img src="@cartItem.ImageRef" alt="@cartItem.MediName" class="product-image">
-                        <div class="medicine-details">
-                            <h2>@cartItem.MediName</h2>
-                            <p>Price: $@cartItem.Price</p>
-                            <p>Quantity: @cartItem.Count</p>
-                            <button @onclick='() => RemoveFromCart(cartItem.Id)'>Remove from Cart</button>
-                        </div>
-                    </li>
-                }
+                <li class="cart-item">
+                    <img src="@cartItem.ImageRef" alt="@cartItem.MediName" class="product-image">
+                    <div class="medicine-details">
+                        <h2>@cartItem.MediName</h2>
+                        <p>Price: $@cartItem.Price</p>
+                        <p>Quantity: @cartItem.Count</p>
+                        <button @onclick='() => RemoveFromCart(cartItem.Id)'>Remove from Cart</button>
+                    </div>
+                </li>
             }
         </ul>
         <button @onclick='ClearCart'>Clear Cart</button>
@@ -38,6 +35,7 @@ else
 </footer>
 
 @code {
+    Cart cart = new Cart();
     private IList<Cart>? Carts;
 
     protected override async Task OnInitializedAsync()
@@ -48,6 +46,12 @@ else
     private async Task LoadCarts()
     {
         Carts = await _client.GetFromJsonAsync<List<Cart>>($"{Endpoints.CartsEndPoint}");
+
+        // Set the cart to the first item in the Carts list
+        if (Carts != null && Carts.Count > 0)
+        {
+            cart = Carts[0];
+        }
     }
 
     private async Task RemoveFromCart(int medicineId)

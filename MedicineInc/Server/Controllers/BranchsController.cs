@@ -27,7 +27,7 @@ namespace MedicineInc.Server.Controllers
         [HttpGet]
         public async Task<IActionResult> GetBranchs()
         {
-            var branchs = await _unitOfWork.Branchs.GetAll();
+            var branchs = await _unitOfWork.Branchs.GetAll(includes: q => q.Include(x => x.Staff));
             return Ok(branchs);
         }
 

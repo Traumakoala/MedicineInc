@@ -13,16 +13,17 @@
 
 @if (Branchs == null)
 {
-    <div class="alert alert-info">Loading Branches...</div>
+    <div class="alert alert-info">Loading branchs...</div>
 }
 else
 {
     <table class="table table-responsive">
         <thead>
             <tr>
-                <th>Branch Name</th>
-                <th>Branch Address</th>
-                <th>Manager Name</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+
             </tr>
         </thead>
         <tbody>
@@ -32,7 +33,6 @@ else
                     <td>@branch.BranchName</td>
                     <td>@branch.BranchAddress</td>
                     <td>@branch.ManagerID</td>
-                    
                     <td>
                         <a href="/branchs/view/@branch.Id" class="btn btn-primary">
                             <span class="oi oi-book"></span>
@@ -49,7 +49,6 @@ else
         </tbody>
     </table>
 }
-
 @code {
     private List<Branch>? Branchs;
 
@@ -72,4 +71,3 @@ else
         }
     }
 }
-
