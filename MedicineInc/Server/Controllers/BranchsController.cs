@@ -17,7 +17,7 @@ namespace MedicineInc.Server.Controllers
     public class BranchsController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
-        
+
 
         public BranchsController(IUnitOfWork unitOfWork)
         {
@@ -28,7 +28,7 @@ namespace MedicineInc.Server.Controllers
         [HttpGet]
         public async Task<IActionResult> GetBranchs()
         {
-            var branchs = await _unitOfWork.Branchs.GetAll(includes: q => q.Include(x => x.Staff));
+            var branchs = await _unitOfWork.Branchs.GetAll();
             return Ok(branchs);
         }
 
