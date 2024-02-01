@@ -17,6 +17,7 @@ namespace MedicineInc.Server.Controllers
     public class BranchsController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
+        
 
         public BranchsController(IUnitOfWork unitOfWork)
         {
