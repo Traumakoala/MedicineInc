@@ -1,0 +1,66 @@
+﻿@using MedicineInc.Client.Components
+@inject HttpClient _client
+
+<EditForm Model="@branch" OnValidSubmit="OnValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <fieldset disabled="@Disabled" >
+
+    <div class="form-group">
+        <label>Branch Name: </label>
+        <div>
+            <InputText @bind-Value="@branch.BranchName" class="form-control" />
+            <ValidationMessage For="@(() => branch.BranchName)" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Branch Address: </label>
+        <div>
+            <InputText @bind-Value="@branch.BranchAddress" class="form-control" />
+            <ValidationMessage For="@(() => branch.BranchAddress)" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Branch Manager: </label>
+        <div>
+            <InputSelect @bind-Value="branch.ManagerID" class="form-control">
+                <option value="">-- Select Manager --</option>
+                @if (Staffs != null)
+                {
+                    foreach (var staff in Staffs)
+                    {
+                        <option value="@staff.ManagerID">@staff.StaffName</option>
+                    }
+                }
+            </InputSelect>
+            <ValidationMessage For="@(() => branch.ManagerID)" />
+        </div>
+    </div>
+    
+    
+    </fieldset>
+    @if (!Disabled)
+    {
+        <button type="submit" class="btn btn-success btn-block">
+            @ButtonText
+        </button>
+    }
+    <BackToList Target="branchs" />
+</EditForm>
+@code {
+    private IList<Staff>? Staffs;
+    private IList<Branch>? Branchs;
+
+    [Parameter] public bool Disabled { get; set; } = false;
+    [Parameter] public Branch? branch { get; set; }
+    [Parameter] public Staff? staff { get; set; }
+    [Parameter] public string ButtonText { get; set; } = "Save";
+    [Parameter] public EventCallback OnValidSubmit { get; set; }
+    
+    protected async override Task OnInitializedAsync()
+    {
+        
+        Staffs = await _client.GetFromJsonAsync<List<Staff>>($"{Endpoints.StaffsEndPoint}");
+        Branchs = await _client.GetFromJsonAsync<List<Branch>>($"{Endpoints.BranchsEndPoint}");
+    }
+}

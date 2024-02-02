@@ -1,0 +1,92 @@
+﻿@using MedicineInc.Client.Components
+@inject HttpClient _client
+
+<EditForm Model="@staff" OnValidSubmit="OnValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <fieldset disabled="@Disabled" >
+
+    <div class="form-group">
+        <label>Staff Name: </label>
+        <div>
+            <InputText @bind-Value="@staff.StaffName" class="form-control" />
+            <ValidationMessage For="@(() => staff.StaffName)" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Staff Email: </label>
+        <div>
+            <InputText @bind-Value="@staff.StaffEmail" class="form-control" />
+            <ValidationMessage For="@(() => staff.StaffEmail)" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Staff Phone Number: </label>
+        <div>
+            <InputText @bind-Value="@staff.StaffPhone" class="form-control" />
+            <ValidationMessage For="@(() => staff.StaffPhone)" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Manager Status: </label>
+        <div>
+            <InputCheckbox @bind-Value="@staff.IsManager" />
+        </div>
+    </div>
+    @if (staff.IsManager)
+    {
+        <div class="form-group">
+            <label>Manager ID: </label>
+            <div>
+                <InputNumber @bind-Value="@staff.ManagerID" class="form-control" />
+                <ValidationMessage For="@(() => staff.ManagerID)" />
+            </div>
+        </div>
+    }
+    <div class="form-group">
+        <label>Branch: </label>
+        <div>
+            <InputSelect @bind-Value="staff.BranchID" class=" = form-control">
+                <option value="">-- Select Branch --</option>
+                @if (Branchs != null)
+                {
+                    foreach (var branch in Branchs)
+                    {
+                        <option value="@branch.Id">@branch.BranchName</option>
+                    }
+                }
+            </InputSelect>
+        </div>
+    </div>
+
+    </fieldset>
+    @if (!Disabled)
+    {
+        <button type="submit" class="btn btn-success btn-block">
+            @ButtonText
+        </button>
+    }
+    <BackToList Target="staffs" />
+    
+
+</EditForm>
+
+@code {
+    
+
+    private IList<Staff>? Staffs;
+    private IList<Branch>? Branchs;
+
+    [Parameter] public bool Disabled { get; set; } = false;
+    [Parameter] public Staff? staff { get; set; }
+    [Parameter] public Branch? Branch { get; set; }
+    [Parameter] public string ButtonText { get; set; } = "Save";
+    [Parameter] public EventCallback OnValidSubmit { get; set; }
+
+    protected async override Task OnInitializedAsync()
+    {
+
+        Staffs = await _client.GetFromJsonAsync<List<Staff>>($"{Endpoints.StaffsEndPoint}");
+        Branchs = await _client.GetFromJsonAsync<List<Branch>>($"{Endpoints.BranchsEndPoint}");
+    }
+}

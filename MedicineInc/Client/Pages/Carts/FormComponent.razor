@@ -1,0 +1,141 @@
+﻿@using MedicineInc.Client.Components
+@inject HttpClient _client
+
+<EditForm Model="@Cart" OnValidSubmit="OnValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <fieldset disabled="@Disabled" >
+
+    <div class="form-group">
+        <label>Choose Medicine: </label>
+        <div>
+            <InputSelect @bind-Value="@selectedMedicine.Id" class="form-control" @onchange="OnMedicineSelectionChange">
+                <option value="">Select Medicine</option>
+                @foreach (var medicineOption in Medicines)
+                {
+                    <option value="@medicineOption.Id">@medicineOption.MediName</option>
+                }
+            </InputSelect>
+        </div>
+    </div>
+
+    @if (selectedMedicine != null && cart != null)
+    {
+        <div class="form-group">
+            <label>Customer: </label>
+            <div>
+                <InputSelect @bind-Value="@cart.CustomerId" class="form-control">
+                    @foreach (var customer in Customers)
+                    {
+                        <option value="@customer.Id">@customer.CustomerName</option>
+                    }
+                </InputSelect>
+                <ValidationMessage For="@(() => cart.CustomerId)" />
+            </div>
+        </div>
+
+        @if (selectedMedicine != null)
+        {
+            <div class="form-group">
+                <label>Medicine Name: </label>
+                <div>
+                    <InputText @bind-Value="@selectedMedicine.MediName" class="form-control" disabled />
+                    <ValidationMessage For="@(() => selectedMedicine.MediName)" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Price: </label>
+                <div>
+                    <InputNumber @bind-Value="@selectedMedicine.Price" class="form-control" disabled />
+                    <ValidationMessage For="@(() => selectedMedicine.Price)" />
+                </div>
+            </div>
+
+            <button type="button" class="btn btn-primary" @onclick="AddMedicine">Add Medicine</button>
+
+            <div>
+                <div class="product-container">
+                    <div class="product">
+                        <ul>
+                            @if (cart != null)
+                            {
+                                @foreach (var cartItems in Carts)
+                                {
+                                    @foreach (var ids in cartItems.MedicineId)
+                                    {
+                                        @foreach (var med in Medicines.Where(q => q.Id == ids))
+                                        {
+                                            <img src="@med.ImageRef" alt="@med.MediName" class="product-image">
+                                            <div class="product-details">
+                                            <li>@med.MediName - @med.Price</li>
+                                            </div>
+                                        }
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                <li>Medication information not available</li>
+                            }
+                        </ul>
+                     </div>
+                </div>
+            </div>
+  
+        }
+    }
+    </fieldset>
+
+    
+    @if (!Disabled)
+    {
+        <button type="submit" class="btn btn-success btn-block">
+            @ButtonText
+        </button>
+    }
+    <BackToList Target="carts" />
+</EditForm>
+
+@code {
+    private IList<Medicine>? Medicines;
+    private Cart cart = new Cart();
+    private Medicine? selectedMedicine;
+    private IList<Cart>? Carts;
+    private IList<Customer>? Customers;
+
+    [Parameter] public bool Disabled { get; set; } = false;
+    [Parameter] public Cart? Cart { get; set; }
+    [Parameter] public Medicine? medicine { get; set; }
+    [Parameter] public Customer? customer { get; set; }
+    [Parameter] public string ButtonText { get; set; } = "Save";
+    [Parameter] public EventCallback OnValidSubmit { get; set; }
+
+    protected async override Task OnInitializedAsync()
+    {
+
+        Medicines = await _client.GetFromJsonAsync<List<Medicine>>($"{Endpoints.MedicinesEndPoint}");
+        Customers = await _client.GetFromJsonAsync<List<Customer>>($"{Endpoints.CustomersEndPoint}");
+    }
+
+    private void AddMedicine()
+    {
+        if (selectedMedicine != null)
+        {
+            cart.MedicineId.Add(selectedMedicine.Id);
+
+        }
+    }
+
+    private async Task OnMedicineSelectionChange(ChangeEventArgs e)
+    {
+        if (int.TryParse(e.Value?.ToString(), out int medicineId))
+        {
+            selectedMedicine = Medicines?.FirstOrDefault(m => m.Id == medicineId);
+        }
+        else
+        {
+            selectedMedicine = null;
+        }
+    }
+}

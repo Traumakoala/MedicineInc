@@ -6,50 +6,10 @@
 <hr />
 <br />
 
-<EditForm Model="@branch" OnValidSubmit="CreateBranch">
-    <DataAnnotationsValidator />
-    <ValidationSummary />
-
-    <div class="form-group">
-        <label>Branch Name: </label>
-        <div>
-            <InputText @bind-Value="@branch.BranchName" class="form-control" />
-            <ValidationMessage For="@(() => branch.BranchName)" />
-        </div>
-    </div>
-    <div class="form-group">
-        <label>Branch Address: </label>
-        <div>
-            <InputText @bind-Value="@branch.BranchAddress" class="form-control" />
-            <ValidationMessage For="@(() => branch.BranchAddress)" />
-        </div>
-    </div>
-    <div class="form-group">
-        <label>Branch Manager: </label>
-        <div>
-            <InputSelect @bind-Value="branch.ManagerID" class="form-control">
-                <option value="">-- Select Manager --</option>
-                @if (Staffs != null)
-                {
-                    foreach (var staff in Staffs)
-                    {
-                        <option value="@staff.ManagerID">@staff.StaffName</option>
-                    }
-                }
-            </InputSelect>
-            <ValidationMessage For="@(() => branch.ManagerID)" />
-        </div>
-    </div>
-
-    <button type="submit" class="btn btn-success btn-block">
-        Create Branch
-    </button>
-
-</EditForm>
-
+<FormComponent ButtonText="Create Branch" branch="branch"
+               OnValidSubmit="@CreateBranch" />
 @code {
     Branch branch = new Branch();
-
     private IList<Staff>? Staffs;
     private IList<Branch>? Branchs;
 

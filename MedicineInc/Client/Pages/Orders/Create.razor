@@ -8,93 +8,16 @@
 <hr />
 <br />
 
-<EditForm Model="@order" OnValidSubmit="CreateOrder">
-    <DataAnnotationsValidator />
-    <ValidationSummary />
-
-    <div class="form-group">
-        <label>Branch ID: </label>
-        <div>
-            <InputSelect @bind-Value="@order.BranchID" class="form-control">
-                @foreach (var branch in Branchs)
-                {
-                    <option value="@branch.Id">@branch.BranchName</option>
-                }
-            </InputSelect>
-            <ValidationMessage For="@(() => order.BranchID)" />
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label>Customer: </label>
-        <div>
-            <InputSelect @bind-Value="@order.CustomerID" class="form-control">
-                @foreach (var customer in Customers)
-                {
-                    <option value="@customer.Id">@customer.CustomerName</option>
-                }
-            </InputSelect>
-            <ValidationMessage For="@(() => order.CustomerID)" />
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label>Order Done: </label>
-        <div>
-            <InputCheckbox @bind-Value="@order.OrderDone" />
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label>Order Details: </label>
-        <div class="products-container">
-            @if (order.OrderDetails != null)      
-            {
-                <div class="product">
-                     @foreach (var newMedicine in order.OrderDetails)
-                     {
-                            <img src="@newMedicine.ImageRef" alt="@newMedicine.MediName" class="product-image">
-                            <div class="newMedicine-details">
-                                <h6>@newMedicine.MediName - @newMedicine.Price</h6>
-                                <h6>@newMedicine.Count</h6>
-                            </div>
-                     }
-                </div>
-            }
-            else
-            {
-                <p>No medicines added to the order</p>
-            }
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label>Add Medicine to Order: </label>
-        <div>
-            <InputSelect @bind-Value="@selectedMedicineId" class="form-control">
-                <option value="">Select Medicine</option>
-                @foreach (var medicine in Medicines)
-                {
-                    <option value="@medicine.Id">@medicine.MediName</option>
-                }
-            </InputSelect>
-            <ValidationMessage For="@(() => selectedMedicineId)" />
-            <br/>
-            <button type="button" class="btn btn-primary" @onclick="AddMedicineToOrder">Add Medicine</button>
-        </div>
-    </div>
-    <br/>
-    <button type="submit" class="btn btn-success btn-block">
-        Create Order
-    </button>
-</EditForm>
+<FormComponent ButtonText="Create Order" order="order"
+               OnValidSubmit="@CreateOrder" />
+     
 
 @code {
     Order order = new Order();
     private int selectedMedicineId;
-    private IList<Customer> Customers;
-    private IList<Medicine> Medicines; 
-    private IList<Branch> Branchs;
+    private IList<Customer>? Customers;
+    private IList<Medicine>? Medicines; 
+    private IList<Branch>? Branchs;
 
     protected async override Task OnInitializedAsync()
     {
@@ -103,18 +26,7 @@
         Branchs = await _client.GetFromJsonAsync<List<Branch>>($"{Endpoints.BranchsEndPoint}");
     }
 
-    private void AddMedicineToOrder()
-    {
-        if (selectedMedicineId != 0)
-        {
-            var selectedMedicine = Medicines.FirstOrDefault(m => m.Id == selectedMedicineId);
-            if (selectedMedicine != null)
-            {
-                order.OrderDetails.Add(selectedMedicine);
-
-            }
-        }
-    }
+    
     private async Task CreateOrder()
     {
         await _client.PostAsJsonAsync(Endpoints.OrdersEndPoint, order);

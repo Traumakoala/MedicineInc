@@ -1,0 +1,24 @@
+﻿@page "/branchs/edit/{id:int}"
+@inject HttpClient _client
+@inject NavigationManager _navManager
+
+<h3>Edit Branch</h3>
+
+<FormComponent ButtonText="Update" OnValidSubmit="EditBranch" branch="branch" />
+
+@code {
+    [Parameter] public int id { get; set; }
+    Branch? branch = new Branch();
+
+    protected async override Task OnParametersSetAsync()
+    {
+        branch = await
+        _client.GetFromJsonAsync<Branch>($"{Endpoints.BranchsEndPoint}/{id}");
+    }
+
+    async Task EditBranch()
+    {
+        await _client.PutAsJsonAsync($"{Endpoints.BranchsEndPoint}/{id}", branch);
+        _navManager.NavigateTo("/branchs/");
+    }
+}

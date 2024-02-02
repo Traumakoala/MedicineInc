@@ -6,54 +6,9 @@
 <hr />
 <br />
 
-<EditForm Model="@medicine" OnValidSubmit="CreateMedicine">
-    <DataAnnotationsValidator />
-    <ValidationSummary />
 
-    <div class="form-group">
-        <label>Medicine Name: </label>
-        <div>
-            <InputText @bind-Value="@medicine.MediName" class="form-control" />
-            <ValidationMessage For="@(() => medicine.MediName)" />
-        </div>
-    </div>
-    <div class="form-group">
-        <label>Medicine Price: </label>
-        <div>
-            <InputNumber @bind-Value="@medicine.Price" class="form-control" />
-            <ValidationMessage For="@(() => medicine.Price)" />
-        </div>
-    </div>
-    <div class="form-group">
-        <label>Featured: </label>
-        <div>
-            <InputCheckbox @bind-Value="@medicine.Feat" />
-        </div>
-    </div>
-    <div class="form-group">
-        <label>Usage: </label>
-        <div>
-            <InputText @bind-Value="@medicine.Usage" class="form-control" />
-            <ValidationMessage For="@(() => medicine.Usage)" />
-        </div>
-    </div>
-    <div class="form-group">
-        <label>Upload Image: </label>
-        <div>
-            <InputFile OnChange="@HandleFileChanged" />
-        </div>
-    </div>
-    @if (!string.IsNullOrEmpty(medicine.ImageRef))
-    {
-        <div>
-            <img src="@medicine.ImageRef" alt="Uploaded Image" style="max-width: 200px; max-height: 200px;" />
-        </div>
-    }
-    <button type="submit" class="btn btn-success btn-block">
-        Create Medicine
-    </button>
-</EditForm>
-
+<FormComponent ButtonText="Create Medicine" medicine="medicine"
+               OnValidSubmit="@CreateMedicine" />
 @code {
     Medicine medicine = new Medicine();
 
@@ -70,15 +25,5 @@
         _navManager.NavigateTo("/medicines/");
     }
 
-    private async Task HandleFileChanged(InputFileChangeEventArgs e)
-    {
-        var file = e.File;
-
-        var fileName = Path.GetFileName(file.Name);
-
-        medicine.ImageRef = "images/" + fileName;
-
-        await _client.PostAsJsonAsync(Endpoints.MedicinesEndPoint, medicine);
-
-    }
+    
 }

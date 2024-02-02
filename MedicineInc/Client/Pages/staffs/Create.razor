@@ -6,68 +6,8 @@
 <hr />
 <br />
 
-<EditForm Model="@staff" OnValidSubmit="CreateStaff">
-    <DataAnnotationsValidator />
-    <ValidationSummary />
-
-    <div class="form-group">
-        <label>Staff Name: </label>
-        <div>
-            <InputText @bind-Value="@staff.StaffName" class="form-control" />
-            <ValidationMessage For="@(() => staff.StaffName)" />
-        </div>
-    </div>
-    <div class="form-group">
-        <label>Staff Email: </label>
-        <div>
-            <InputText @bind-Value="@staff.StaffEmail" class="form-control" />
-            <ValidationMessage For="@(() => staff.StaffEmail)" />
-        </div>
-    </div>
-    <div class="form-group">
-        <label>Staff Phone Number: </label>
-        <div>
-            <InputText @bind-Value="@staff.StaffPhone" class="form-control" />
-            <ValidationMessage For="@(() => staff.StaffPhone)" />
-        </div>
-    </div>
-    <div class="form-group">
-        <label>Manager Status: </label>
-        <div>
-            <InputCheckbox @bind-Value="@staff.IsManager" />
-        </div>
-    </div>
-    @if (staff.IsManager)
-    {
-        <div class="form-group">
-            <label>Manager ID: </label>
-            <div>
-                <InputNumber @bind-Value="@staff.ManagerID" class="form-control" />
-                <ValidationMessage For="@(() => staff.ManagerID)" />
-            </div>
-        </div>
-    }
-    <div class="form-group">
-        <label>Branch: </label>
-        <div>
-            <InputSelect @bind-Value="staff.BranchID" class=" = form-control">
-                <option value="">-- Select Branch --</option>
-                @if (Branchs != null)
-                {
-                    foreach (var branch in Branchs)
-                    {
-                        <option value="@branch.Id">@branch.BranchName</option>
-                    }
-                }
-            </InputSelect>
-        </div>
-    </div>
-
-    <button type="submit" class="btn btn-success btn-block">
-        Create Staff
-    </button>
-
-</EditForm>
+<FormComponent ButtonText="Create Staff" staff="staff"
+               OnValidSubmit="@CreateStaff" />
 
 @code {
     Staff staff = new Staff();

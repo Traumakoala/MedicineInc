@@ -6,71 +6,8 @@
 <hr />
 <br />
 
-<EditForm Model="@customer" OnValidSubmit="CreateCustomer">
-    <DataAnnotationsValidator />
-    <ValidationSummary />
-
-    <div class="form-group">
-        <label>Customer Name: </label>
-        <div>
-            <InputText @bind-Value="@customer.CustomerName" class="form-control" />
-            <ValidationMessage For="@(() => customer.CustomerName)" />
-        </div>
-    </div>
-    <div class="form-group">
-        <label>Customer Email: </label>
-        <div>
-            <InputText @bind-Value="@customer.CustomerEmail" class="form-control" />
-            <ValidationMessage For="@(() => customer.CustomerEmail)" />
-        </div>
-    </div>
-    <div class="form-group">
-        <label>Customer Phone: </label>
-        <div>
-            <InputText @bind-Value="@customer.CustomerPhone" class="form-control" />
-            <ValidationMessage For="@(() => customer.CustomerPhone)" />
-        </div>
-    </div>
-    <div class="form-group">
-        <label>Customer User: </label>
-        <div>
-            <InputText @bind-Value="@customer.CustomerUser" class="form-control" />
-            <ValidationMessage For="@(() => customer.CustomerUser)" />
-        </div>
-    </div>
-    <div class="form-group">
-        <label>Customer Password: </label>
-        <div>
-            <InputText @bind-Value="@customer.CustomerPassword" class="form-control" />
-            <ValidationMessage For="@(() => customer.CustomerPassword)" />
-        </div>
-    </div>
-    <div class="form-group">
-        <label>Gender: </label>
-        <div>
-            <InputText @bind-Value="@customer.Gender" class="form-control" />
-            <ValidationMessage For="@(() => customer.Gender)" />
-        </div>
-    </div>
-    <div class="form-group">
-        <label>Allergies: </label>
-        <div>
-            <InputText @bind-Value="@customer.Allergies" class="form-control" />
-            <ValidationMessage For="@(() => customer.Allergies)" />
-        </div>
-    </div>
-    <div class="form-group">
-        <label>Customer Address: </label>
-        <div>
-            <InputText @bind-Value="@customer.CustomerAddress" class="form-control" />
-            <ValidationMessage For="@(() => customer.CustomerAddress)" />
-        </div>
-    </div>
-
-    <button type="submit" class="btn btn-success btn-block">
-        Create Customer
-    </button>
-</EditForm>
+<FormComponent ButtonText="Create Customer" customer="customer"
+               OnValidSubmit="@CreateCustomer" />
 
 @code {
     Customer customer = new Customer();
