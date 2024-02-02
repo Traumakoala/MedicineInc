@@ -10,6 +10,9 @@
 <div class="products-container">
     @if (Medicines != null && Medicines.Any())
     {
+
+        custId = customer.Id;
+ 
         @foreach (var item in Medicines.Where(q => q.Feat).Take(4))
         {
             <div class="product">
@@ -31,6 +34,11 @@
             <h2>There are no featured items today!</h2>
         </div>
     }
+    <br/>
+    <br/>
+    <div class="product-button">
+        <button @onclick='() => ConfirmAddToCart()'>Confirm Addition To Cart</button>
+    </div>
 </div>
 
 <footer>
@@ -38,6 +46,10 @@
 </footer>
 
 @code {
+
+    Cart cart = new Cart();
+    Customer customer = new Customer();
+    private int custId;
     private IList<Medicine>? Medicines;
     private IList<Cart>? Carts;
     private IList<Customer>? Customers;
@@ -66,13 +78,18 @@
 
     private async Task AddToCart(int medicineId, int count)
     {
-        Cart cart = new Cart();
         var selectedMedicine = Medicines?.FirstOrDefault(m => m.Id == medicineId);
-        var cartItem = selectedMedicine.Id;
-        cart.CartItems.Add(cartItem);
+        cart.MedicineId.Add(selectedMedicine.Id);
 
+    }
+
+    private async Task ConfirmAddToCart()
+    {
+        cart.CustomerId = custId;
         await _client.PostAsJsonAsync(Endpoints.CartsEndPoint, cart);
         await LoadMedicines();
         await LoadCarts();
     }
 }
+
+        

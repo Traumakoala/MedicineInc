@@ -66,15 +66,18 @@
                         @if (cart != null)
                         {
                             @foreach (var cartItems in Carts)
-                            {   
-                                @foreach(var med in Medicines.Where(q=>q.Id == cartItems.MedicineId))
-                                {   
-                                    <img src="@med.ImageRef" alt="@med.MediName" class="product-image">
-                                    <div class="product-details">  
-                                        <li>@med.MediName - @med.Price</li>
-                                    </div>
+                                {
+                                    @foreach (var ids in cartItems.MedicineId)
+                                    {
+                                        @foreach (var med in Medicines.Where(q => q.Id == ids))
+                                        {
+                                            <img src="@med.ImageRef" alt="@med.MediName" class="product-image">
+                                            <div class="product-details">  
+                                                <li>@med.MediName - @med.Price</li>
+                                            </div>
+                                        }
+                                    }
                                 }
-                            }
                         }
                         else
                         {
@@ -95,7 +98,6 @@
 @code {
     private IList<Medicine>? Medicines;
     private Cart cart = new Cart();
-    private List<int> = new List();
     private Medicine? selectedMedicine;
     private IList<Cart>? Carts;
     private IList<Customer>? Customers;

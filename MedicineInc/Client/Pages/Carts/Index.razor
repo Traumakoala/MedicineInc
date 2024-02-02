@@ -28,33 +28,36 @@ else
         </thead>
         <tbody>
             @foreach (var cart in Carts)
-            {   
-                @foreach (var cartItems in cart.CartItems)
+            {
+                @foreach (var custId in Customers.Where(c => c.Id == cart.CustomerId))
                 {
-                    @foreach (var CartItems in Medicines)
+                    @foreach (var ids in cart.MedicineId)
                     {
-                        quantity = cart.CartItems.Count;
-                        cart.TotalAmount = CartItems.Price * quantity;
+                        @foreach (var CartItems in Medicines.Where(q => q.Id == ids))
+                        {
+                            name = customer.CustomerName;
+                            quantity = CartItems.Count;
+                            cart.TotalAmount = CartItems.Price * quantity;
 
-                        <tr>
-                            <td>@cart.Customer?.CustomerName</td>
-                            <td>@quantity</td>
-                            <td>@cart.TotalAmount</td>
-                            <td>
-                                <a href="/carts/view/@cart.Id" class="btn btn-primary">
-                                    <span class="oi oi-book"></span>
-                                </a>
-                                <a href="/carts/edit/@cart.Id" class="btn btn-warning">
-                                    <span class="oi oi-pencil"></span>
-                                </a>
-                                <button class="btn btn-danger" onclick="@(()=>Delete(cart.Id))">
-                                    <span class="oi oi-delete"></span>
-                                </button>
-                            </td>
-                        </tr>
+                            <tr>
+                                <td></td>
+                                <td>@quantity</td>
+                                <td>@cart.TotalAmount</td>
+                                <td>
+                                    <a href="/carts/view/@cart.Id" class="btn btn-primary">
+                                        <span class="oi oi-book"></span>
+                                    </a>
+                                    <a href="/carts/edit/@cart.Id" class="btn btn-warning">
+                                        <span class="oi oi-pencil"></span>
+                                    </a>
+                                    <button class="btn btn-danger" onclick="@(()=>Delete(cart.Id))">
+                                        <span class="oi oi-delete"></span>
+                                    </button>
+                                </td>
+                            </tr>
+                        }
                     }
                 }
-                
             }
         </tbody>
     </table>
@@ -62,12 +65,18 @@ else
 
 @code {
     private int quantity;
+    private string? name;
+    private Customer customer = new Customer();
     private List<Cart>? Carts;
     private List<Medicine>? Medicines;
+    private List<Customer>? Customers;
+
+
     protected async override Task OnInitializedAsync()
     {
         Carts = await _client.GetFromJsonAsync<List<Cart>>($"{Endpoints.CartsEndPoint}");
         Medicines = await _client.GetFromJsonAsync<List<Medicine>>($"{Endpoints.MedicinesEndPoint}");
+        Customers = await _client.GetFromJsonAsync<List<Customer>>($"{Endpoints.CustomersEndPoint}");
     }
 
     async Task Delete(int cartId)

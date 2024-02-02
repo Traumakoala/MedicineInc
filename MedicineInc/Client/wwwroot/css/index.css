@@ -21,19 +21,19 @@
     margin-bottom: 15px;
 }
 
-.product button {
-    background-color: #e74c3c;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 18px;
-    margin-top: 15px;
-    cursor: pointer;
-    border-radius: 6px;
-}
+    .product button {
+        background-color: #48D1CC;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 18px;
+        margin-top: 15px;
+        cursor: pointer;
+        border-radius: 6px;
+    }
 
 .product button:hover {
     background-color: #c0392b;

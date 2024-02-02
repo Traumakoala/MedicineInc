@@ -48,10 +48,10 @@
     <div class="form-group">
         <label>Order Details: </label>
         <div class="products-container">
-            @if (order.MedicineId != null)      
+            @if (order.OrderDetails != null)      
             {
                 <div class="product">
-                     @foreach (var newMedicine in Medicines.Where(q => q.Id == order.MedicineId))
+                     @foreach (var newMedicine in order.OrderDetails)
                      {
                             <img src="@newMedicine.ImageRef" alt="@newMedicine.MediName" class="product-image">
                             <div class="newMedicine-details">
@@ -110,7 +110,7 @@
             var selectedMedicine = Medicines.FirstOrDefault(m => m.Id == selectedMedicineId);
             if (selectedMedicine != null)
             {
-                order.OrderDetails.Add(selectedMedicineId);
+                order.OrderDetails.Add(selectedMedicine);
 
             }
         }

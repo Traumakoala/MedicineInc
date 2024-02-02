@@ -11,19 +11,21 @@
         <ul class="cart-items">
             @foreach (var cart in Carts)
             {
-                @foreach(var cartItem in Medicines.Where(c=>c.Id == cart.MedicineId))
+                @foreach (var ids in cart.MedicineId)
                 {
-                    <li class="cart-item">
-                        <img src="@cartItem.ImageRef" alt="@cartItem.MediName" class="product-image">
-                        <div class="medicine-details">
-                            <h2>@cartItem.MediName</h2>
-                            <p>Price: $@cartItem.Price</p>
-                            <p>Quantity: @cartItem.Count</p>
-                            <button @onclick='() => RemoveFromCart(cartItem.Id)'>Remove from Cart</button>
-                        </div>
-                    </li>
+                    @foreach (var cartItem in Medicines.Where(c => c.Id == ids))
+                    {
+                        <li class="cart-item">
+                            <img src="@cartItem.ImageRef" alt="@cartItem.MediName" class="product-image">
+                            <div class="medicine-details">
+                                <h2>@cartItem.MediName</h2>
+                                <p>Price: $@cartItem.Price</p>
+                                <p>Quantity: @cartItem.Count</p>
+                                <button @onclick='() => RemoveFromCart(cartItem.Id)'>Remove from Cart</button>
+                            </div>
+                        </li>
+                    }
                 }
-                
             }
         </ul>
         <button @onclick='ClearCart'>Clear Cart</button>
