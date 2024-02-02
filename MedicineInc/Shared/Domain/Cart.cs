@@ -2,7 +2,9 @@
 {
     public class Cart : BaseDomainModel
     {
-        public virtual List<Medicine>? CartItems { get; set; }
+        public double? TotalAmount { get; set; }
+        public int? MedicineId { get; set; }
+        public virtual Medicine? Medicine { get; set; }
         public int? CustomerId { get; set; }
         public virtual Customer? Customer { get; set; }
     }

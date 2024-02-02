@@ -28,34 +28,46 @@ else
         </thead>
         <tbody>
             @foreach (var cart in Carts)
-            {
-                <tr>
-                    <td>@cart.Customer?.CustomerName</td>
-                    <td>@cart.CartItems.Count</td>
-                    <td>@cart.CartItems.Sum(item => item.Price * item.Count)</td>
-                    <td>
-                        <a href="/carts/view/@cart.Id" class="btn btn-primary">
-                            <span class="oi oi-book"></span>
-                        </a>
-                        <a href="/carts/edit/@cart.Id" class="btn btn-warning">
-                            <span class="oi oi-pencil"></span>
-                        </a>
-                        <button class="btn btn-danger" onclick="@(()=>Delete(cart.Id))">
-                            <span class="oi oi-delete"></span>
-                        </button>
-                    </td>
-                </tr>
+            {   
+                @foreach (var cartItems in cart.CartItems)
+                {
+                    @foreach (var CartItems in Medicines)
+                    {
+                        quantity = cart.CartItems.Count;
+                        cart.TotalAmount = CartItems.Price * quantity;
+
+                        <tr>
+                            <td>@cart.Customer?.CustomerName</td>
+                            <td>@quantity</td>
+                            <td>@cart.TotalAmount</td>
+                            <td>
+                                <a href="/carts/view/@cart.Id" class="btn btn-primary">
+                                    <span class="oi oi-book"></span>
+                                </a>
+                                <a href="/carts/edit/@cart.Id" class="btn btn-warning">
+                                    <span class="oi oi-pencil"></span>
+                                </a>
+                                <button class="btn btn-danger" onclick="@(()=>Delete(cart.Id))">
+                                    <span class="oi oi-delete"></span>
+                                </button>
+                            </td>
+                        </tr>
+                    }
+                }
+                
             }
         </tbody>
     </table>
 }
 
 @code {
-    private List<MedicineInc.Shared.Domain.Cart>? Carts;
-
+    private int quantity;
+    private List<Cart>? Carts;
+    private List<Medicine>? Medicines;
     protected async override Task OnInitializedAsync()
     {
-        Carts = await _client.GetFromJsonAsync<List<MedicineInc.Shared.Domain.Cart>>($"{Endpoints.CartsEndPoint}");
+        Carts = await _client.GetFromJsonAsync<List<Cart>>($"{Endpoints.CartsEndPoint}");
+        Medicines = await _client.GetFromJsonAsync<List<Medicine>>($"{Endpoints.MedicinesEndPoint}");
     }
 
     async Task Delete(int cartId)

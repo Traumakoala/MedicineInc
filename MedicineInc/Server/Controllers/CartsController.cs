@@ -26,7 +26,7 @@ namespace MedicineInc.Server.Controllers
         [HttpGet]
         public async Task<IActionResult> GetCarts()
         {
-            var Carts = await _unitOfWork.Carts.GetAll(includes: q => q.Include(c=> c.Customer));
+            var Carts = await _unitOfWork.Carts.GetAll(includes: q => q.Include(c=> c.Customer).Include(m => m.Medicine));
             return Ok(Carts);
         }
 

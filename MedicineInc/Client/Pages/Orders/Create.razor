@@ -3,6 +3,8 @@
 @inject NavigationManager _navManager
 
 <h3 class="card-title">Create New Order</h3>
+<link href="css/index.css" rel="stylesheet" />
+
 <hr />
 <br />
 
@@ -13,7 +15,12 @@
     <div class="form-group">
         <label>Branch ID: </label>
         <div>
-            <InputNumber @bind-Value="@order.BranchID" class="form-control" />
+            <InputSelect @bind-Value="@order.BranchID" class="form-control">
+                @foreach (var branch in Branchs)
+                {
+                    <option value="@branch.Id">@branch.BranchName</option>
+                }
+            </InputSelect>
             <ValidationMessage For="@(() => order.BranchID)" />
         </div>
     </div>
@@ -40,15 +47,19 @@
 
     <div class="form-group">
         <label>Order Details: </label>
-        <div>
-            @if (order.OrderDetails != null && order.OrderDetails.Any())
+        <div class="products-container">
+            @if (order.MedicineId != null)      
             {
-                <ul>
-                    @foreach (var medicine in order.OrderDetails)
-                    {
-                        <li>@medicine.MediName - @medicine.Price</li>
-                    }
-                </ul>
+                <div class="product">
+                     @foreach (var newMedicine in Medicines.Where(q => q.Id == order.MedicineId))
+                     {
+                            <img src="@newMedicine.ImageRef" alt="@newMedicine.MediName" class="product-image">
+                            <div class="newMedicine-details">
+                                <h6>@newMedicine.MediName - @newMedicine.Price</h6>
+                                <h6>@newMedicine.Count</h6>
+                            </div>
+                     }
+                </div>
             }
             else
             {
@@ -68,10 +79,11 @@
                 }
             </InputSelect>
             <ValidationMessage For="@(() => selectedMedicineId)" />
+            <br/>
             <button type="button" class="btn btn-primary" @onclick="AddMedicineToOrder">Add Medicine</button>
         </div>
     </div>
-
+    <br/>
     <button type="submit" class="btn btn-success btn-block">
         Create Order
     </button>
@@ -80,13 +92,15 @@
 @code {
     Order order = new Order();
     private int selectedMedicineId;
-    private IList<Customer>? Customers;
-    private IList<Medicine>? Medicines;
+    private IList<Customer> Customers;
+    private IList<Medicine> Medicines; 
+    private IList<Branch> Branchs;
 
     protected async override Task OnInitializedAsync()
     {
         Customers = await _client.GetFromJsonAsync<List<Customer>>($"{Endpoints.CustomersEndPoint}");
         Medicines = await _client.GetFromJsonAsync<List<Medicine>>($"{Endpoints.MedicinesEndPoint}");
+        Branchs = await _client.GetFromJsonAsync<List<Branch>>($"{Endpoints.BranchsEndPoint}");
     }
 
     private void AddMedicineToOrder()
@@ -96,15 +110,15 @@
             var selectedMedicine = Medicines.FirstOrDefault(m => m.Id == selectedMedicineId);
             if (selectedMedicine != null)
             {
-                order.OrderDetails ??= new List<Medicine>();
-                order.OrderDetails.Add(selectedMedicine);
+                order.OrderDetails.Add(selectedMedicineId);
+
             }
         }
     }
-
     private async Task CreateOrder()
     {
         await _client.PostAsJsonAsync(Endpoints.OrdersEndPoint, order);
         _navManager.NavigateTo("/orders/");
     }
+    
 }

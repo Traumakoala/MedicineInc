@@ -3,6 +3,7 @@
 @inject NavigationManager _navManager
 
 <h3 class="card-title">Create New Cart</h3>
+<link href="css/index.css" rel="stylesheet" />
 <hr />
 <br />
 
@@ -59,19 +60,29 @@
             <button type="button" class="btn btn-primary" @onclick="AddMedicine">Add Medicine</button>
 
             <div>
-                <ul>
-                    @if (cart.CartItems != null)
-                    {
-                        @foreach (var med in cart.CartItems)
+                <div class="product-container">
+                    <div class="product">
+                    <ul>
+                        @if (cart != null)
                         {
-                            <li>@med.MediName - @med.Price</li>
+                            @foreach (var cartItems in Carts)
+                            {   
+                                @foreach(var med in Medicines.Where(q=>q.Id == cartItems.MedicineId))
+                                {   
+                                    <img src="@med.ImageRef" alt="@med.MediName" class="product-image">
+                                    <div class="product-details">  
+                                        <li>@med.MediName - @med.Price</li>
+                                    </div>
+                                }
+                            }
                         }
-                    }
-                    else
-                    {
-                        <li>Medication information not available</li>
-                    }
-                </ul>
+                        else
+                        {
+                            <li>Medication information not available</li>
+                        }
+                    </ul>
+                    </div>
+                </div>
             </div>
         }
     }
@@ -82,14 +93,17 @@
 </EditForm>
 
 @code {
-    private List<Medicine>? Medicines = new List<Medicine>();
+    private IList<Medicine>? Medicines;
     private Cart cart = new Cart();
+    private List<int> = new List();
     private Medicine? selectedMedicine;
-    private List<Customer>? Customers = new List<Customer>();
+    private IList<Cart>? Carts;
+    private IList<Customer>? Customers;
 
     protected override async Task OnInitializedAsync()
     {
         Medicines = await _client.GetFromJsonAsync<List<Medicine>>($"{Endpoints.MedicinesEndPoint}");
+        Carts = await _client.GetFromJsonAsync<List<Cart>>($"{Endpoints.CartsEndPoint}");
         Customers = await _client.GetFromJsonAsync<List<Customer>>($"{Endpoints.CustomersEndPoint}");
     }
 
@@ -109,8 +123,8 @@
     {
         if (selectedMedicine != null)
         {
-            cart.CartItems ??= new List<Medicine>();
-            cart.CartItems.Add(selectedMedicine);
+            cart.MedicineId.Add(selectedMedicine.Id);
+
         }
     }
 

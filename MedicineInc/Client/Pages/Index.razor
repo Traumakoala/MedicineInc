@@ -14,7 +14,7 @@
         {
             <div class="product">
                 <img src="@item.ImageRef" alt="@item.MediName" class="product-image">
-                <div class="medicine-details">
+                <div class="product-details">
                     <h2>@item.MediName</h2>
                     <p>Price: $@item.Price</p>
                     <div class="quantity-input">
@@ -68,25 +68,8 @@
     {
         Cart cart = new Cart();
         var selectedMedicine = Medicines?.FirstOrDefault(m => m.Id == medicineId);
-        var cartItem = new Medicine
-            {
-                Id = medicineId,
-                MediName = selectedMedicine.MediName,
-                Price = selectedMedicine.Price,
-                Feat = selectedMedicine.Feat,
-                Count = count,
-                Usage = selectedMedicine.Usage,
-                ImageRef = selectedMedicine.ImageRef
-            };
-
-        if (cart.CartItems == null)
-        {
-            cart.CartItems = new List<Medicine>();
-        }
-
+        var cartItem = selectedMedicine.Id;
         cart.CartItems.Add(cartItem);
-
-        cart.CustomerId = 1;
 
         await _client.PostAsJsonAsync(Endpoints.CartsEndPoint, cart);
         await LoadMedicines();
