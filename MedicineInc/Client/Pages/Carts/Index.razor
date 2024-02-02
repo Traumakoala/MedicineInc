@@ -1,0 +1,74 @@
+﻿@page "/carts/"
+@inject HttpClient _client
+@inject IJSRuntime js
+@attribute [Authorize]
+
+<h3 class="card-title">Cart Management</h3>
+<a href="/carts/create" class="btn btn-secondary">
+    <span class="oi oi-plus"></span>
+    Create New Cart
+</a>
+<br />
+<br />
+
+@if (Carts == null)
+{
+    <div class="alert alert-info">Loading Carts...</div>
+}
+else
+{
+    <table class="table table-responsive">
+        <thead>
+            <tr>
+                <th>Customer Name</th>
+                <th>Medicine Count</th>
+                <th>Total Price</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var cart in Carts)
+            {
+                <tr>
+                    <td>@cart.Customer?.CustomerName</td>
+                    <td>@cart.CartItems.Count</td>
+                    <td>@cart.CartItems.Sum(item => item.Price * item.Count)</td>
+                    <td>
+                        <a href="/carts/view/@cart.Id" class="btn btn-primary">
+                            <span class="oi oi-book"></span>
+                        </a>
+                        <a href="/carts/edit/@cart.Id" class="btn btn-warning">
+                            <span class="oi oi-pencil"></span>
+                        </a>
+                        <button class="btn btn-danger" onclick="@(()=>Delete(cart.Id))">
+                            <span class="oi oi-delete"></span>
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<MedicineInc.Shared.Domain.Cart>? Carts;
+
+    protected async override Task OnInitializedAsync()
+    {
+        Carts = await _client.GetFromJsonAsync<List<MedicineInc.Shared.Domain.Cart>>($"{Endpoints.CartsEndPoint}");
+    }
+
+    async Task Delete(int cartId)
+    {
+        if (Carts != null)
+        {
+            var cart = Carts.First(q => q.Id == cartId);
+            var confirm = await js.InvokeAsync<bool>("confirm", $"Do you want to delete the cart for {cart.Customer?.CustomerName}?");
+            if (confirm)
+            {
+                await _client.DeleteAsync($"{Endpoints.CartsEndPoint}/{cartId}");
+                await OnInitializedAsync();
+            }
+        }
+    }
+}

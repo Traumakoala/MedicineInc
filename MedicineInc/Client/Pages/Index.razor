@@ -88,7 +88,7 @@
 
         cart.CustomerId = 1;
 
-        var response = await _client.PostAsJsonAsync($"{Endpoints.CartsEndPoint}/", cart);
+        await _client.PostAsJsonAsync(Endpoints.CartsEndPoint, cart);
         await LoadMedicines();
         await LoadCarts();
     }

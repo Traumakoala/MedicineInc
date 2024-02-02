@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MedicineInc.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240201192854_Cbt")]
-    partial class Cbt
+    [Migration("20240202002700_BirdyHehe")]
+    partial class BirdyHehe
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -277,8 +277,8 @@ namespace MedicineInc.Server.Migrations
                             BranchAddress = "311 New Upper Changi Road, #B2 - 12/13, Bedok Mall, 467360",
                             BranchName = "MedicineInc",
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 2, 2, 3, 28, 54, 43, DateTimeKind.Local).AddTicks(7293),
-                            DateUpdated = new DateTime(2024, 2, 2, 3, 28, 54, 43, DateTimeKind.Local).AddTicks(7294),
+                            DateCreated = new DateTime(2024, 2, 2, 8, 27, 0, 29, DateTimeKind.Local).AddTicks(9690),
+                            DateUpdated = new DateTime(2024, 2, 2, 8, 27, 0, 29, DateTimeKind.Local).AddTicks(9691),
                             ManagerID = 1,
                             UpdatedBy = "System"
                         });
@@ -295,7 +295,7 @@ namespace MedicineInc.Server.Migrations
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("CustomerId")
+                    b.Property<int?>("CustomerId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("DateCreated")
@@ -374,8 +374,8 @@ namespace MedicineInc.Server.Migrations
                             CustomerPassword = "hashed_password",
                             CustomerPhone = "123-456-7890",
                             CustomerUser = "john_doe",
-                            DateCreated = new DateTime(2024, 2, 2, 3, 28, 54, 43, DateTimeKind.Local).AddTicks(7110),
-                            DateUpdated = new DateTime(2024, 2, 2, 3, 28, 54, 43, DateTimeKind.Local).AddTicks(7111),
+                            DateCreated = new DateTime(2024, 2, 2, 8, 27, 0, 29, DateTimeKind.Local).AddTicks(9479),
+                            DateUpdated = new DateTime(2024, 2, 2, 8, 27, 0, 29, DateTimeKind.Local).AddTicks(9480),
                             Gender = "Male",
                             UpdatedBy = "System"
                         });
@@ -439,8 +439,8 @@ namespace MedicineInc.Server.Migrations
                             Id = 1,
                             Count = 0,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 2, 2, 3, 28, 54, 43, DateTimeKind.Local).AddTicks(6744),
-                            DateUpdated = new DateTime(2024, 2, 2, 3, 28, 54, 43, DateTimeKind.Local).AddTicks(6754),
+                            DateCreated = new DateTime(2024, 2, 2, 8, 27, 0, 29, DateTimeKind.Local).AddTicks(9121),
+                            DateUpdated = new DateTime(2024, 2, 2, 8, 27, 0, 29, DateTimeKind.Local).AddTicks(9131),
                             Feat = true,
                             ImageRef = "images/Glucosamine.jpg",
                             MediName = "Glucosamine",
@@ -453,8 +453,8 @@ namespace MedicineInc.Server.Migrations
                             Id = 2,
                             Count = 0,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 2, 2, 3, 28, 54, 43, DateTimeKind.Local).AddTicks(6757),
-                            DateUpdated = new DateTime(2024, 2, 2, 3, 28, 54, 43, DateTimeKind.Local).AddTicks(6758),
+                            DateCreated = new DateTime(2024, 2, 2, 8, 27, 0, 29, DateTimeKind.Local).AddTicks(9134),
+                            DateUpdated = new DateTime(2024, 2, 2, 8, 27, 0, 29, DateTimeKind.Local).AddTicks(9135),
                             Feat = true,
                             ImageRef = "images/panadol.jpg",
                             MediName = "Panadol",
@@ -467,8 +467,8 @@ namespace MedicineInc.Server.Migrations
                             Id = 3,
                             Count = 0,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 2, 2, 3, 28, 54, 43, DateTimeKind.Local).AddTicks(6759),
-                            DateUpdated = new DateTime(2024, 2, 2, 3, 28, 54, 43, DateTimeKind.Local).AddTicks(6760),
+                            DateCreated = new DateTime(2024, 2, 2, 8, 27, 0, 29, DateTimeKind.Local).AddTicks(9137),
+                            DateUpdated = new DateTime(2024, 2, 2, 8, 27, 0, 29, DateTimeKind.Local).AddTicks(9137),
                             Feat = false,
                             ImageRef = "images/bandaids.jpg",
                             MediName = "Bandaids",
@@ -481,8 +481,8 @@ namespace MedicineInc.Server.Migrations
                             Id = 4,
                             Count = 0,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 2, 2, 3, 28, 54, 43, DateTimeKind.Local).AddTicks(6761),
-                            DateUpdated = new DateTime(2024, 2, 2, 3, 28, 54, 43, DateTimeKind.Local).AddTicks(6762),
+                            DateCreated = new DateTime(2024, 2, 2, 8, 27, 0, 29, DateTimeKind.Local).AddTicks(9139),
+                            DateUpdated = new DateTime(2024, 2, 2, 8, 27, 0, 29, DateTimeKind.Local).AddTicks(9139),
                             Feat = false,
                             ImageRef = "images/strepsils.jpg",
                             MediName = "Strepsils",
@@ -495,8 +495,8 @@ namespace MedicineInc.Server.Migrations
                             Id = 5,
                             Count = 0,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 2, 2, 3, 28, 54, 43, DateTimeKind.Local).AddTicks(6763),
-                            DateUpdated = new DateTime(2024, 2, 2, 3, 28, 54, 43, DateTimeKind.Local).AddTicks(6764),
+                            DateCreated = new DateTime(2024, 2, 2, 8, 27, 0, 29, DateTimeKind.Local).AddTicks(9140),
+                            DateUpdated = new DateTime(2024, 2, 2, 8, 27, 0, 29, DateTimeKind.Local).AddTicks(9141),
                             Feat = true,
                             ImageRef = "images/tylenol.jpg",
                             MediName = "Tylenol",
@@ -509,8 +509,8 @@ namespace MedicineInc.Server.Migrations
                             Id = 6,
                             Count = 0,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 2, 2, 3, 28, 54, 43, DateTimeKind.Local).AddTicks(6765),
-                            DateUpdated = new DateTime(2024, 2, 2, 3, 28, 54, 43, DateTimeKind.Local).AddTicks(6765),
+                            DateCreated = new DateTime(2024, 2, 2, 8, 27, 0, 29, DateTimeKind.Local).AddTicks(9142),
+                            DateUpdated = new DateTime(2024, 2, 2, 8, 27, 0, 29, DateTimeKind.Local).AddTicks(9143),
                             Feat = true,
                             ImageRef = "images/ibuprofen.jpg",
                             MediName = "Ibuprofen",
@@ -523,8 +523,8 @@ namespace MedicineInc.Server.Migrations
                             Id = 7,
                             Count = 0,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 2, 2, 3, 28, 54, 43, DateTimeKind.Local).AddTicks(6767),
-                            DateUpdated = new DateTime(2024, 2, 2, 3, 28, 54, 43, DateTimeKind.Local).AddTicks(6767),
+                            DateCreated = new DateTime(2024, 2, 2, 8, 27, 0, 29, DateTimeKind.Local).AddTicks(9144),
+                            DateUpdated = new DateTime(2024, 2, 2, 8, 27, 0, 29, DateTimeKind.Local).AddTicks(9144),
                             Feat = false,
                             ImageRef = "images/claritin.jpg",
                             MediName = "Claritin",
@@ -623,8 +623,8 @@ namespace MedicineInc.Server.Migrations
                             Id = 1,
                             BranchID = 1,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 2, 2, 3, 28, 54, 43, DateTimeKind.Local).AddTicks(7624),
-                            DateUpdated = new DateTime(2024, 2, 2, 3, 28, 54, 43, DateTimeKind.Local).AddTicks(7625),
+                            DateCreated = new DateTime(2024, 2, 2, 8, 27, 0, 30, DateTimeKind.Local).AddTicks(38),
+                            DateUpdated = new DateTime(2024, 2, 2, 8, 27, 0, 30, DateTimeKind.Local).AddTicks(39),
                             IsManager = true,
                             ManagerID = 1,
                             StaffEmail = "TenSeconds@gmail.com",
@@ -775,9 +775,7 @@ namespace MedicineInc.Server.Migrations
                 {
                     b.HasOne("MedicineInc.Shared.Domain.Customer", "Customer")
                         .WithMany()
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CustomerId");
 
                     b.Navigation("Customer");
                 });

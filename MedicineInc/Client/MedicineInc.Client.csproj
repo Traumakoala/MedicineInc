@@ -8,25 +8,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Pages\Cart\**" />
     <Compile Remove="Pages\Customer\**" />
     <Compile Remove="Pages\Medicine\**" />
-    <Compile Remove="Pages\Order\**" />
     <Compile Remove="Pages\Staff\**" />
-    <Content Remove="Pages\Cart\**" />
     <Content Remove="Pages\Customer\**" />
     <Content Remove="Pages\Medicine\**" />
-    <Content Remove="Pages\Order\**" />
     <Content Remove="Pages\Staff\**" />
-    <EmbeddedResource Remove="Pages\Cart\**" />
     <EmbeddedResource Remove="Pages\Customer\**" />
     <EmbeddedResource Remove="Pages\Medicine\**" />
-    <EmbeddedResource Remove="Pages\Order\**" />
     <EmbeddedResource Remove="Pages\Staff\**" />
-    <None Remove="Pages\Cart\**" />
     <None Remove="Pages\Customer\**" />
     <None Remove="Pages\Medicine\**" />
-    <None Remove="Pages\Order\**" />
     <None Remove="Pages\Staff\**" />
   </ItemGroup>
 

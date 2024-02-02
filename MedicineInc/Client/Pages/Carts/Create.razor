@@ -1,0 +1,122 @@
+﻿@page "/carts/create"
+@inject HttpClient _client
+@inject NavigationManager _navManager
+
+<h3 class="card-title">Create New Cart</h3>
+<hr />
+<br />
+
+<EditForm Model="@cart" OnValidSubmit="CreateCart">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-group">
+        <label>Choose Medicine: </label>
+        <div>
+            <InputSelect @bind-Value="@selectedMedicine.Id" class="form-control" @onchange="OnMedicineSelectionChange">
+                <option value="">Select Medicine</option>
+                @foreach (var medicineOption in Medicines)
+                {
+                    <option value="@medicineOption.Id">@medicineOption.MediName</option>
+                }
+            </InputSelect>
+        </div>
+    </div>
+
+    @if (selectedMedicine != null && cart != null)
+    {
+        <div class="form-group">
+            <label>Customer: </label>
+            <div>
+                <InputSelect @bind-Value="@cart.CustomerId" class="form-control">
+                    @foreach (var customer in Customers)
+                    {
+                        <option value="@customer.Id">@customer.CustomerName</option>
+                    }
+                </InputSelect>
+                <ValidationMessage For="@(() => cart.CustomerId)" />
+            </div>
+        </div>
+
+        @if (selectedMedicine != null)
+        {
+            <div class="form-group">
+                <label>Medicine Name: </label>
+                <div>
+                    <InputText @bind-Value="@selectedMedicine.MediName" class="form-control" disabled />
+                    <ValidationMessage For="@(() => selectedMedicine.MediName)" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Price: </label>
+                <div>
+                    <InputNumber @bind-Value="@selectedMedicine.Price" class="form-control" disabled />
+                    <ValidationMessage For="@(() => selectedMedicine.Price)" />
+                </div>
+            </div>
+
+            <button type="button" class="btn btn-primary" @onclick="AddMedicine">Add Medicine</button>
+
+            <div>
+                <ul>
+                    @if (cart.CartItems != null)
+                    {
+                        @foreach (var med in cart.CartItems)
+                        {
+                            <li>@med.MediName - @med.Price</li>
+                        }
+                    }
+                    else
+                    {
+                        <li>Medication information not available</li>
+                    }
+                </ul>
+            </div>
+        }
+    }
+
+    <button type="submit" class="btn btn-success btn-block">
+        Create Cart
+    </button>
+</EditForm>
+
+@code {
+    private List<Medicine>? Medicines = new List<Medicine>();
+    private Cart cart = new Cart();
+    private Medicine? selectedMedicine;
+    private List<Customer>? Customers = new List<Customer>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        Medicines = await _client.GetFromJsonAsync<List<Medicine>>($"{Endpoints.MedicinesEndPoint}");
+        Customers = await _client.GetFromJsonAsync<List<Customer>>($"{Endpoints.CustomersEndPoint}");
+    }
+
+    private async Task OnMedicineSelectionChange(ChangeEventArgs e)
+    {
+        if (int.TryParse(e.Value?.ToString(), out int medicineId))
+        {
+            selectedMedicine = Medicines?.FirstOrDefault(m => m.Id == medicineId);
+        }
+        else
+        {
+            selectedMedicine = null;
+        }
+    }
+
+    private void AddMedicine()
+    {
+        if (selectedMedicine != null)
+        {
+            cart.CartItems ??= new List<Medicine>();
+            cart.CartItems.Add(selectedMedicine);
+        }
+    }
+
+    private async Task CreateCart()
+    {
+        await _client.PostAsJsonAsync(Endpoints.CartsEndPoint, cart);
+        _navManager.NavigateTo("/carts/");
+    }
+}

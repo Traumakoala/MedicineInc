@@ -27,7 +27,7 @@ namespace MedicineInc.Server.Controllers
         [HttpGet]
         public async Task<IActionResult> GetOrders()
         {
-            var orders = await _unitOfWork.Orders.GetAll();
+            var orders = await _unitOfWork.Orders.GetAll(includes:q => q.Include(x=>x.Branch).Include(c=>c.Customer));
             return Ok(orders);
         }
 
