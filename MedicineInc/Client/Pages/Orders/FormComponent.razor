@@ -49,7 +49,7 @@
                     {
                         <img src="@newMedicine.ImageRef" alt="@newMedicine.MediName" class="product-image">
                         <div class="newMedicine-details">
-                            <h6>@newMedicine.MediName - @newMedicine.Price</h6>
+                            <h6>@newMedicine.MediName - $@newMedicine.Price</h6>
                             <h6>@newMedicine.Count</h6>
                         </div>
                     }
@@ -99,9 +99,9 @@
     [Parameter] public EventCallback OnValidSubmit { get; set; }
 
     private int selectedMedicineId;
-    private IList<Customer>? Customers;
-    private IList<Medicine>? Medicines;
-    private IList<Branch>? Branchs;
+    private IList<Customer> Customers;
+    private IList<Medicine> Medicines;
+    private IList<Branch> Branchs;
 
     protected async override Task OnInitializedAsync()
     {
@@ -110,15 +110,34 @@
         Branchs = await _client.GetFromJsonAsync<List<Branch>>($"{Endpoints.BranchsEndPoint}");
     }
 
-    private void AddMedicineToOrder()
+    private async Task AddMedicineToOrder()
     {
         if (selectedMedicineId != 0)
         {
             var selectedMedicine = Medicines.FirstOrDefault(m => m.Id == selectedMedicineId);
             if (selectedMedicine != null)
             {
-                order.OrderDetails.Add(selectedMedicine);
+                if (order.OrderDetails == null)
+                {
+                    order.OrderDetails = new List<Medicine>();
+                }
 
+                
+                var existingMedicine = order.OrderDetails.FirstOrDefault(m => m.Id == selectedMedicine.Id);
+                if (existingMedicine != null)
+                {
+                    
+                    existingMedicine.Count++;
+                }
+                else
+                {
+                    
+                    selectedMedicine.Count = 1;
+                    order.OrderDetails.Add(selectedMedicine);
+                }
+
+                
+                StateHasChanged();
             }
         }
     }
