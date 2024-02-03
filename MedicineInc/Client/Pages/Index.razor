@@ -44,12 +44,11 @@
 <footer>
     <p>&copy; 2024 Online Pharmacy</p>
 </footer>
-
 @code {
-
     Cart cart = new Cart();
     Customer customer = new Customer();
     private int custId;
+    private double price = 0;
     private IList<Medicine>? Medicines;
     private IList<Cart>? Carts;
     private IList<Customer>? Customers;
@@ -79,12 +78,26 @@
     private async Task AddToCart(int medicineId, int count)
     {
         var selectedMedicine = Medicines?.FirstOrDefault(m => m.Id == medicineId);
-        cart.MedicineId.Add(selectedMedicine.Id);
-
+        if (selectedMedicine != null)
+        {
+            cart.MedicineId ??= new List<int>();
+            for (int item = 0; item < count; item++)
+            {
+                cart.MedicineId.Add(selectedMedicine.Id);
+            }
+        }
     }
 
     private async Task ConfirmAddToCart()
     {
+        foreach (var item in cart.MedicineId)
+        {
+            foreach (var superItem in Medicines.Where(p => p.Id == item)){
+                price = price + superItem.Price;
+
+            }
+        }
+        cart.TotalAmount = price;
         cart.CustomerId = custId;
         await _client.PostAsJsonAsync(Endpoints.CartsEndPoint, cart);
         await LoadMedicines();
