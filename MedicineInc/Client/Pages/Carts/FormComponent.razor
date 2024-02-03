@@ -1,7 +1,7 @@
 ﻿@using MedicineInc.Client.Components
 @inject HttpClient _client
 
-<EditForm Model="@Cart" OnValidSubmit="OnValidSubmit">
+<EditForm Model="@cart" OnValidSubmit="OnValidSubmit">
     <DataAnnotationsValidator />
     <ValidationSummary />
     <fieldset disabled="@Disabled" >
@@ -98,14 +98,17 @@
 </EditForm>
 
 @code {
-    private IList<Medicine>? Medicines;
-    private Cart cart = new Cart();
+
+
     private Medicine? selectedMedicine;
-    private IList<Cart>? Carts;
-    private IList<Customer>? Customers;
+    private IList<Cart> Carts;
+    private IList<Customer> Customers;
+    private IList<Medicine> Medicines;
+
+    
 
     [Parameter] public bool Disabled { get; set; } = false;
-    [Parameter] public Cart? Cart { get; set; }
+    [Parameter] public Cart? cart { get; set; }
     [Parameter] public Medicine? medicine { get; set; }
     [Parameter] public Customer? customer { get; set; }
     [Parameter] public string ButtonText { get; set; } = "Save";
@@ -116,6 +119,7 @@
 
         Medicines = await _client.GetFromJsonAsync<List<Medicine>>($"{Endpoints.MedicinesEndPoint}");
         Customers = await _client.GetFromJsonAsync<List<Customer>>($"{Endpoints.CustomersEndPoint}");
+        Carts = await _client.GetFromJsonAsync<List<Cart>>($"{Endpoints.CartsEndPoint}");
     }
 
     private void AddMedicine()
