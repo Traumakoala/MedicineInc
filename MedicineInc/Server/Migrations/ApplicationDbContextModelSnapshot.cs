@@ -249,6 +249,7 @@ namespace MedicineInc.Server.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CreatedBy")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("DateCreated")
@@ -261,6 +262,7 @@ namespace MedicineInc.Server.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("UpdatedBy")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -274,8 +276,8 @@ namespace MedicineInc.Server.Migrations
                             BranchAddress = "311 New Upper Changi Road, #B2 - 12/13, Bedok Mall, 467360",
                             BranchName = "MedicineInc",
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 2, 4, 1, 39, 19, 805, DateTimeKind.Local).AddTicks(5573),
-                            DateUpdated = new DateTime(2024, 2, 4, 1, 39, 19, 805, DateTimeKind.Local).AddTicks(5574),
+                            DateCreated = new DateTime(2024, 2, 4, 16, 4, 42, 172, DateTimeKind.Local).AddTicks(3359),
+                            DateUpdated = new DateTime(2024, 2, 4, 16, 4, 42, 172, DateTimeKind.Local).AddTicks(3360),
                             ManagerID = 1,
                             UpdatedBy = "System"
                         });
@@ -290,6 +292,7 @@ namespace MedicineInc.Server.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("CreatedBy")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("CustomerId")
@@ -305,6 +308,7 @@ namespace MedicineInc.Server.Migrations
                         .HasColumnType("float");
 
                     b.Property<string>("UpdatedBy")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -326,6 +330,7 @@ namespace MedicineInc.Server.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CreatedBy")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CustomerAddress")
@@ -356,6 +361,7 @@ namespace MedicineInc.Server.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UpdatedBy")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -374,8 +380,8 @@ namespace MedicineInc.Server.Migrations
                             CustomerPassword = "hashed_password",
                             CustomerPhone = "123-456-7890",
                             CustomerUser = "john_doe",
-                            DateCreated = new DateTime(2024, 2, 4, 1, 39, 19, 805, DateTimeKind.Local).AddTicks(5383),
-                            DateUpdated = new DateTime(2024, 2, 4, 1, 39, 19, 805, DateTimeKind.Local).AddTicks(5384),
+                            DateCreated = new DateTime(2024, 2, 4, 16, 4, 42, 172, DateTimeKind.Local).AddTicks(3188),
+                            DateUpdated = new DateTime(2024, 2, 4, 16, 4, 42, 172, DateTimeKind.Local).AddTicks(3190),
                             Gender = "Male",
                             UpdatedBy = "System"
                         });
@@ -393,6 +399,7 @@ namespace MedicineInc.Server.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("CreatedBy")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("DateCreated")
@@ -417,6 +424,7 @@ namespace MedicineInc.Server.Migrations
                         .HasColumnType("float");
 
                     b.Property<string>("UpdatedBy")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Usage")
@@ -434,8 +442,8 @@ namespace MedicineInc.Server.Migrations
                             Id = 1,
                             Count = 0,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 2, 4, 1, 39, 19, 805, DateTimeKind.Local).AddTicks(5025),
-                            DateUpdated = new DateTime(2024, 2, 4, 1, 39, 19, 805, DateTimeKind.Local).AddTicks(5036),
+                            DateCreated = new DateTime(2024, 2, 4, 16, 4, 42, 172, DateTimeKind.Local).AddTicks(2838),
+                            DateUpdated = new DateTime(2024, 2, 4, 16, 4, 42, 172, DateTimeKind.Local).AddTicks(2850),
                             Feat = true,
                             ImageRef = "images/Glucosamine.jpg",
                             MediName = "Glucosamine",
@@ -448,8 +456,8 @@ namespace MedicineInc.Server.Migrations
                             Id = 2,
                             Count = 0,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 2, 4, 1, 39, 19, 805, DateTimeKind.Local).AddTicks(5039),
-                            DateUpdated = new DateTime(2024, 2, 4, 1, 39, 19, 805, DateTimeKind.Local).AddTicks(5039),
+                            DateCreated = new DateTime(2024, 2, 4, 16, 4, 42, 172, DateTimeKind.Local).AddTicks(2853),
+                            DateUpdated = new DateTime(2024, 2, 4, 16, 4, 42, 172, DateTimeKind.Local).AddTicks(2853),
                             Feat = true,
                             ImageRef = "images/panadol.jpg",
                             MediName = "Panadol",
@@ -462,8 +470,8 @@ namespace MedicineInc.Server.Migrations
                             Id = 3,
                             Count = 0,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 2, 4, 1, 39, 19, 805, DateTimeKind.Local).AddTicks(5041),
-                            DateUpdated = new DateTime(2024, 2, 4, 1, 39, 19, 805, DateTimeKind.Local).AddTicks(5042),
+                            DateCreated = new DateTime(2024, 2, 4, 16, 4, 42, 172, DateTimeKind.Local).AddTicks(2855),
+                            DateUpdated = new DateTime(2024, 2, 4, 16, 4, 42, 172, DateTimeKind.Local).AddTicks(2855),
                             Feat = false,
                             ImageRef = "images/bandaids.jpg",
                             MediName = "Bandaids",
@@ -476,8 +484,8 @@ namespace MedicineInc.Server.Migrations
                             Id = 4,
                             Count = 0,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 2, 4, 1, 39, 19, 805, DateTimeKind.Local).AddTicks(5044),
-                            DateUpdated = new DateTime(2024, 2, 4, 1, 39, 19, 805, DateTimeKind.Local).AddTicks(5044),
+                            DateCreated = new DateTime(2024, 2, 4, 16, 4, 42, 172, DateTimeKind.Local).AddTicks(2857),
+                            DateUpdated = new DateTime(2024, 2, 4, 16, 4, 42, 172, DateTimeKind.Local).AddTicks(2858),
                             Feat = false,
                             ImageRef = "images/strepsils.jpg",
                             MediName = "Strepsils",
@@ -490,8 +498,8 @@ namespace MedicineInc.Server.Migrations
                             Id = 5,
                             Count = 0,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 2, 4, 1, 39, 19, 805, DateTimeKind.Local).AddTicks(5046),
-                            DateUpdated = new DateTime(2024, 2, 4, 1, 39, 19, 805, DateTimeKind.Local).AddTicks(5046),
+                            DateCreated = new DateTime(2024, 2, 4, 16, 4, 42, 172, DateTimeKind.Local).AddTicks(2859),
+                            DateUpdated = new DateTime(2024, 2, 4, 16, 4, 42, 172, DateTimeKind.Local).AddTicks(2859),
                             Feat = true,
                             ImageRef = "images/tylenol.jpg",
                             MediName = "Tylenol",
@@ -504,8 +512,8 @@ namespace MedicineInc.Server.Migrations
                             Id = 6,
                             Count = 0,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 2, 4, 1, 39, 19, 805, DateTimeKind.Local).AddTicks(5048),
-                            DateUpdated = new DateTime(2024, 2, 4, 1, 39, 19, 805, DateTimeKind.Local).AddTicks(5048),
+                            DateCreated = new DateTime(2024, 2, 4, 16, 4, 42, 172, DateTimeKind.Local).AddTicks(2861),
+                            DateUpdated = new DateTime(2024, 2, 4, 16, 4, 42, 172, DateTimeKind.Local).AddTicks(2861),
                             Feat = true,
                             ImageRef = "images/ibuprofen.jpg",
                             MediName = "Ibuprofen",
@@ -518,8 +526,8 @@ namespace MedicineInc.Server.Migrations
                             Id = 7,
                             Count = 0,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 2, 4, 1, 39, 19, 805, DateTimeKind.Local).AddTicks(5050),
-                            DateUpdated = new DateTime(2024, 2, 4, 1, 39, 19, 805, DateTimeKind.Local).AddTicks(5050),
+                            DateCreated = new DateTime(2024, 2, 4, 16, 4, 42, 172, DateTimeKind.Local).AddTicks(2862),
+                            DateUpdated = new DateTime(2024, 2, 4, 16, 4, 42, 172, DateTimeKind.Local).AddTicks(2863),
                             Feat = false,
                             ImageRef = "images/claritin.jpg",
                             MediName = "Claritin",
@@ -541,6 +549,7 @@ namespace MedicineInc.Server.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("CreatedBy")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("CustomerID")
@@ -556,6 +565,7 @@ namespace MedicineInc.Server.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("UpdatedBy")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -579,6 +589,7 @@ namespace MedicineInc.Server.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("CreatedBy")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("DateCreated")
@@ -603,6 +614,7 @@ namespace MedicineInc.Server.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UpdatedBy")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -618,8 +630,8 @@ namespace MedicineInc.Server.Migrations
                             Id = 1,
                             BranchID = 1,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2024, 2, 4, 1, 39, 19, 805, DateTimeKind.Local).AddTicks(5902),
-                            DateUpdated = new DateTime(2024, 2, 4, 1, 39, 19, 805, DateTimeKind.Local).AddTicks(5903),
+                            DateCreated = new DateTime(2024, 2, 4, 16, 4, 42, 172, DateTimeKind.Local).AddTicks(3779),
+                            DateUpdated = new DateTime(2024, 2, 4, 16, 4, 42, 172, DateTimeKind.Local).AddTicks(3780),
                             IsManager = true,
                             ManagerID = 1,
                             StaffEmail = "TenSeconds@gmail.com",

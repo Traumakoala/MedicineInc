@@ -6,7 +6,7 @@ namespace MedicineInc.Shared.Domain
     {
         public double TotalAmount { get; set; }
         [NotMapped]
-        public List<int>? MedicineId { get; set; }
+        public List<int> MedicineId { get; set; }
         public int CustomerId { get; set; }
         public virtual Customer? Customer { get; set; }
     }

@@ -50,7 +50,7 @@ else
                         <a href="/customers/edit/@customer.Id" class="btn btn-warning">
                             <span class="oi oi-pencil"></span>
                         </a>
-                        <button class="btn btn-danger" onclick="@(()=>Delete(customer.Id))">
+                        <button class="btn btn-danger" @onclick="@(()=>Delete(customer.Id))">
                             <span class="oi oi-delete"></span>
                         </button>
                     </td>

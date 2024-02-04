@@ -50,7 +50,7 @@ else
                                     <a href="/carts/edit/@cart.Id" class="btn btn-warning">
                                         <span class="oi oi-pencil"></span>
                                     </a>
-                                    <button class="btn btn-danger" onclick="@(()=>Delete(cart.Id))">
+                                    <button class="btn btn-danger" @onclick="@(()=>Delete(cart.Id))">
                                         <span class="oi oi-delete"></span>
                                     </button>
                                 </td>

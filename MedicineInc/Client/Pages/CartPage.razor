@@ -63,7 +63,7 @@ else
     {
         var response = await _client.DeleteAsync($"{Endpoints.CartsEndPoint}/{cart.Id}");
         await LoadCarts();
-     }
+    }
 
     private async Task ClearCart()
     {

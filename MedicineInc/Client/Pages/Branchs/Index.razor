@@ -40,7 +40,7 @@ else
                         <a href="/branchs/edit/@branch.Id" class="btn btn-warning">
                             <span class="oi oi-pencil"></span>
                         </a>
-                        <button class="btn btn-danger" onclick="@(()=>Delete(branch.Id))">
+                        <button class="btn btn-danger" @onclick="@(()=>Delete(branch.Id))">
                             <span class="oi oi-delete"></span>
                         </button>
                     </td>

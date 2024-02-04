@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace MedicineInc.Server.Migrations
 {
     /// <inheritdoc />
-    public partial class Bird : Migration
+    public partial class bird : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -65,8 +65,8 @@ namespace MedicineInc.Server.Migrations
                     ManagerID = table.Column<int>(type: "int", nullable: false),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DateUpdated = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -89,8 +89,8 @@ namespace MedicineInc.Server.Migrations
                     CustomerAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DateUpdated = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -274,8 +274,8 @@ namespace MedicineInc.Server.Migrations
                     BranchID = table.Column<int>(type: "int", nullable: false),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DateUpdated = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -298,8 +298,8 @@ namespace MedicineInc.Server.Migrations
                     CustomerId = table.Column<int>(type: "int", nullable: false),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DateUpdated = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -323,8 +323,8 @@ namespace MedicineInc.Server.Migrations
                     CustomerID = table.Column<int>(type: "int", nullable: false),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DateUpdated = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -358,8 +358,8 @@ namespace MedicineInc.Server.Migrations
                     OrderId = table.Column<int>(type: "int", nullable: true),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DateUpdated = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -374,31 +374,31 @@ namespace MedicineInc.Server.Migrations
             migrationBuilder.InsertData(
                 table: "Branchs",
                 columns: new[] { "Id", "BranchAddress", "BranchName", "CreatedBy", "DateCreated", "DateUpdated", "ManagerID", "UpdatedBy" },
-                values: new object[] { 1, "311 New Upper Changi Road, #B2 - 12/13, Bedok Mall, 467360", "MedicineInc", "System", new DateTime(2024, 2, 4, 1, 39, 19, 805, DateTimeKind.Local).AddTicks(5573), new DateTime(2024, 2, 4, 1, 39, 19, 805, DateTimeKind.Local).AddTicks(5574), 1, "System" });
+                values: new object[] { 1, "311 New Upper Changi Road, #B2 - 12/13, Bedok Mall, 467360", "MedicineInc", "System", new DateTime(2024, 2, 4, 16, 4, 42, 172, DateTimeKind.Local).AddTicks(3359), new DateTime(2024, 2, 4, 16, 4, 42, 172, DateTimeKind.Local).AddTicks(3360), 1, "System" });
 
             migrationBuilder.InsertData(
                 table: "Customers",
                 columns: new[] { "Id", "Allergies", "CreatedBy", "CustomerAddress", "CustomerEmail", "CustomerName", "CustomerPassword", "CustomerPhone", "CustomerUser", "DateCreated", "DateUpdated", "Gender", "UpdatedBy" },
-                values: new object[] { 1, "None", "System", "123 Main St, City, Country", "john.doe@example.com", "John Doe", "hashed_password", "123-456-7890", "john_doe", new DateTime(2024, 2, 4, 1, 39, 19, 805, DateTimeKind.Local).AddTicks(5383), new DateTime(2024, 2, 4, 1, 39, 19, 805, DateTimeKind.Local).AddTicks(5384), "Male", "System" });
+                values: new object[] { 1, "None", "System", "123 Main St, City, Country", "john.doe@example.com", "John Doe", "hashed_password", "123-456-7890", "john_doe", new DateTime(2024, 2, 4, 16, 4, 42, 172, DateTimeKind.Local).AddTicks(3188), new DateTime(2024, 2, 4, 16, 4, 42, 172, DateTimeKind.Local).AddTicks(3190), "Male", "System" });
 
             migrationBuilder.InsertData(
                 table: "Medicines",
                 columns: new[] { "Id", "Count", "CreatedBy", "DateCreated", "DateUpdated", "Feat", "ImageRef", "MediName", "OrderId", "Price", "UpdatedBy", "Usage" },
                 values: new object[,]
                 {
-                    { 1, 0, "System", new DateTime(2024, 2, 4, 1, 39, 19, 805, DateTimeKind.Local).AddTicks(5025), new DateTime(2024, 2, 4, 1, 39, 19, 805, DateTimeKind.Local).AddTicks(5036), true, "images/Glucosamine.jpg", "Glucosamine", null, 10.99, "System", "Best Vitamins to stay healthy" },
-                    { 2, 0, "System", new DateTime(2024, 2, 4, 1, 39, 19, 805, DateTimeKind.Local).AddTicks(5039), new DateTime(2024, 2, 4, 1, 39, 19, 805, DateTimeKind.Local).AddTicks(5039), true, "images/panadol.jpg", "Panadol", null, 5.9900000000000002, "System", "Most Popular Item for Cold and Fever" },
-                    { 3, 0, "System", new DateTime(2024, 2, 4, 1, 39, 19, 805, DateTimeKind.Local).AddTicks(5041), new DateTime(2024, 2, 4, 1, 39, 19, 805, DateTimeKind.Local).AddTicks(5042), false, "images/bandaids.jpg", "Bandaids", null, 7.4900000000000002, "System", "For any and all injuries" },
-                    { 4, 0, "System", new DateTime(2024, 2, 4, 1, 39, 19, 805, DateTimeKind.Local).AddTicks(5044), new DateTime(2024, 2, 4, 1, 39, 19, 805, DateTimeKind.Local).AddTicks(5044), false, "images/strepsils.jpg", "Strepsils", null, 4.29, "System", "To soothe your sore throat" },
-                    { 5, 0, "System", new DateTime(2024, 2, 4, 1, 39, 19, 805, DateTimeKind.Local).AddTicks(5046), new DateTime(2024, 2, 4, 1, 39, 19, 805, DateTimeKind.Local).AddTicks(5046), true, "images/tylenol.jpg", "Tylenol", null, 9.9900000000000002, "System", "Pain reliever and fever reducer" },
-                    { 6, 0, "System", new DateTime(2024, 2, 4, 1, 39, 19, 805, DateTimeKind.Local).AddTicks(5048), new DateTime(2024, 2, 4, 1, 39, 19, 805, DateTimeKind.Local).AddTicks(5048), true, "images/ibuprofen.jpg", "Ibuprofen", null, 7.4900000000000002, "System", "Nonsteroidal anti-inflammatory drug (NSAID)" },
-                    { 7, 0, "System", new DateTime(2024, 2, 4, 1, 39, 19, 805, DateTimeKind.Local).AddTicks(5050), new DateTime(2024, 2, 4, 1, 39, 19, 805, DateTimeKind.Local).AddTicks(5050), false, "images/claritin.jpg", "Claritin", null, 5.9900000000000002, "System", "Antihistamine for allergy relief" }
+                    { 1, 0, "System", new DateTime(2024, 2, 4, 16, 4, 42, 172, DateTimeKind.Local).AddTicks(2838), new DateTime(2024, 2, 4, 16, 4, 42, 172, DateTimeKind.Local).AddTicks(2850), true, "images/Glucosamine.jpg", "Glucosamine", null, 10.99, "System", "Best Vitamins to stay healthy" },
+                    { 2, 0, "System", new DateTime(2024, 2, 4, 16, 4, 42, 172, DateTimeKind.Local).AddTicks(2853), new DateTime(2024, 2, 4, 16, 4, 42, 172, DateTimeKind.Local).AddTicks(2853), true, "images/panadol.jpg", "Panadol", null, 5.9900000000000002, "System", "Most Popular Item for Cold and Fever" },
+                    { 3, 0, "System", new DateTime(2024, 2, 4, 16, 4, 42, 172, DateTimeKind.Local).AddTicks(2855), new DateTime(2024, 2, 4, 16, 4, 42, 172, DateTimeKind.Local).AddTicks(2855), false, "images/bandaids.jpg", "Bandaids", null, 7.4900000000000002, "System", "For any and all injuries" },
+                    { 4, 0, "System", new DateTime(2024, 2, 4, 16, 4, 42, 172, DateTimeKind.Local).AddTicks(2857), new DateTime(2024, 2, 4, 16, 4, 42, 172, DateTimeKind.Local).AddTicks(2858), false, "images/strepsils.jpg", "Strepsils", null, 4.29, "System", "To soothe your sore throat" },
+                    { 5, 0, "System", new DateTime(2024, 2, 4, 16, 4, 42, 172, DateTimeKind.Local).AddTicks(2859), new DateTime(2024, 2, 4, 16, 4, 42, 172, DateTimeKind.Local).AddTicks(2859), true, "images/tylenol.jpg", "Tylenol", null, 9.9900000000000002, "System", "Pain reliever and fever reducer" },
+                    { 6, 0, "System", new DateTime(2024, 2, 4, 16, 4, 42, 172, DateTimeKind.Local).AddTicks(2861), new DateTime(2024, 2, 4, 16, 4, 42, 172, DateTimeKind.Local).AddTicks(2861), true, "images/ibuprofen.jpg", "Ibuprofen", null, 7.4900000000000002, "System", "Nonsteroidal anti-inflammatory drug (NSAID)" },
+                    { 7, 0, "System", new DateTime(2024, 2, 4, 16, 4, 42, 172, DateTimeKind.Local).AddTicks(2862), new DateTime(2024, 2, 4, 16, 4, 42, 172, DateTimeKind.Local).AddTicks(2863), false, "images/claritin.jpg", "Claritin", null, 5.9900000000000002, "System", "Antihistamine for allergy relief" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Staffs",
                 columns: new[] { "Id", "BranchID", "CreatedBy", "DateCreated", "DateUpdated", "IsManager", "ManagerID", "StaffEmail", "StaffName", "StaffPhone", "UpdatedBy" },
-                values: new object[] { 1, 1, "System", new DateTime(2024, 2, 4, 1, 39, 19, 805, DateTimeKind.Local).AddTicks(5902), new DateTime(2024, 2, 4, 1, 39, 19, 805, DateTimeKind.Local).AddTicks(5903), true, 1, "TenSeconds@gmail.com", "Ten", "10101010", "System" });
+                values: new object[] { 1, 1, "System", new DateTime(2024, 2, 4, 16, 4, 42, 172, DateTimeKind.Local).AddTicks(3779), new DateTime(2024, 2, 4, 16, 4, 42, 172, DateTimeKind.Local).AddTicks(3780), true, 1, "TenSeconds@gmail.com", "Ten", "10101010", "System" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
